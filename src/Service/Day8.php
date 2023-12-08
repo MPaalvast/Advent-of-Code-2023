@@ -12,48 +12,27 @@ class Day8 extends AbstractController
 
     public function generatePart1($rows): int
     {
-        $directionMapper = [
-            'L' => 0,
-            'R' => 1
-        ];
         $start = 'AAA';
         $end = 'ZZZ';
 
-        $mapData = [];
+        [$mapData, $mapDirections] = $this->getMapData($rows);
 
-        $mapDirections = [];
-        foreach ($rows as $row) {
-            $row = trim(preg_replace('/\r+/', '', $row));
-            if (empty($row)) {
-                continue;
-            }
-
-            if (empty($mapDirections)) {
-                $mapDirections = str_split($row);
-                continue;
-            }
-            [$mapName, $directions] = explode(' = ', $row);
-            $mapData[$mapName] = explode(', ', str_replace(['(', ')'], '',$directions));
-        }
-
-        return $this->findEndPosition($start, $end, $directionMapper, $mapDirections, $mapData);
+        return $this->findEndPosition($start, $end, $mapDirections, $mapData);
     }
 
-    private function findEndPosition(string $start, string $end, array $directionMapper, array $mapDirections, array $mapData): int
+    private function findEndPosition(string $start, string $end, array $mapDirections, array $mapData): int
     {
         $i = 0;
         $found = false;
-
         $currentPosition = $start;
 
         while (!$found) {
-            // loop over de mapdirections en tel het aantal op
             if ($currentPosition === $end) {
                 break;
             }
             foreach ($mapDirections as $direction) {
                 $i++;
-                $currentPosition = $mapData[$currentPosition][$directionMapper[$direction]];
+                $currentPosition = $mapData[$currentPosition][$direction];
             }
         }
 
@@ -62,14 +41,13 @@ class Day8 extends AbstractController
 
     public function generatePart2($rows): string
     {
-        ini_set('max_execution_time', 1800);
-        $directionMapper = [
-            'L' => 0,
-            'R' => 1
-        ];
+        [$mapData, $mapDirections] = $this->getMapData($rows);
+        return $this->findAllEndPositions($mapDirections, $mapData);
+    }
 
+    private function getMapData($rows): array
+    {
         $mapData = [];
-
         $mapDirections = [];
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));
@@ -84,7 +62,8 @@ class Day8 extends AbstractController
             [$mapName, $directions] = explode(' = ', $row);
             $mapData[$mapName] = array_combine(['L', 'R'], explode(', ', str_replace(['(', ')'], '',$directions)));
         }
-        return $this->findAllEndPositions($mapDirections, $mapData);
+
+        return [$mapData,$mapDirections];
     }
 
     private function findAllEndPositions(array $mapDirections, array $mapData): int
@@ -99,7 +78,6 @@ class Day8 extends AbstractController
             while (!$found) {
                 foreach ($mapDirections as $direction) {
                     if ($this->allPositionsHasEnded([$currentPosition])) {
-
                         $found = true;
                         $result[] = $i;
                         break;
