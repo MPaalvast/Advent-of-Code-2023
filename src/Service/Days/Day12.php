@@ -4,86 +4,120 @@ namespace App\Service\Days;
 
 class Day12
 {
-    //$pattern = "example?.txt";
-    //
-    //$fileName = "example1.txt";
-    //
-    // fnmatch is the way to go
-    //    if (fnmatch($pattern, $fileName)) {
-    //        echo "The file name '$fileName' matches the pattern '$pattern'.\n";
-    //    } else {
-    //        echo "The file name '$fileName' does not match the pattern '$pattern'.\n";
-    //    }
     public function generatePart1($rows): string
     {
-        $patern = "?###????????";
-        $parts = explode(',', "3,2,1");
-        $baseString = "###.##.#";
-        // "?###.##.#"
+        $result = 0;
+        foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
+            if (empty($row)) {
+                continue;
+            }
+            [$patern, $input] = explode(' ', $row);
+            $inputParts = explode(',', $input);
+            $baseString = $this->setBaseString($inputParts);
+            $lengthDiff = strlen($patern) - strlen($baseString);
+            if ($lengthDiff === 0) {
+                $result++;
+            } else {
+                $result += $this->calculateDiffStrings($baseString, $patern, $lengthDiff);
+            }
 
-        // bekende patronen extraheren
-        // .?. kan nooit ## worden
-        //?.?.?#..## 2,2
-
-        $test = [
-            '?','.','?','.','?','#','.','.','#','#'
-        ];
-        // count values 3 x #  totaal = 4 (2+2) 4-3 = 1
-        // 1 # en 2 .
-        // ?.?.?#..##
-        // ....##..##
-        // ..#..#..##
-        // #....#..##
-        $test2 = [
-            '#','#','.','#','#'
-        ];
-
-        // ?????#??????????# 6,1,6
-        // ??####????.######
-
-        // ???????.#???.?##?. 1,1,2,2,1,3
-        //
-
-        // pregmatch
-        // ?? -> of . of #
-        //
-
-
-        $diff = strlen($patern) - strlen($baseString);
-        for ($i=0;$i<=$diff;$i++) {
-            //0,0,0,4
-            //0,0,1,3
-            //0,0,2,2
-            //0,0,3,1
-            //0,0,4,0
-            //0,1,0,3
-            //0,1,1,2
-            //0,1,2,1
-            //0,1,3,0
-            //0,2,0,2
-            //0,2,1,1
-            //0,2,2,0
-            //0,3,0,1
-            //0,3,1,0
-            //0,4,0,0
-            //1,0,0,3
-            //1,0,1,2
-            //1,0,2,1
-            //1,0,3,0
-            //1,0,3,0
-            //1,1,0,2
-            //1,1,1,1
-            //1,1,2,0
-            //1,2,0,1
-            //1,2,1,0
-            //1,3,0,0
         }
-        //???????????#???.#??
-        return 0;
+
+        return $result;
+    }
+
+    private function calculateDiffStrings(string $baseString, string $patern, int $posibleDots): int
+    {
+        $paternLength = strlen($patern);
+        $nrOfMatchingStrings = 0;
+        $loopData = [$baseString];
+        $y = 0;
+        while (!empty($loopData)) {
+            $string = array_shift($loopData);
+            if (strlen($string) === $paternLength && substr_count($string, '-') === 0) {
+                if (fnmatch($patern, $string)) {
+                    $nrOfMatchingStrings++;
+                }
+                continue;
+            }
+            if ($y === 0) {
+                for ($i=0;$i<=$posibleDots;$i++) {
+                    $newString = str_repeat(".", $i) . $string;
+                    if (strlen($newString) < $paternLength || (strlen($newString) === $paternLength && substr_count($newString, '-') > 0)) {
+                        $loopData[] = $newString;
+                    } elseif (strlen($newString) === $paternLength) {
+                        if (fnmatch($patern, $newString)) {
+                            $nrOfMatchingStrings++;
+                        }
+                        continue;
+                    }
+                }
+            } else {
+                $parts = substr_count($string, '-');
+                if ($parts > 0) {
+                    [$before, $after] = explode('-', $string, 2);
+                    for ($i=0;$i<=$posibleDots;$i++) {
+                        $newString = $before . '.' . str_repeat(".", $i) . $after;
+                        if (strlen($newString) < $paternLength || (strlen($newString) === $paternLength && substr_count($newString, '-') > 0)) {
+                            $loopData[] = $newString;
+                        } elseif (strlen($newString) === $paternLength) {
+                            if (fnmatch($patern, $newString)) {
+                                $nrOfMatchingStrings++;
+                            }
+                            continue;
+                        }
+                    }
+                } else {
+                    $dotsToAdd = $paternLength - strlen($string);
+                    if (fnmatch($patern, $string . str_repeat(".", $dotsToAdd))) {
+                        $nrOfMatchingStrings++;
+                    }
+                }
+            }
+            $y++;
+        }
+
+        return $nrOfMatchingStrings;
+    }
+
+    private function setBaseString(array $inputParts): string
+    {
+        $baseString = '';
+        foreach ($inputParts as $part) {
+            if (!empty($baseString)) {
+                $baseString .= '-';
+            }
+            $baseString .= str_repeat("#", $part);
+        }
+
+        return $baseString;
     }
 
     public function generatePart2($rows): string
     {
-        return 0;
+        set_time_limit(1600);
+        $result = 0;
+        foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
+            if (empty($row)) {
+                continue;
+            }
+            [$patern, $input] = explode(' ', $row);
+            $newPatern = rtrim(str_repeat($patern . '.', 5), '.');
+            $newInput = rtrim(str_repeat($input . ',', 5), ',');
+
+            $inputParts = explode(',', $newInput);
+            $baseString = $this->setBaseString($inputParts);
+            $lengthDiff = strlen($newPatern) - strlen($baseString);
+            if ($lengthDiff === 0) {
+                $result++;
+            } else {
+                $result += $this->calculateDiffStrings($baseString, $newPatern, $lengthDiff);
+            }
+
+        }
+
+        return $result;
     }
 }
