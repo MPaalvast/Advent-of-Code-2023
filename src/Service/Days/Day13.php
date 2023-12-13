@@ -4,60 +4,130 @@ namespace App\Service\Days;
 
 class Day13
 {
-    public function generatePart1($rows): string
+    public function generatePart1($rows): int
     {
-        // generate gridX
-        // generate gridY
+        [$gridX, $gridY] = $this->getGrids($rows);
 
-        // walk through each array and find same rows.
-        // form that walk left and right to find the edge
-        // if key = 0 or key = max grid value
-        // return nr of startCollumn + 1
+        return $this->calculateResults($gridX, $gridY);
+    }
 
+    private function calculateResults(array $gridX, array $gridY): int
+    {
         $result = 0;
-        $grid = [];
-        $calculate = 'collumn';
+        foreach ($gridX as $key => $grid) {
+            $rowId = $this->findMiddle($grid);
+            if ($rowId > 0) {
+                $result += ($rowId*100);
+            }
+        }
+        foreach ($gridY as $key => $grid) {
+            $rowId = $this->findMiddle($grid);
+            if ($rowId > 0) {
+                $result += $rowId;
+            }
+        }
+
+        return $result;
+    }
+
+    private function findMiddle(array $grid): int
+    {
+        $rowId = 0;
+        $maxNr = count($grid)-1;
+        for ($i=0;$i<$maxNr;$i++) {
+            if ($grid[$i] === $grid[$i+1]) {
+                $done = true;
+                for ($y=$i-1,$z=$i+2;$y>=0&&$z<=$maxNr;$y--, $z++) {
+                    if ($grid[$y] !== $grid[$z]) {
+                        $done = false;
+                        break;
+                    }
+                }
+                if ($done) {
+                    $rowId = $i+1;
+                    break;
+                }
+            }
+        }
+        return $rowId;
+    }
+
+    private function getGrids($rows): array
+    {
+        $i = 1;
+        $gridX = [];
+        $gridY = [];
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));
             if (empty($row)) {
-
-                dump($grid);
-                $max = count($grid[0]);
-                for ($i=0;$i<$max;$i++) {
-                    if ($grid[$i] === $grid[$i+1]) {
-                        $middle = true;
-                        for ($y=$i-1;$y>=0;$y--) {
-                            $opositeNr = $i-$y;
-                            if ($opositeNr > $max) {
-
-                            }
-                        }
-                        dd($i);
-                    }
-                }
-                if ($calculate === 'row') {
-                    // $result += $value;
-                } else {
-                    // $result += ($value*100);
-                }
-                continue;
-            }
-            $rowValues = str_split($row);
-
-            if ($calculate === 'row') {
-                $grid[] = $rowValues;
+                $i++;
             } else {
+                $rowValues = str_split($row);
+
+                $gridX[$i][] = $rowValues;
                 foreach ($rowValues as $collumn => $value) {
-                    $grid[$collumn][] = $value;
+                    $gridY[$i][$collumn][] = $value;
                 }
             }
-
         }
-        return $result;
+
+        return [$gridX, $gridY];
     }
 
     public function generatePart2($rows): string
     {
-        return 0;
+        [$gridX, $gridY] = $this->getGrids($rows);
+
+        return $this->calculateSmudgeResults($gridX, $gridY);
+    }
+
+    private function calculateSmudgeResults(array $gridX, array $gridY): int
+    {
+        $result = 0;
+        foreach ($gridX as $key => $grid) {
+            $rowId = $this->findMiddleWithSmudge($grid);
+            if ($rowId > 0) {
+                $result += ($rowId*100);
+            }
+        }
+        foreach ($gridY as $key => $grid) {
+            $rowId = $this->findMiddleWithSmudge($grid);
+            if ($rowId > 0) {
+                $result += $rowId;
+            }
+        }
+
+        return $result;
+    }
+
+    private function findMiddleWithSmudge(array $grid): int
+    {
+        $rowId = 0;
+        $maxNr = count($grid)-1;
+        for ($i=0;$i<$maxNr;$i++) {
+            $smudge = 0;
+            $rowDiff = array_diff_assoc($grid[$i],$grid[$i+1]);
+            if ($grid[$i] === $grid[$i+1] || count($rowDiff) === 1) {
+                $done = true;
+                if (count($rowDiff) > 0) {
+                    $smudge += count($rowDiff);
+                }
+                for ($y=$i-1,$z=$i+2;$y>=0&&$z<=$maxNr;$y--, $z++) {
+                    $rowDiff = array_diff_assoc($grid[$y],$grid[$z]);
+                    if (count($rowDiff) > 0) {
+                        $smudge += count($rowDiff);
+                    }
+                    if (($grid[$y] !== $grid[$z] && $smudge === 0) || $smudge > 1) {
+                        $done = false;
+                        break;
+                    }
+                }
+                if ($done && $smudge === 1) {
+                    $rowId = $i+1;
+                    break;
+                }
+            }
+        }
+        return $rowId;
     }
 }
