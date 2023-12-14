@@ -129,7 +129,7 @@ class DayController extends AbstractDayController
     public function day14(Request $request, FileOptions $fileOptions, Day14 $dayService): Response
     {
         $day = 14;
-        $title = '???';
+        $title = 'Parabolic Reflector Dish';
         return $this->renderDayPage($request, $fileOptions, $dayService, $day, $title);
     }
     #[Route('/day15', name: 'app_day15')]
