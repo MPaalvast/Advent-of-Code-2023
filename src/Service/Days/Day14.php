@@ -69,7 +69,7 @@ class Day14 extends AbstractController
     public function generatePart2($rows): string
     {
         $this->createGrid($rows);
-        $totalCycles = 9999;
+        $totalCycles = 999;
         $y = 0;
         $testArray[$y] = [];
         $i = 0;
@@ -93,9 +93,13 @@ class Day14 extends AbstractController
         $loop = true;
         $i = 0;
         $cycles = 1000000000;
+
         while ($loop) {
             if (implode(',', $testArray[$i]) === implode(',', $testArray[$i+2])) {
                 $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]));
+                $loop = false;
+            } elseif (implode(',', $testArray[$i]) === implode(',', $testArray[$i+3])) {
+                $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]) . ',' . implode(',', $testArray[$i+2]));
                 $loop = false;
             } else {
                 $cycles -= count($testArray[$i]);
