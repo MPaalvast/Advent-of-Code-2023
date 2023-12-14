@@ -54,39 +54,52 @@ class Day14 extends AbstractController
 
     private function moveRocksUp(): void
     {
-        // while kan eruit
-        // kijk per 0 hoever hij kan verplaatsen en verplaats hem
-//        $moved = true;
-//        while ($moved) {
-//            $moved = false;
-        dump($this->grid);
         foreach ($this->grid as $gridRowNr => $gridRow) {
-            if ($gridRowNr === 0) {
-                continue;
-            }
-
-            foreach ($gridRow as $fieldNr => &$fieldValue) {
-                if ($fieldValue === 'O') {
-                    $hasChanged = false;
-                    $i=0;
-                    while (!$hasChanged) {
-                        dump($gridRowNr . '-' . $i . '===');
-                        dump($this->grid[$gridRowNr-($i+1)][$fieldNr]);
-                        if (!isset($this->grid[$gridRowNr-($i+1)][$fieldNr]) || in_array($this->grid[$gridRowNr-($i+1)][$fieldNr], ['#', 'O'], true)) {
-                            dump('---');
-                            $this->grid[$gridRowNr-$i][$fieldNr] = 'O';
-                            $fieldValue = '.';
-                            $hasChanged = true;
-                            break 2;
-                        }
-
-                        $i++;
-                    }
+            foreach ($gridRow as $fieldNr => $fieldValue) {
+                if ($this->grid[$gridRowNr][$fieldNr] === '.') {
+                    $test = '1';
                 }
             }
         }
-//        }
     }
+
+//    private function moveRocksUp(): void
+//    {
+//        // while kan eruit
+//        // kijk per 0 hoever hij kan verplaatsen en verplaats hem
+////        $moved = true;
+////        while ($moved) {
+////            $moved = false;
+//        dump($this->grid);
+//        foreach ($this->grid as $gridRowNr => $gridRow) {
+//            if ($gridRowNr === 0) {
+//                continue;
+//            }
+//
+//            // get values and keys where de value = O
+//
+//            foreach ($gridRow as $fieldNr => &$fieldValue) {
+//                if ($fieldValue === 'O') {
+//                    $hasChanged = false;
+//                    $i=0;
+//                    while (!$hasChanged) {
+//                        dump($gridRowNr . '-' . $i . '===');
+//                        dump($this->grid[$gridRowNr-($i+1)][$fieldNr]);
+//                        if (!isset($this->grid[$gridRowNr-($i+1)][$fieldNr]) || in_array($this->grid[$gridRowNr-($i+1)][$fieldNr], ['#', 'O'], true)) {
+//                            dump('---');
+//                            $this->grid[$gridRowNr-$i][$fieldNr] = 'O';
+//                            $fieldValue = '.';
+//                            $hasChanged = true;
+//                            break 2;
+//                        }
+//
+//                        $i++;
+//                    }
+//                }
+//            }
+//        }
+////        }
+//    }
 
     private function calculateResult(): void
     {
