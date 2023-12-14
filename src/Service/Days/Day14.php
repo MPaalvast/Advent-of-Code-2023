@@ -52,41 +52,58 @@ class Day14 extends AbstractController
 //        }
 //    }
 
-    private function moveRocksUp(): void
-    {
-        foreach ($this->grid as $gridRowNr => $gridRow) {
-            foreach ($gridRow as $fieldNr => $fieldValue) {
-                if ($this->grid[$gridRowNr][$fieldNr] === '.') {
-                    $test = '1';
-                }
-            }
-        }
-    }
-
 //    private function moveRocksUp(): void
 //    {
-//        // while kan eruit
-//        // kijk per 0 hoever hij kan verplaatsen en verplaats hem
-////        $moved = true;
-////        while ($moved) {
-////            $moved = false;
-//        dump($this->grid);
 //        foreach ($this->grid as $gridRowNr => $gridRow) {
-//            if ($gridRowNr === 0) {
-//                continue;
+//            foreach ($gridRow as $fieldNr => $fieldValue) {
+//                if ($this->grid[$gridRowNr][$fieldNr] === '.') {
+//                    $test = '1';
+//                }
 //            }
-//
-//            // get values and keys where de value = O
-//
+//        }
+//    }
+
+    private function moveRocksUp(): void
+    {
+        // while kan eruit
+        // kijk per 0 hoever hij kan verplaatsen en verplaats hem
+//        $moved = true;
+//        while ($moved) {
+//            $moved = false;
+//        dump($this->grid);
+        foreach ($this->grid as $gridRowNr => $gridRow) {
+            if ($gridRowNr === 0) {
+                continue;
+            }
+
+            // get values and keys where de value = O
+            $positionsToCheck = array_keys($gridRow, "O");
+            dump($this->grid);
+            if (count($positionsToCheck) > 0) {
+                foreach ($positionsToCheck as $y) {
+                    $i = 1;
+                    if ($this->grid[$gridRowNr-$i][$y] !== '.') {
+                        continue;
+                    }
+                    while ($gridRowNr-$i > 0 && isset($this->grid[$gridRowNr-$i][$y]) && $this->grid[$gridRowNr-$i][$y] === '.') {
+                        $i++;
+                    }
+                    dump($gridRowNr-$i . '----');
+                    $this->grid[$gridRowNr-$i][$y] = 'O';
+                    $this->grid[$gridRowNr][$y] = '.';
+                }
+                dump($this->grid);
+            }
+
 //            foreach ($gridRow as $fieldNr => &$fieldValue) {
 //                if ($fieldValue === 'O') {
 //                    $hasChanged = false;
 //                    $i=0;
 //                    while (!$hasChanged) {
-//                        dump($gridRowNr . '-' . $i . '===');
-//                        dump($this->grid[$gridRowNr-($i+1)][$fieldNr]);
+////                        dump($gridRowNr . '-' . $i . '===');
+////                        dump($this->grid[$gridRowNr-($i+1)][$fieldNr]);
 //                        if (!isset($this->grid[$gridRowNr-($i+1)][$fieldNr]) || in_array($this->grid[$gridRowNr-($i+1)][$fieldNr], ['#', 'O'], true)) {
-//                            dump('---');
+////                            dump('---');
 //                            $this->grid[$gridRowNr-$i][$fieldNr] = 'O';
 //                            $fieldValue = '.';
 //                            $hasChanged = true;
@@ -97,9 +114,9 @@ class Day14 extends AbstractController
 //                    }
 //                }
 //            }
+        }
 //        }
-////        }
-//    }
+    }
 
     private function calculateResult(): void
     {
