@@ -94,6 +94,7 @@ class Day14 extends AbstractController
         $i = 0;
         $cycles = 1000000000;
 
+        $resultArrayValues = [];
         while ($loop) {
             if (implode(',', $testArray[$i]) === implode(',', $testArray[$i+2])) {
                 $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]));
@@ -110,15 +111,6 @@ class Day14 extends AbstractController
         $position = $cycles%count($resultArrayValues);
 
         return ($resultArrayValues[$position-1]);
-    }
-
-    private function dumpGrid(): void
-    {
-        $dump = '';
-        foreach ($this->grid as $row) {
-            $dump .= implode('', $row) . "\n";
-        }
-        dump($dump);
     }
 
     private function rotate(): void
