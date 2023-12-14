@@ -69,7 +69,7 @@ class Day14 extends AbstractController
     public function generatePart2($rows): string
     {
         $this->createGrid($rows);
-        $totalCycles = 500;
+        $totalCycles = 9999;
         $y = 0;
         $testArray[$y] = [];
         $i = 0;
