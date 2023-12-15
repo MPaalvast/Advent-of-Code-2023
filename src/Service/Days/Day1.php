@@ -2,9 +2,12 @@
 
 namespace App\Service\Days;
 
-class Day1
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+
+#[AsAlias(id: 'app.day1', public: true)]
+class Day1 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $total = 0;
         foreach ($rows as $subString) {
@@ -19,7 +22,7 @@ class Day1
         return $total;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $numberStringOptions = [
             1 => "one",

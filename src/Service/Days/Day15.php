@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day15
+class Day15 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $stringParts = $this->getStringParts($rows);
 
@@ -16,7 +16,7 @@ class Day15
         return $total;
     }
 
-    private function getStringParts(array $rows): array
+    private function getStringParts(array|\Generator $rows): array
     {
         $totalString = '';
         foreach ($rows as $row) {
@@ -40,7 +40,7 @@ class Day15
         return $value;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $stringParts = $this->getStringParts($rows);
         $boxes = $this->getBoxes($stringParts);

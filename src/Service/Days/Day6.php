@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day6
+class Day6 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $timeStringData = [];
         $distanceStringData = [];
@@ -50,7 +50,7 @@ class Day6
         return $result;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $timeStringData = [];
         $distanceStringData = [];

@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day2
+class Day2 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $maxTotals = [
             'red' => 12,
@@ -14,6 +14,7 @@ class Day2
         $totalGameNumber = 0;
 
         foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
             $fairGame = true;
             $gameData = explode(': ', $row);
             $gameNumber = (explode(' ', $gameData[0]))[1];
@@ -36,7 +37,7 @@ class Day2
         return $totalGameNumber;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $totalGameNumber = 0;
         foreach ($rows as $row) {

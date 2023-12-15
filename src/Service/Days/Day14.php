@@ -2,15 +2,13 @@
 
 namespace App\Service\Days;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-class Day14 extends AbstractController
+class Day14 implements DayServiceInterface
 {
     public function __construct(public array $grid = [], public int $maxRows = 0, public int $maxCol = 0)
     {
     }
 
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $this->createGrid($rows);
         $this->moveRocksUp();
@@ -66,7 +64,7 @@ class Day14 extends AbstractController
         return $result;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $this->createGrid($rows);
         $totalCycles = 999;

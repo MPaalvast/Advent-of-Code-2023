@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day5
+class Day5 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $seedLocations = [];
         $convertArray = [];
@@ -45,7 +45,7 @@ class Day5
         return $seedLocations;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $seedLocations = [];
         $convertArray = [];

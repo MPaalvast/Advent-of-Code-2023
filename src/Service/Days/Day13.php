@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day13
+class Day13 implements DayServiceInterface
 {
-    public function generatePart1($rows): int
+    public function generatePart1(array|\Generator $rows): string
     {
         [$gridX, $gridY] = $this->getGrids($rows);
 
@@ -74,7 +74,7 @@ class Day13
         return [$gridX, $gridY];
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         [$gridX, $gridY] = $this->getGrids($rows);
 

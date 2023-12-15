@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day7
+class Day7 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $handsPlayed = [
             'Five of a kind' => [],
@@ -123,7 +123,7 @@ class Day7
         return $cardsArray;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $handsPlayed = [
             'Five of a kind' => [],

@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day12
+class Day12 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $result = 0;
         foreach ($rows as $row) {
@@ -94,7 +94,7 @@ class Day12
         return $baseString;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         set_time_limit(1600);
         $result = 0;

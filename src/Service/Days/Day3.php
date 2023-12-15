@@ -2,9 +2,9 @@
 
 namespace App\Service\Days;
 
-class Day3
+class Day3 implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);
         $numbersToCount = $this->listNumbersToCount($arrayInput);
@@ -12,7 +12,7 @@ class Day3
         return array_sum($numbersToCount);
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);
         $numbersToCount = $this->listNumbersToCountByStar($arrayInput);

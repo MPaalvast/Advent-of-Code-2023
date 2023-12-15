@@ -3,15 +3,16 @@
 namespace App\Service\Days;
 
 use App\Service\Tools\LCM;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class Day8 extends AbstractController
+class Day8 implements DayServiceInterface
 {
-    public function __construct(private readonly LCM $LCM)
+    public LCM $LCM;
+    public function __construct()
     {
+        $this->LCM = new LCM();
     }
 
-    public function generatePart1($rows): int
+    public function generatePart1(array|\Generator $rows): string
     {
         $start = 'AAA';
         $end = 'ZZZ';
@@ -40,7 +41,7 @@ class Day8 extends AbstractController
         return $i;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         [$mapData, $mapDirections] = $this->getMapData($rows);
         return $this->findAllEndPositions($mapDirections, $mapData);
