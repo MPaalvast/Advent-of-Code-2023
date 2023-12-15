@@ -136,7 +136,7 @@ class DayController extends AbstractDayController
     public function day15(Request $request, FileOptions $fileOptions, Day15 $dayService): Response
     {
         $day = 15;
-        $title = '???';
+        $title = 'Lens Library';
         return $this->renderDayPage($request, $fileOptions, $dayService, $day, $title);
     }
     #[Route('/day16', name: 'app_day16')]
