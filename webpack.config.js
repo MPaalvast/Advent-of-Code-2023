@@ -69,9 +69,12 @@ Encore
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 
-    // Add Bootstrap
-    .addStyleEntry('bootstrap', './node_modules/bootstrap/dist/css/bootstrap.min.css')
-    .enableSingleRuntimeChunk()
+
+    // // Add Bootstrap
+    // .addStyleEntry('bootstrap', './node_modules/bootstrap/dist/css/bootstrap.min.css')
+    // .enableSingleRuntimeChunk()
+
+    .enablePostCssLoader()
 ;
 
 module.exports = Encore.getWebpackConfig();
