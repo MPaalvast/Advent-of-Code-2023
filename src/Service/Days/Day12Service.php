@@ -31,29 +31,29 @@ class Day12Service implements DayServiceInterface
 
     public function generatePart2(array|\Generator $rows): string
     {
-        set_time_limit(1600);
-        $result = 0;
-        foreach ($rows as $row) {
-            $row = trim(preg_replace('/\r+/', '', $row));
-            if (empty($row)) {
-                continue;
-            }
-            [$patern, $input] = explode(' ', $row);
-            $newPatern = rtrim(str_repeat($patern . '.', 5), '.');
-            $newInput = rtrim(str_repeat($input . ',', 5), ',');
-
-            $inputParts = explode(',', $newInput);
-            $baseString = $this->setBaseString($inputParts);
-            $lengthDiff = strlen($newPatern) - strlen($baseString);
-            if ($lengthDiff === 0) {
-                $result++;
-            } else {
-                $result += $this->calculateDiffStrings($baseString, $newPatern, $lengthDiff);
-            }
-
-        }
-
-        return (string)$result;
+        return "Not yet solved :(";
+//        $result = 0;
+//        foreach ($rows as $row) {
+//            $row = trim(preg_replace('/\r+/', '', $row));
+//            if (empty($row)) {
+//                continue;
+//            }
+//            [$patern, $input] = explode(' ', $row);
+//            $newPatern = rtrim(str_repeat($patern . '.', 5), '.');
+//            $newInput = rtrim(str_repeat($input . ',', 5), ',');
+//
+//            $inputParts = explode(',', $newInput);
+//            $baseString = $this->setBaseString($inputParts);
+//            $lengthDiff = strlen($newPatern) - strlen($baseString);
+//            if ($lengthDiff === 0) {
+//                $result++;
+//            } else {
+//                $result += $this->calculateDiffStrings($baseString, $newPatern, $lengthDiff);
+//            }
+//
+//        }
+//
+//        return (string)$result;
     }
 
     private function calculateDiffStrings(string $baseString, string $patern, int $posibleDots): int
@@ -117,7 +117,7 @@ class Day12Service implements DayServiceInterface
             if (!empty($baseString)) {
                 $baseString .= '-';
             }
-            $baseString .= str_repeat("#", $part);
+            $baseString .= str_repeat("#", (int)$part);
         }
 
         return $baseString;

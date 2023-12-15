@@ -50,7 +50,7 @@ class Day1Service implements DayServiceInterface
             }
 
             foreach (array_keys($numberStringOptions) as $option) {
-                $this->getInstringData($inStringData, $row, $option);
+                $this->getInstringData($inStringData, $row, (string)$option);
             }
 
             $total += (int)($inStringData['first'].$inStringData['last']);
@@ -59,7 +59,7 @@ class Day1Service implements DayServiceInterface
         return (string)$total;
     }
 
-    private function getInstringData(&$inStringData, $subString, $option, $key = null): void
+    private function getInstringData(array &$inStringData, string $subString, string $option, ?int $key = null): void
     {
         $position = strpos($subString,$option);
         if (false !== $position) {

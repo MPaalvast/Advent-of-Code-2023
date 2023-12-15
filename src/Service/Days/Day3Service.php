@@ -176,6 +176,6 @@ class Day3Service implements DayServiceInterface
             }
         }
 
-        return $number;
+        return (int)$number;
     }
 }
