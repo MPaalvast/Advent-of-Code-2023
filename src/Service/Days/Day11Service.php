@@ -1,26 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-class Day11 extends AbstractController
+class Day11Service implements DayServiceInterface
 {
     public function __construct(public array $normalizedGrid = [], public array $grid = [], public array $planetLocations = [], public array $emptyData = [])
     {
     }
 
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $this->generateGrid($rows);
 
-        return $this->generateDistance(1);
+        return (string)$this->generateDistance(1);
     }
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $this->generateGrid($rows);
 
-        return $this->generateDistance(999999);
+        return (string)$this->generateDistance(999999);
     }
 
     private function generateGrid($rows): void

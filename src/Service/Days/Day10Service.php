@@ -1,21 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
-class Day10 extends AbstractController
+class Day10Service implements DayServiceInterface
 {
     public function __construct(public array $grid = [], public array $gridBorder = [], public array $startPosition = [])
     {
     }
 
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $this->createGrid($rows);
 
-        return $this->findEndPosition();
+        return (string)$this->findEndPosition();
     }
+
+    public function generatePart2(array|\Generator $rows): string
+    {
+        $this->createGrid($rows);
+        $this->findEndPosition();
+
+        return (string)$this->findTotalInLoop();
+    }
+
     private function createGrid($rows): void
     {
         $i = 0;
@@ -28,14 +37,6 @@ class Day10 extends AbstractController
             }
             $i++;
         }
-    }
-
-    public function generatePart2($rows): string
-    {
-        $this->createGrid($rows);
-        $this->findEndPosition();
-
-        return $this->findTotalInLoop();
     }
 
     /*

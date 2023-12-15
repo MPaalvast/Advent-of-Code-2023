@@ -3,19 +3,14 @@
 {% block title %}Day {{ day_nr }}{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
-
-    <div class="example-wrapper pt-5">
-        <h1>--- Day {{ day_nr }}: {{ day_title}} ---</h1>
-        <fieldset>
+    <div class="example-wrapper pt-40 mx-auto max-w-screen-lg">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">--- Day {{ day_nr }}: {{ day_title}} ---</h1>
+        <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-8">
             {{ form(form) }}
         </fieldset>
 
-        <fieldset>
-            <h2>Result:</h2>
+        <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-4">
+            <h2 class="mb-4 text-3xl">Result:</h2>
             <div id="result">{{ result }}</div>
         </fieldset>
     </div>

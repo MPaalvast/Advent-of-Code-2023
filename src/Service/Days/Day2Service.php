@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day2
+class Day2Service implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $maxTotals = [
             'red' => 12,
@@ -14,6 +16,7 @@ class Day2
         $totalGameNumber = 0;
 
         foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
             $fairGame = true;
             $gameData = explode(': ', $row);
             $gameNumber = (explode(' ', $gameData[0]))[1];
@@ -33,13 +36,14 @@ class Day2
             }
         }
 
-        return $totalGameNumber;
+        return (string)$totalGameNumber;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $totalGameNumber = 0;
         foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
             $minTotals = [
                 'red' => 0,
                 'green' => 0,
@@ -60,6 +64,6 @@ class Day2
             $totalGameNumber += $powerOfRow;
         }
 
-        return $totalGameNumber;
+        return (string)$totalGameNumber;
     }
 }

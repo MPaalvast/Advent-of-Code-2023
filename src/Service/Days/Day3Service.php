@@ -1,30 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day3
+class Day3Service implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);
         $numbersToCount = $this->listNumbersToCount($arrayInput);
 
-        return array_sum($numbersToCount);
+        return (string)array_sum($numbersToCount);
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);
         $numbersToCount = $this->listNumbersToCountByStar($arrayInput);
 
-        return array_sum($numbersToCount);
+        return (string)array_sum($numbersToCount);
     }
 
-    private function makeArrayInput($input): array
+    private function makeArrayInput(array|\Generator$input): array
     {
         $outputArray = [];
         $i = 0;
         foreach ($input as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
             $outputArray[$i] = str_split($row);
             $i++;
         }
@@ -130,10 +133,8 @@ class Day3
             if (isset($arrayInput[($y - 1)][($i + 1)]) && is_numeric($arrayInput[($y - 1)][($i + 1)])) {
                 $numbers[] = $this->getTotalNumber($y-1, $i+1, $arrayInput);
             }
-        } else {
-            if (isset($arrayInput[($y - 1)][($i)]) && is_numeric($arrayInput[($y - 1)][$i])) {
-                $numbers[] = $this->getTotalNumber($y-1, $i, $arrayInput);
-            }
+        } elseif (isset($arrayInput[($y - 1)][($i)]) && is_numeric($arrayInput[($y - 1)][$i])) {
+            $numbers[] = $this->getTotalNumber($y-1, $i, $arrayInput);
         }
 
         if (isset($arrayInput[($y)][($i-1)]) && is_numeric($arrayInput[($y)][($i-1)])) {
@@ -150,10 +151,8 @@ class Day3
             if (isset($arrayInput[($y + 1)][($i + 1)]) && is_numeric($arrayInput[($y + 1)][($i + 1)])) {
                 $numbers[] = $this->getTotalNumber($y+1, $i+1, $arrayInput);
             }
-        } else {
-            if (isset($arrayInput[($y + 1)][($i)]) && is_numeric($arrayInput[($y + 1)][$i])) {
-                $numbers[] = $this->getTotalNumber($y+1, $i, $arrayInput);
-            }
+        } elseif (isset($arrayInput[($y + 1)][($i)]) && is_numeric($arrayInput[($y + 1)][$i])) {
+            $numbers[] = $this->getTotalNumber($y+1, $i, $arrayInput);
         }
 
         return $numbers;
@@ -177,6 +176,6 @@ class Day3
             }
         }
 
-        return $number;
+        return (int)$number;
     }
 }

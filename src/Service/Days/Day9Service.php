@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day9
+class Day9Service implements DayServiceInterface
 {
-    public function generatePart1($rows): string
+    public function generatePart1(array|\Generator $rows): string
     {
         $result = 0;
         foreach ($rows as $row) {
@@ -17,10 +19,10 @@ class Day9
             $result += $nextNumber;
         }
 
-        return $result;
+        return (string)$result;
     }
 
-    public function generatePart2($rows): string
+    public function generatePart2(array|\Generator $rows): string
     {
         $result = 0;
         foreach ($rows as $row) {
@@ -33,7 +35,7 @@ class Day9
             $result += $nextNumber;
         }
 
-        return $result;
+        return (string)$result;
     }
 
     private function findNextNumber(array $rowParts): int
