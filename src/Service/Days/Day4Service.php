@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day4 implements DayServiceInterface
+class Day4Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
@@ -27,7 +29,7 @@ class Day4 implements DayServiceInterface
             }
         }
         
-        return $totalPoints;
+        return (string)$totalPoints;
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -62,6 +64,6 @@ class Day4 implements DayServiceInterface
             }
         }
 
-        return array_sum($trackingArray);
+        return (string)array_sum($trackingArray);
     }
 }

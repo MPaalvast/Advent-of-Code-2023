@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day5 implements DayServiceInterface
+class Day5Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
@@ -28,21 +30,7 @@ class Day5 implements DayServiceInterface
         }
         $seedLocations = $this->recalculateLocations($seedLocations, $convertArray);
 
-        return min($seedLocations);
-    }
-
-    private function recalculateLocations(array $seedLocations, array $convertArray): array
-    {
-        foreach ($seedLocations as $seedLocationKey => $seedLocation) {
-            foreach ($convertArray as [$nextStartValue, $optionStartNr, $optionRangeLength]) {
-                if (($optionStartNr <= $seedLocation) && ($seedLocation <= ($optionStartNr + $optionRangeLength))) {
-                    $seedLocations[$seedLocationKey] = $seedLocation + ($nextStartValue - $optionStartNr);
-                    break;
-                }
-            }
-        }
-
-        return $seedLocations;
+        return (string)min($seedLocations);
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -86,7 +74,21 @@ class Day5 implements DayServiceInterface
             }
         }
 
-        return $lowestNumber;
+        return (string)$lowestNumber;
+    }
+
+    private function recalculateLocations(array $seedLocations, array $convertArray): array
+    {
+        foreach ($seedLocations as $seedLocationKey => $seedLocation) {
+            foreach ($convertArray as [$nextStartValue, $optionStartNr, $optionRangeLength]) {
+                if (($optionStartNr <= $seedLocation) && ($seedLocation <= ($optionStartNr + $optionRangeLength))) {
+                    $seedLocations[$seedLocationKey] = $seedLocation + ($nextStartValue - $optionStartNr);
+                    break;
+                }
+            }
+        }
+
+        return $seedLocations;
     }
 
     private function calculateSeedsLocation(array $seedLocations, array $convertArray): array

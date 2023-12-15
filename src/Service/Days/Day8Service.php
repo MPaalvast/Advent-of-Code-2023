@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
 use App\Service\Tools\LCM;
 
-class Day8 implements DayServiceInterface
+class Day8Service implements DayServiceInterface
 {
     public LCM $LCM;
     public function __construct()
@@ -19,7 +21,13 @@ class Day8 implements DayServiceInterface
 
         [$mapData, $mapDirections] = $this->getMapData($rows);
 
-        return $this->findEndPosition($start, $end, $mapDirections, $mapData);
+        return (string)$this->findEndPosition($start, $end, $mapDirections, $mapData);
+    }
+
+    public function generatePart2(array|\Generator $rows): string
+    {
+        [$mapData, $mapDirections] = $this->getMapData($rows);
+        return (string)$this->findAllEndPositions($mapDirections, $mapData);
     }
 
     private function findEndPosition(string $start, string $end, array $mapDirections, array $mapData): int
@@ -39,12 +47,6 @@ class Day8 implements DayServiceInterface
         }
 
         return $i;
-    }
-
-    public function generatePart2(array|\Generator $rows): string
-    {
-        [$mapData, $mapDirections] = $this->getMapData($rows);
-        return $this->findAllEndPositions($mapDirections, $mapData);
     }
 
     private function getMapData($rows): array

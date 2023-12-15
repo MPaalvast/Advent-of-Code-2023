@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day10 implements DayServiceInterface
+class Day10Service implements DayServiceInterface
 {
     public function __construct(public array $grid = [], public array $gridBorder = [], public array $startPosition = [])
     {
@@ -12,8 +14,17 @@ class Day10 implements DayServiceInterface
     {
         $this->createGrid($rows);
 
-        return $this->findEndPosition();
+        return (string)$this->findEndPosition();
     }
+
+    public function generatePart2(array|\Generator $rows): string
+    {
+        $this->createGrid($rows);
+        $this->findEndPosition();
+
+        return (string)$this->findTotalInLoop();
+    }
+
     private function createGrid($rows): void
     {
         $i = 0;
@@ -26,14 +37,6 @@ class Day10 implements DayServiceInterface
             }
             $i++;
         }
-    }
-
-    public function generatePart2(array|\Generator $rows): string
-    {
-        $this->createGrid($rows);
-        $this->findEndPosition();
-
-        return $this->findTotalInLoop();
     }
 
     /*

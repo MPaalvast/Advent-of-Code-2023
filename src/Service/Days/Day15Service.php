@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day15 implements DayServiceInterface
+class Day15Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
@@ -13,7 +15,15 @@ class Day15 implements DayServiceInterface
             $total += $this->calculateValue($subString);
         }
 
-        return $total;
+        return (string)$total;
+    }
+
+    public function generatePart2(array|\Generator $rows): string
+    {
+        $stringParts = $this->getStringParts($rows);
+        $boxes = $this->getBoxes($stringParts);
+
+        return (string)$this->calculateBoxValues($boxes);
     }
 
     private function getStringParts(array|\Generator $rows): array
@@ -38,14 +48,6 @@ class Day15 implements DayServiceInterface
         }
 
         return $value;
-    }
-
-    public function generatePart2(array|\Generator $rows): string
-    {
-        $stringParts = $this->getStringParts($rows);
-        $boxes = $this->getBoxes($stringParts);
-
-        return $this->calculateBoxValues($boxes);
     }
 
     private function calculateBoxValues(array $boxes): int

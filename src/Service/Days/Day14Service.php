@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day14 implements DayServiceInterface
+class Day14Service implements DayServiceInterface
 {
     public function __construct(public array $grid = [], public int $maxRows = 0, public int $maxCol = 0)
     {
@@ -14,6 +16,53 @@ class Day14 implements DayServiceInterface
         $this->moveRocksUp();
 
         return $this->calculateResult();
+    }
+
+    public function generatePart2(array|\Generator $rows): string
+    {
+        $this->createGrid($rows);
+        $totalCycles = 500;
+        $y = 0;
+        $testArray[$y] = [];
+        $i = 0;
+        do {
+            $this->moveRocksUp();
+            $this->rotate();
+            $this->moveRocksUp();
+            $this->rotate();
+            $this->moveRocksUp();
+            $this->rotate();
+            $this->moveRocksUp();
+            $this->rotate();
+            $i++;
+            $result = $this->calculateResult();
+            if (in_array($result, $testArray[$y], true)) {
+                $y++;
+            }
+            $testArray[$y][] = $result;
+        } while ($i<=$totalCycles);
+
+        $loop = true;
+        $i = 0;
+        $cycles = 1000000000;
+
+        $resultArrayValues = [];
+        while ($loop) {
+            if (implode(',', $testArray[$i]) === implode(',', $testArray[$i+2])) {
+                $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]));
+                $loop = false;
+            } elseif (implode(',', $testArray[$i]) === implode(',', $testArray[$i+3])) {
+                $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]) . ',' . implode(',', $testArray[$i+2]));
+                $loop = false;
+            } else {
+                $cycles -= count($testArray[$i]);
+                $i++;
+            }
+        }
+
+        $position = $cycles%count($resultArrayValues);
+
+        return ($resultArrayValues[$position-1]);
     }
 
     private function createGrid($rows): void
@@ -61,54 +110,7 @@ class Day14 implements DayServiceInterface
             $gridTotalRowValue--;
         }
 
-        return $result;
-    }
-
-    public function generatePart2(array|\Generator $rows): string
-    {
-        $this->createGrid($rows);
-        $totalCycles = 999;
-        $y = 0;
-        $testArray[$y] = [];
-        $i = 0;
-        do {
-            $this->moveRocksUp();
-            $this->rotate();
-            $this->moveRocksUp();
-            $this->rotate();
-            $this->moveRocksUp();
-            $this->rotate();
-            $this->moveRocksUp();
-            $this->rotate();
-            $i++;
-            $result = $this->calculateResult();
-            if (in_array($result, $testArray[$y], true)) {
-                $y++;
-            }
-            $testArray[$y][] = $result;
-        } while ($i<=$totalCycles);
-
-        $loop = true;
-        $i = 0;
-        $cycles = 1000000000;
-
-        $resultArrayValues = [];
-        while ($loop) {
-            if (implode(',', $testArray[$i]) === implode(',', $testArray[$i+2])) {
-                $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]));
-                $loop = false;
-            } elseif (implode(',', $testArray[$i]) === implode(',', $testArray[$i+3])) {
-                $resultArrayValues = explode(',', implode(',', $testArray[$i]) . ',' . implode(',', $testArray[$i+1]) . ',' . implode(',', $testArray[$i+2]));
-                $loop = false;
-            } else {
-                $cycles -= count($testArray[$i]);
-                $i++;
-            }
-        }
-
-        $position = $cycles%count($resultArrayValues);
-
-        return ($resultArrayValues[$position-1]);
+        return (string)$result;
     }
 
     private function rotate(): void

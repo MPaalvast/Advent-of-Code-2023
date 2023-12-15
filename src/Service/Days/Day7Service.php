@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day7 implements DayServiceInterface
+class Day7Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
@@ -75,52 +77,7 @@ class Day7 implements DayServiceInterface
             }
         }
 
-        return $score;
-    }
-
-    private function camelCardsSord(array $cardsArray, array $order): array
-    {
-        uksort($cardsArray, static function ($a, $b) use ($order) {
-            $i=0;
-
-            $aString = str_split($a);
-            $bString = str_split($b);
-            $valueAToCompare = '';
-            $valueBToCompare = '';
-
-            while ($i<6) {
-                if ($aString[$i] !== $bString[$i]) {
-                    $valueAToCompare = $aString[$i];
-                    $valueBToCompare = $bString[$i];
-                    break;
-                }
-                $i++;
-            }
-            if ($i === 6) {
-                dd('SameValue');
-            }
-            if ('' === $valueAToCompare || '' === $valueBToCompare) {
-                dd('values not correct');
-            }
-
-            $a = array_search($valueAToCompare, $order, true);
-            $b = array_search($valueBToCompare, $order, true);
-            if ($a === false && $b === false) {
-                return 0;
-            }
-
-            if ($a === false) {
-                return -1;
-            }
-
-            if ($b === false) {
-                return 1;
-            }
-
-            return $a - $b;
-        });
-
-        return $cardsArray;
+        return (string)$score;
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -214,6 +171,51 @@ class Day7 implements DayServiceInterface
             }
         }
 
-        return $score;
+        return (string)$score;
+    }
+
+    private function camelCardsSord(array $cardsArray, array $order): array
+    {
+        uksort($cardsArray, static function ($a, $b) use ($order) {
+            $i=0;
+
+            $aString = str_split($a);
+            $bString = str_split($b);
+            $valueAToCompare = '';
+            $valueBToCompare = '';
+
+            while ($i<6) {
+                if ($aString[$i] !== $bString[$i]) {
+                    $valueAToCompare = $aString[$i];
+                    $valueBToCompare = $bString[$i];
+                    break;
+                }
+                $i++;
+            }
+            if ($i === 6) {
+                dd('SameValue');
+            }
+            if ('' === $valueAToCompare || '' === $valueBToCompare) {
+                dd('values not correct');
+            }
+
+            $a = array_search($valueAToCompare, $order, true);
+            $b = array_search($valueBToCompare, $order, true);
+            if ($a === false && $b === false) {
+                return 0;
+            }
+
+            if ($a === false) {
+                return -1;
+            }
+
+            if ($b === false) {
+                return 1;
+            }
+
+            return $a - $b;
+        });
+
+        return $cardsArray;
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day6 implements DayServiceInterface
+class Day6Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
@@ -25,29 +27,7 @@ class Day6 implements DayServiceInterface
         $timeArray = explode (' ', $timeStringData[1]);
         $distanceArray = explode (' ', $distanceStringData[1]);
 
-        return $this->getNumberOfWays($timeArray, $distanceArray);
-    }
-
-    private function getNumberOfWays($timeArray, $distanceArray): int
-    {
-        $result = 1;
-        foreach ($timeArray as $key => $time) {
-            $halftime = (int)$time/2;
-            $i = (int)floor($halftime);
-            $totalTimeToPush = 0;
-
-            while ($i * ((int)$time-$i) > (int)$distanceArray[$key]) {
-                $totalTimeToPush++;
-                --$i;
-            }
-            $totalTimeToPush *= 2;
-            if ($time%2 === 0) {
-                $totalTimeToPush--;
-            }
-            $result *= $totalTimeToPush;
-        }
-
-        return $result;
+        return (string)$this->getNumberOfWays($timeArray, $distanceArray);
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -71,6 +51,28 @@ class Day6 implements DayServiceInterface
         $timeArray = explode (' ', $timeStringData[1]);
         $distanceArray = explode (' ', $distanceStringData[1]);
 
-        return $this->getNumberOfWays($timeArray, $distanceArray);
+        return (string)$this->getNumberOfWays($timeArray, $distanceArray);
+    }
+
+    private function getNumberOfWays($timeArray, $distanceArray): int
+    {
+        $result = 1;
+        foreach ($timeArray as $key => $time) {
+            $halftime = (int)$time/2;
+            $i = (int)floor($halftime);
+            $totalTimeToPush = 0;
+
+            while ($i * ((int)$time-$i) > (int)$distanceArray[$key]) {
+                $totalTimeToPush++;
+                --$i;
+            }
+            $totalTimeToPush *= 2;
+            if ($time%2 === 0) {
+                $totalTimeToPush--;
+            }
+            $result *= $totalTimeToPush;
+        }
+
+        return $result;
     }
 }

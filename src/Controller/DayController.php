@@ -14,4 +14,5 @@ class DayController extends AbstractDayController
     {
         return $this->renderDayPage($request, $fileOptions, $day);
     }
+
 }

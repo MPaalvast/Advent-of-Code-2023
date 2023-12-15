@@ -1,17 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-use Symfony\Component\DependencyInjection\Attribute\AsAlias;
-
-#[AsAlias(id: 'app.day1', public: true)]
-class Day1 implements DayServiceInterface
+class Day1Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
         $total = 0;
-        foreach ($rows as $subString) {
-            $numbers = array_filter(preg_split("/\D+/", $subString));
+        foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
+            $numbers = array_filter(preg_split("/\D+/", $row));
             if (!empty($numbers)) {
                 $first = mb_substr(reset($numbers), 0, 1);
                 $last = mb_substr(end($numbers), -1);
@@ -19,7 +19,7 @@ class Day1 implements DayServiceInterface
             }
         }
 
-        return $total;
+        return (string)$total;
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -37,7 +37,8 @@ class Day1 implements DayServiceInterface
         ];
 
         $total = 0;
-        foreach ($rows as $subString) {
+        foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
             $inStringData = [
                 'first' => null,
                 'firstPosition' => null,
@@ -45,17 +46,17 @@ class Day1 implements DayServiceInterface
                 'lastPosition' => null,
             ];
             foreach ($numberStringOptions as $int => $option) {
-                $this->getInstringData($inStringData, $subString, $option, $int);
+                $this->getInstringData($inStringData, $row, $option, $int);
             }
 
             foreach (array_keys($numberStringOptions) as $option) {
-                $this->getInstringData($inStringData, $subString, $option);
+                $this->getInstringData($inStringData, $row, $option);
             }
 
             $total += (int)($inStringData['first'].$inStringData['last']);
         }
 
-        return $total;
+        return (string)$total;
     }
 
     private function getInstringData(&$inStringData, $subString, $option, $key = null): void

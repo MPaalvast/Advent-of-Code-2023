@@ -1,14 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day13 implements DayServiceInterface
+class Day13Service implements DayServiceInterface
 {
     public function generatePart1(array|\Generator $rows): string
     {
         [$gridX, $gridY] = $this->getGrids($rows);
 
-        return $this->calculateResults($gridX, $gridY);
+        return (string)$this->calculateResults($gridX, $gridY);
+    }
+
+    public function generatePart2(array|\Generator $rows): string
+    {
+        [$gridX, $gridY] = $this->getGrids($rows);
+
+        return (string)$this->calculateSmudgeResults($gridX, $gridY);
     }
 
     private function calculateResults(array $gridX, array $gridY): int
@@ -72,13 +81,6 @@ class Day13 implements DayServiceInterface
         }
 
         return [$gridX, $gridY];
-    }
-
-    public function generatePart2(array|\Generator $rows): string
-    {
-        [$gridX, $gridY] = $this->getGrids($rows);
-
-        return $this->calculateSmudgeResults($gridX, $gridY);
     }
 
     private function calculateSmudgeResults(array $gridX, array $gridY): int

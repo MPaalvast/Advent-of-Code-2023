@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Days;
 
-class Day11 implements DayServiceInterface
+class Day11Service implements DayServiceInterface
 {
     public function __construct(public array $normalizedGrid = [], public array $grid = [], public array $planetLocations = [], public array $emptyData = [])
     {
@@ -12,13 +14,13 @@ class Day11 implements DayServiceInterface
     {
         $this->generateGrid($rows);
 
-        return $this->generateDistance(1);
+        return (string)$this->generateDistance(1);
     }
     public function generatePart2(array|\Generator $rows): string
     {
         $this->generateGrid($rows);
 
-        return $this->generateDistance(999999);
+        return (string)$this->generateDistance(999999);
     }
 
     private function generateGrid($rows): void
