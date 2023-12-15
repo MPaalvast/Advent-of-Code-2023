@@ -3,13 +3,14 @@
 {% block title %}Day {{ day_nr }}{% endblock %}
 
 {% block body %}
-    <div class="example-wrapper pt-40 mx-auto max-w-screen-lg">
-        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">--- Day {{ day_nr }}: {{ day_title}} ---</h1>
+    <div class="example-wrapper mx-auto max-w-screen-lg">
+        <h1 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white text-center">Day {{ day_nr }}</h1>
+        <h2 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white text-center">--- {{ day_title}} ---</h2>
         <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-8">
             {{ form(form) }}
         </fieldset>
 
-        <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-4">
+        <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:text-white rounded mt-4">
             <h2 class="mb-4 text-3xl">Result:</h2>
             <div id="result">{{ result }}</div>
         </fieldset>
