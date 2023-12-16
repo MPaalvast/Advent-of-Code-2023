@@ -16,7 +16,7 @@ class Day16Service implements DayServiceInterface
     {
         // directions = R,D,L,U
         $this->getGrid($rows);
-        $direction = 'D';
+        $direction = 'R';
         if ($this->grid[0][0] === '\\') {
             $direction = 'D';
         }
