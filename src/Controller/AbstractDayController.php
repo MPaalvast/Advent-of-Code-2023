@@ -56,7 +56,7 @@ class AbstractDayController extends AbstractController
             13 => ['class' =>Day13Service::class, 'title' => 'Point of Incidence'],
             14 => ['class' =>Day14Service::class, 'title' => 'Parabolic Reflector Dish'],
             15 => ['class' =>Day15Service::class, 'title' => 'Lens Library'],
-            16 => ['class' =>Day16Service::class, 'title' => '???'],
+            16 => ['class' =>Day16Service::class, 'title' => 'The Floor Will Be Lava'],
             17 => ['class' =>Day17Service::class, 'title' => '???'],
             18 => ['class' =>Day18Service::class, 'title' => '???'],
             19 => ['class' =>Day19Service::class, 'title' => '???'],
