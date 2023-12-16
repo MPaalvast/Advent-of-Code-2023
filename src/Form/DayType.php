@@ -16,29 +16,33 @@ class DayType extends AbstractType
     {
         $builder
             ->add('day_part', ChoiceType::class, [
-                'label_attr' => ['class'=> 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'],
+                'label_attr' => ['class'=> 'text-gray-700'],
                 'choices' => [
                     'Part 1' => 1,
                     'Part 2' => 2,
                 ],
+                'attr' => ['class' => 'border block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50']
             ])
             ->add('input_type', ChoiceType::class, [
-                'label_attr' => ['class'=> 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'],
+//                'label_attr' => ['class'=> 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'],
                 'choices' => [
                     'Preview'  => 'preview',
                     'Input' => 'input',
                 ],
-                'attr' => ['class' => 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'],
+//                'attr' => ['class' => 'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'],
                 'expanded' => true,
             ])
             ->add('input', TextareaType::class, [
                 'required'   => false,
-                'label_attr' => ['class'=> 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'],
-                'attr' => ['class' => 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'],
+                'label_attr' => ['class'=> 'text-gray-700'],
+                'attr' => [
+                    'class' => 'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50',
+                    'rows' => 10,
+                ],
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Get result',
-                'attr' => ['class' => 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'],
+                'attr' => ['class' => 'px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700'],
             ])
         ;
         $builder->setData(array(

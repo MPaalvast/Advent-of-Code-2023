@@ -72,7 +72,7 @@ class AbstractDayController extends AbstractController
     public function renderDayPage(Request $request, FileOptions $fileOptions, int $day): Response
     {
         if (!isset($this->dayClass[$day])) {
-            throw new AccessDeniedException($request->getUri());
+            return $this->redirectToRoute('app_home');
         }
         $dayService = new $this->dayClass[$day]['class'];
         $form = $this->createForm(DayType::class);
