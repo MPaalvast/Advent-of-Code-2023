@@ -14,7 +14,6 @@ class Day16Service implements DayServiceInterface
 
     public function generatePart1(array|\Generator $rows): string
     {
-        // directions = R,D,L,U
         $this->getGrid($rows);
         $direction = 'R';
         if ($this->grid[0][0] === '\\') {
@@ -22,8 +21,9 @@ class Day16Service implements DayServiceInterface
         }
 
         $this->findAllEnergized('0-0', $direction);
+        $this->calculateEnergigezedResult();
 
-        return (string)count(array_unique(array_merge(array_keys($this->energized['horizontal']), array_keys($this->energized['vertical']))));
+        return (string)$this->calculateEnergigezedResult();
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -33,11 +33,7 @@ class Day16Service implements DayServiceInterface
             'value' => 0
         ];
 
-//        $gridDumper = new GridDumper();
-//        $gridDumper->dumpGrid();
-
         $this->getGrid($rows);
-
         $this->generateBestEdgePosition();
 
         return (string)$this->maxResults['value'];
@@ -55,7 +51,6 @@ class Day16Service implements DayServiceInterface
             }
             $this->findAllEnergized('0-' . $y, $direction);
             $result = $this->calculateEnergigezedResult();
-            dump($result);
             if ($result > $this->maxResults['value']) {
                 $this->maxResults['value'] = $result;
                 $this->maxResults['id'] = '0-' . $y;
@@ -126,9 +121,9 @@ class Day16Service implements DayServiceInterface
                     if ($x < 0) {
                         continue 2;
                     }
-                    $exists = isset($this->energized['vertical'][$x . '-' . $y]);
+                    $exists = isset($this->energized['vertical'][$x . '-' . $y]) && $this->energized['vertical'][$x . '-' . $y] === $nextDirection;
                     if (!$exists) {
-                        $this->energized['vertical'][$x . '-' . $y] = 1;
+                        $this->energized['vertical'][$x . '-' . $y] = $nextDirection;
                     }
 
                     if ($this->grid[$x][$y] === '-') {
@@ -156,9 +151,9 @@ class Day16Service implements DayServiceInterface
                     if ($y >= $this->maxWidth) {
                         continue 2;
                     }
-                    $exists = isset($this->energized['horizontal'][$x . '-' . $y]);
+                    $exists = isset($this->energized['horizontal'][$x . '-' . $y]) && $this->energized['horizontal'][$x . '-' . $y] === $nextDirection;
                     if (!$exists) {
-                        $this->energized['horizontal'][$x . '-' . $y] = 1;
+                        $this->energized['horizontal'][$x . '-' . $y] = $nextDirection;
                     }
 
                     if ($this->grid[$x][$y] === '|') {
@@ -186,9 +181,9 @@ class Day16Service implements DayServiceInterface
                     if ($x >= $this->maxHeight) {
                         continue 2;
                     }
-                    $exists = isset($this->energized['vertical'][$x . '-' . $y]);
+                    $exists = isset($this->energized['vertical'][$x . '-' . $y]) && $this->energized['vertical'][$x . '-' . $y] === $nextDirection;
                     if (!$exists) {
-                        $this->energized['vertical'][$x . '-' . $y] = 1;
+                        $this->energized['vertical'][$x . '-' . $y] = $nextDirection;
                     }
 
                     if ($this->grid[$x][$y] === '-') {
@@ -216,9 +211,9 @@ class Day16Service implements DayServiceInterface
                     if ($y < 0) {
                         continue 2;
                     }
-                    $exists = isset($this->energized['horizontal'][$x . '-' . $y]);
+                    $exists = isset($this->energized['horizontal'][$x . '-' . $y]) && $this->energized['horizontal'][$x . '-' . $y] === $nextDirection;
                     if (!$exists) {
-                        $this->energized['horizontal'][$x . '-' . $y] = 1;
+                        $this->energized['horizontal'][$x . '-' . $y] = $nextDirection;
                     }
 
                     if ($this->grid[$x][$y] === '|') {
