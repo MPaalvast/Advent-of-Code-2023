@@ -12,6 +12,7 @@ module.exports = {
   safelist: [
     'border',
     'rounded-md',
+    'rounded-lg',
     'shadow-sm',
     'bg-sky-600',
     'border-sky-600',
@@ -19,7 +20,7 @@ module.exports = {
     'md:px-4',
     'py-1',
     'text-gray-700',
-      'ml-3',
+    'ml-3',
   ],
 }
 

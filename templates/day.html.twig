@@ -5,6 +5,7 @@
 {% block body %}
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
+            <a href="{{ path('app_days') }}" class="absolute right-6 px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700"><- Back</a>
             <h1 class="text-3xl text-black pb-6 text-center">Day {{ day_nr }}</h1>
             <h2 class="text-2xl text-black pb-6 text-center">--- {{ day_title}} ---</h2>
             <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-8">
