@@ -146,7 +146,11 @@ class PriorityQueue implements PriorityQueueInterface
     public function change_priority($element, $new_priority): bool
     {
         // Get the position of the element in the queue.  Must be present, or return false.
-        $pos = $this->hashmap[hash($this->algorithm, $element)];
+        if (isset($this->hashmap[hash($this->algorithm, $element)])) {
+            $pos = $this->hashmap[hash($this->algorithm, $element)];
+        } else {
+            $pos = false;
+        }
 
         if ($pos) {
             // It's the first element, and the new priority is lower than current

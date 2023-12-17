@@ -8,7 +8,7 @@ use App\Service\Tools\Dijkstra\Dijkstra;
 
 class Day17Service implements DayServiceInterface
 {
-    public function __construct(public array $grid = [], public int $maxHeight = 0, public int $maxWidth = 0)
+    public function __construct(public array $grid = [], public array $dijkstraGrid = [], public int $maxHeight = 0, public int $maxWidth = 0)
     {
     }
 
@@ -16,16 +16,32 @@ class Day17Service implements DayServiceInterface
     {
         $this->getGrid($rows);
 
-        $dijkstraGrid = $this->createDijkstraGrid();
+        $this->createDijkstraGrid();
 //dd($dijkstraGrid);
         $source = '0-0';
 
-        $dijkstra = new Dijkstra($dijkstraGrid, $source, true);
-        dd($dijkstra);
+        $dijkstra = new Dijkstra($this->dijkstraGrid, $source, true);
+//        dump($this->dijkstraGrid);
+//        dd($dijkstra);
         $destination    = '12-12';
-        $shortest_path1 = $dijkstra->shortestPathTo($destination);
-        dd($shortest_path1);
-        return 0;
+        $shortest = $dijkstra->shortestPathTo($destination);
+
+        $loop = true;
+        while ($loop) {
+//            dump($shortest);
+            $loop = false;
+            if ($this->exceededMaxStraight($shortest)) {
+//                dump($this->dijkstraGrid);
+                $dijkstra = new Dijkstra($this->dijkstraGrid, $source, true);
+                $shortest = $dijkstra->shortestPathTo($destination);
+//                dd($shortest);
+                $loop = true;
+            }
+
+        }
+
+        dd($shortest);
+        return '';
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -33,7 +49,90 @@ class Day17Service implements DayServiceInterface
         return '0';
     }
 
-    private function createDijkstraGrid(): array
+    private function exceededMaxStraight(array $path): bool
+    {
+        $lastPosition = null;
+        $direction = null;
+        $directionTotal = 0;
+        foreach ($path as $pathValue) {
+            [$x, $y] = explode('-', $pathValue['node_identifier']);
+            if ($lastPosition === null) {
+                $lastPosition = $x . '-' . $y;
+                continue;
+            }
+
+            [$xL, $yL] = explode('-', $lastPosition);
+            if ($x === $xL) {
+                // collumn is anders -> links of rechts
+                if ($y < $yL) {
+                    $newDirection = 'L';
+                } else {
+                    $newDirection = 'R';
+                }
+                if ($newDirection === $direction) {
+                    $directionTotal++;
+                } else {
+                    $direction = $newDirection;
+                    $directionTotal = 0;
+                }
+            } elseif ($y === $yL) {
+                // row is anders -> boven onder
+                if ($x < $xL) {
+                    $newDirection = 'U';
+                } else {
+                    $newDirection = 'D';
+                }
+                if ($newDirection === $direction) {
+                    $directionTotal++;
+                } else {
+                    $direction = $newDirection;
+                    $directionTotal = 0;
+                }
+            }
+            if ($directionTotal > 2) {
+                // haal de verbinding weg uit de grid
+                unset($this->dijkstraGrid[$lastPosition][$x . '-' . $y]);
+                return true;
+            }
+
+            $lastPosition = $x . '-' . $y;
+        }
+//        if (!isset($this->previous[$current])) {
+//            return false;
+//        }
+//        [$x, $y] = explode('-', $current);
+//        [$xp, $yp] = explode('-', $this->previous[$current]);
+//        [$xn, $yn] = explode('-', $neighbour);
+//
+//        if ($x === $xp && $x === $xn) {
+//            if (isset($this->previous[$this->previous[$this->previous[$current]]])) {
+//                [$xt, $yt] = explode('-', $this->previous[$this->previous[$this->previous[$current]]]);
+//                if ((int)$x === (int)$xt &&  (int)$yt === (int)($y-3)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        if ($y === $yp && $y === $yn) {
+//            if (isset($this->previous[$this->previous[$this->previous[$current]]])) {
+//                [$xt, $yt] = explode('-', $this->previous[$this->previous[$this->previous[$current]]]);
+//                if ((int)$y === (int)$yt && (int)$xt === (int)($x-3)) {
+//                    return true;
+//                }
+//            }
+//        }
+//
+////        if (
+////            ((isset($this->previous[$x . '-' . ($y+1)]) && isset($this->previous[$x . '-' . ($y+2)]) && isset($this->previous[$x . '-' . ($y+3)]))) ||
+////            ((isset($this->previous[$x . '-' . ($y-1)]) && isset($this->previous[$x . '-' . ($y-2)]) && isset($this->previous[$x . '-' . ($y-3)]))) ||
+////            ((isset($this->previous[($x+1) . '-' . $y]) && isset($this->previous[($x+2) . '-' . $y]) && isset($this->previous[($x+3) . '-' . $y]))) ||
+////            ((isset($this->previous[($x-1) . '-' . $y]) && isset($this->previous[($x-2) . '-' . $y]) && isset($this->previous[($x-3) . '-' . $y])))
+////        ) {
+////            return true;
+////        }
+        return false;
+    }
+
+    private function createDijkstraGrid(): void
     {
         $grid = [];
         for ($x=0;$x<$this->maxHeight;$x++) {
@@ -57,8 +156,7 @@ class Day17Service implements DayServiceInterface
                 }
             }
         }
-
-        return $grid;
+        $this->dijkstraGrid = $grid;
     }
 
     private function getGrid($rows): void

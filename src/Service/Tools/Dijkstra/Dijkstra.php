@@ -83,14 +83,9 @@ class Dijkstra
             $current = $this->queue->pop();
             $neighborsOfCurrent = $this->getNeighbors($current);
             foreach ($neighborsOfCurrent as $neighbour => $distance) {
-                // get fields on a line = it is 4 keep existing distance of $neighbour
-                $exceeded = $this->exceededMaxStraight($current, $neighbour);
-                if ($exceeded) {
-                    $distance += 9000;
-                }
                 $alt = $this->distances[$current] + $distance;      // $distance = length($current, $neighbour)
 
-                if (!$exceeded && $alt < $this->distances[$neighbour]) {
+                if ($alt < $this->distances[$neighbour]) {
                     $this->distances[$neighbour] = $alt;
                     $this->previous[$neighbour] = $current;
                     $this->queue->change_priority($neighbour, $alt);
@@ -98,43 +93,6 @@ class Dijkstra
             }
         }
         $this->time = round(microtime(true) - $start, 4);
-    }
-
-    private function exceededMaxStraight(string $current, string $neighbour): bool
-    {
-        if (!isset($this->previous[$current])) {
-            return false;
-        }
-        [$x, $y] = explode('-', $current);
-        [$xp, $yp] = explode('-', $this->previous[$current]);
-        [$xn, $yn] = explode('-', $neighbour);
-
-        if ($x === $xp && $x === $xn) {
-            if (isset($this->previous[$this->previous[$this->previous[$current]]])) {
-                [$xt, $yt] = explode('-', $this->previous[$this->previous[$this->previous[$current]]]);
-                if ((int)$x === (int)$xt &&  (int)$yt === (int)($y-3)) {
-                    return true;
-                }
-            }
-        }
-        if ($y === $yp && $y === $yn) {
-            if (isset($this->previous[$this->previous[$this->previous[$current]]])) {
-                [$xt, $yt] = explode('-', $this->previous[$this->previous[$this->previous[$current]]]);
-                if ((int)$y === (int)$yt && (int)$xt === (int)($x-3)) {
-                    return true;
-                }
-            }
-        }
-
-//        if (
-//            ((isset($this->previous[$x . '-' . ($y+1)]) && isset($this->previous[$x . '-' . ($y+2)]) && isset($this->previous[$x . '-' . ($y+3)]))) ||
-//            ((isset($this->previous[$x . '-' . ($y-1)]) && isset($this->previous[$x . '-' . ($y-2)]) && isset($this->previous[$x . '-' . ($y-3)]))) ||
-//            ((isset($this->previous[($x+1) . '-' . $y]) && isset($this->previous[($x+2) . '-' . $y]) && isset($this->previous[($x+3) . '-' . $y]))) ||
-//            ((isset($this->previous[($x-1) . '-' . $y]) && isset($this->previous[($x-2) . '-' . $y]) && isset($this->previous[($x-3) . '-' . $y])))
-//        ) {
-//            return true;
-//        }
-        return false;
     }
 
     /**
