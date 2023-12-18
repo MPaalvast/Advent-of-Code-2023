@@ -138,17 +138,17 @@ class Day17Service implements DayServiceInterface
         for ($x=0;$x<$this->maxHeight;$x++) {
             for ($y=0;$y<$this->maxWidth;$y++) {
                 $grid[$x.'-'.$y] = [];
-                // top
-                if ($x-1 >= 0) {
-                    $grid[$x.'-'.$y][($x-1).'-'.$y] = $this->grid[($x-1)][$y];
+                // right
+                if ($y+1 < $this->maxWidth) {
+                    $grid[$x.'-'.$y][$x.'-'.($y+1)] = $this->grid[$x][($y+1)];
                 }
                 // bottom
                 if ($x+1 < $this->maxHeight) {
                     $grid[$x.'-'.$y][($x+1).'-'.$y] = $this->grid[($x+1)][$y];
                 }
-                // right
-                if ($y+1 < $this->maxWidth) {
-                    $grid[$x.'-'.$y][$x.'-'.($y+1)] = $this->grid[$x][($y+1)];
+                // top
+                if ($x-1 >= 0) {
+                    $grid[$x.'-'.$y][($x-1).'-'.$y] = $this->grid[($x-1)][$y];
                 }
                 // left
                 if ($y-1 >= 0) {
