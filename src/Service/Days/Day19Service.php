@@ -13,16 +13,112 @@ class Day19Service implements DayServiceInterface
     public function generatePart1(array|\Generator $rows): string
     {
         $this->getInputData($rows);
-//        dump($this->functionList);
-//        dump($this->value);
-//        dd($this->inputList);
         $this->generateValue();
         return (string)$this->value;
     }
 
     public function generatePart2(array|\Generator $rows): string
     {
-        return '0';
+        $this->getInputData($rows, true);
+        $this->inputList[] = [
+            'action' => 'in',
+            'value' => [
+                'x' => ['min' => 1, 'max' => 4000],
+                'm' => ['min' => 1, 'max' => 4000],
+                'a' => ['min' => 1, 'max' => 4000],
+                's' => ['min' => 1, 'max' => 4000],
+            ],
+        ];
+        $this->generateRangeValue();
+
+        return (string)$this->value;
+    }
+
+    private function generateRangeValue(): void
+    {
+        while (!empty($this->inputList)) {
+            $input = array_shift($this->inputList);
+            $function = $this->functionList[$input['action']];
+            foreach ($function as $key => $functionAction) {
+                if ($key === 'next') {
+                    if (in_array($functionAction, ['A', 'R'])) {
+                        $this->calculateRangeValue($functionAction, $input['value']);
+                        continue 2;
+                    }
+
+                    $input['action'] = $functionAction;
+                    $this->inputList[] = $input;
+
+                    continue 2;
+                }
+                if (isset($input['value'][$functionAction['key']])) {
+                    if ($functionAction['typeCompare'] === '>') {
+                        if ($input['value'][$functionAction['key']]['min'] > $functionAction['valueCompare']) {
+                            if (in_array($functionAction['next'], ['A', 'R'])) {
+                                $this->calculateRangeValue($functionAction['next'], $input['value']);
+                            } else {
+                                $input['action'] = $functionAction['next'];
+                                $this->inputList[] = $input;
+                            }
+                            continue 2;
+                        }
+                        if ($input['value'][$functionAction['key']]['max'] > $functionAction['valueCompare']) {
+                            // haal de range eruit die voldoet aan deze voorwaarde en zet die range er opnieuw in $this->inputList[]
+                            $newInput = [];
+                            $newInput['action'] = $functionAction['next'];
+                            $newInput['value'] = [
+                                'x' => $input['value']['x'],
+                                'm' => $input['value']['m'],
+                                'a' => $input['value']['a'],
+                                's' => $input['value']['s'],
+                            ];
+                            $newInput['value'][$functionAction['key']]['min'] = (int)$functionAction['valueCompare']+1;
+                            if (in_array($functionAction['next'], ['A', 'R'])) {
+                                $this->calculateRangeValue($functionAction['next'], $newInput['value']);
+                            } else {
+                                $newInput['action'] = $functionAction['next'];
+                                $this->inputList[] = $newInput;
+                            }
+                            // de range die niet overeenkomt moet verder verwerkt worden
+                                // update $input['value'] met de overgebleven range
+                            $input['value'][$functionAction['key']]['max'] = (int)$functionAction['valueCompare'];
+                        }
+                    }
+                    if ($functionAction['typeCompare'] === '<') {
+                        if ($input['value'][$functionAction['key']]['max'] < $functionAction['valueCompare']) {
+                            if (in_array($functionAction['next'], ['A', 'R'])) {
+                                $this->calculateRangeValue($functionAction['next'], $input['value']);
+                            } else {
+                                $input['action'] = $functionAction['next'];
+                                $this->inputList[] = $input;
+                            }
+                            continue 2;
+                        }
+                        if ($input['value'][$functionAction['key']]['min'] < $functionAction['valueCompare']) {
+                            // haal de range eruit die voldoet aan deze voorwaarde en zet die range er opnieuw in $this->inputList[]
+                            $newInput = [];
+                            $newInput['action'] = $functionAction['next'];
+                            $newInput['value'] = [
+                                'x' => $input['value']['x'],
+                                'm' => $input['value']['m'],
+                                'a' => $input['value']['a'],
+                                's' => $input['value']['s'],
+                            ];
+                            $newInput['value'][$functionAction['key']]['max'] = $functionAction['valueCompare']-1;
+                            if (in_array($functionAction['next'], ['A', 'R'])) {
+                                $this->calculateRangeValue($functionAction['next'], $newInput['value']);
+                            } else {
+                                $newInput['action'] = $functionAction['next'];
+                                $this->inputList[] = $newInput;
+                            }
+                            // de range die niet overeenkomt moet verder verwerkt worden
+                            // update $input['value'] met de overgebleven range
+                            $input['value'][$functionAction['key']]['min'] = (int)$functionAction['valueCompare'];
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private function generateValue(): void
@@ -30,7 +126,6 @@ class Day19Service implements DayServiceInterface
         while (!empty($this->inputList)) {
             $input = array_shift($this->inputList);
             $function = $this->functionList[$input['action']];
-            dump($input['action']);
             foreach ($function as $key => $functionAction) {
                 if ($key === 'next') {
 
@@ -74,6 +169,16 @@ class Day19Service implements DayServiceInterface
         }
     }
 
+    private function calculateRangeValue(string $type, array $dataToCalculate): void
+    {
+        if ($type === 'A') {
+            $valueX = $dataToCalculate['x']['max'] === $dataToCalculate['x']['min'] ? 1 : ($dataToCalculate['x']['max'] - $dataToCalculate['x']['min'])+1;
+            $valueM = $dataToCalculate['m']['max'] === $dataToCalculate['m']['min'] ? 1 : ($dataToCalculate['m']['max'] - $dataToCalculate['m']['min']+1);
+            $valueA = $dataToCalculate['a']['max'] === $dataToCalculate['a']['min'] ? 1 : ($dataToCalculate['a']['max'] - $dataToCalculate['a']['min']+1);
+            $valueS = $dataToCalculate['s']['max'] === $dataToCalculate['s']['min'] ? 1 : ($dataToCalculate['s']['max'] - $dataToCalculate['s']['min']+1);
+            $this->value += ($valueX * $valueM * $valueA * $valueS);
+        }
+    }
     private function calculateValue(string $type, array $dataToCalculate): void
     {
         if ($type === 'A') {
@@ -81,13 +186,17 @@ class Day19Service implements DayServiceInterface
         }
     }
 
-    private function getInputData($rows): void
+    private function getInputData($rows, bool $functionOnly = false): void
     {
         $getFunctions = true;
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));
             if ('' === $row) {
                 $getFunctions = false;
+                if ($functionOnly) {
+                    break;
+                }
+
                 continue;
             }
             if ($getFunctions) {
