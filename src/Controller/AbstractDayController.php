@@ -59,7 +59,7 @@ class AbstractDayController extends AbstractController
             16 => ['class' => Day16Service::class, 'title' => 'The Floor Will Be Lava'],
             17 => ['class' => Day17Service::class, 'title' => 'Clumsy Crucible'],
             18 => ['class' => Day18Service::class, 'title' => 'Lavaduct Lagoon'],
-            19 => ['class' => Day19Service::class, 'title' => '???'],
+            19 => ['class' => Day19Service::class, 'title' => 'Aplenty'],
             20 => ['class' => Day20Service::class, 'title' => '???'],
             21 => ['class' => Day21Service::class, 'title' => '???'],
             22 => ['class' => Day22Service::class, 'title' => '???'],
