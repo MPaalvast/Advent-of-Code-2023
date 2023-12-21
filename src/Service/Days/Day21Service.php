@@ -8,18 +8,21 @@ use App\Service\Tools\GridDumper;
 
 class Day21Service implements DayServiceInterface
 {
-    public function __construct(public array $grid = [], public string $start = '', public array $blockedFields = [], public array $steps = [])
+    public function __construct(public array $grid = [], public string $start = '', public array $blockedFields = [], public array $steps = ['evenSteps' => [], 'oddSteps' => [], 'allSteps' => []])
     {
     }
 
     public function generatePart1(array|\Generator $rows): string
     {
         $this->handleInput($rows);
-        dump($this->start);
-        dump($this->blockedFields);
-        GridDumper::dumpGrid($this->grid, '');
-        dd('');
-        return '0';
+        $steps = 64;
+        if (count($this->grid[0]) === 11) {
+            $steps = 6;
+        }
+        for ($i=1;$i<=$steps;$i++) {
+            $this->walkStep($i);
+        }
+        return (string)count($this->steps['evenSteps']);
     }
 
     public function generatePart2(array|\Generator $rows): string
@@ -29,29 +32,22 @@ class Day21Service implements DayServiceInterface
 
     private function walkStep(int $stepNr): void
     {
-        // if $stepNr = 1
-        // use $this->start as value to walk from
-
-        // oddNewSteps
-        // oddSteps
-        // evenNewSteps
-        // evenSteps
-        // allSteps
-        if (($stepNr%2) === 0) {
-            //even
-            // for every evenNewSteps
-            // find new possible fields that are not in oddSteps
-            // update evenNewSteps with new fields
-            // update evenSteps
-            // update allSteps
+        if ($stepNr === 1) {
+            $stepsToCheck = [$this->start];
         } else {
-            // odd
-            // for every oddNewSteps
-            // find new possible fields that are not in evenSteps
-            // update oddNewSteps with new fields
-            // update oddSteps
-            // update allSteps
+            $stepsToCheck = $this->steps['newSteps'];
         }
+
+        if (($stepNr%2) === 0) {
+            $stepType = 'evenSteps';
+        } else {
+            $stepType = 'oddSteps';
+        }
+
+        $nextFields = $this->getNextFields($stepsToCheck);
+        $this->steps['newSteps'] = $nextFields;
+        $this->steps[$stepType] = array_unique(array_merge($this->steps[$stepType], $nextFields));
+        $this->steps['allSteps'] = array_unique(array_merge($this->steps['allSteps'], $nextFields));
     }
 
     private function getNextFields(array $newSteps): array
@@ -76,7 +72,7 @@ class Day21Service implements DayServiceInterface
                 $nextFields[] = $idRight;
             }
         }
-        return $nextFields;
+        return array_unique($nextFields);
     }
 
     private function handleInput(array|\Generator$input): void
