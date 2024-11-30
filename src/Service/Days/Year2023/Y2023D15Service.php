@@ -8,6 +8,13 @@ use App\Service\Days\DayServiceInterface;
 
 class Y2023D15Service implements DayServiceInterface
 {
+    private string $title = "Lens Library";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function generatePart1(array|\Generator $rows): string
     {
         $stringParts = $this->getStringParts($rows);

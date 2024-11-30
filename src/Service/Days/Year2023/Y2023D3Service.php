@@ -8,6 +8,12 @@ use App\Service\Days\DayServiceInterface;
 
 class Y2023D3Service implements DayServiceInterface
 {
+    private string $title = "Gear Ratios";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
     public function generatePart1(array|\Generator $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);

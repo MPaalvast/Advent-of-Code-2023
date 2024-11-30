@@ -9,6 +9,13 @@ use App\Service\Tools\DFSNode;
 
 class Y2023D23Service implements DayServiceInterface
 {
+    private string $title = "???";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
 
     public function __construct(public array $grid = [], public array $gridNodes = [])
     {

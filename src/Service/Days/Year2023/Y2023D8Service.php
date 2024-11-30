@@ -9,6 +9,13 @@ use App\Service\Tools\LCM;
 
 class Y2023D8Service implements DayServiceInterface
 {
+    private string $title = "Haunted Wasteland";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public LCM $LCM;
     public function __construct()
     {

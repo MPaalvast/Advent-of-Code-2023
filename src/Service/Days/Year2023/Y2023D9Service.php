@@ -8,6 +8,13 @@ use App\Service\Days\DayServiceInterface;
 
 class Y2023D9Service implements DayServiceInterface
 {
+    private string $title = "Mirage Maintenance";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function generatePart1(array|\Generator $rows): string
     {
         $result = 0;

@@ -6,6 +6,12 @@ use App\Service\Days\DayServiceInterface;
 
 class Y2024D17Service implements DayServiceInterface
 {
+    private string $title = "???";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
 
     public function generatePart1(array|\Generator $rows): string
     {

@@ -8,6 +8,13 @@ use App\Service\Days\DayServiceInterface;
 
 class Y2023D5Service implements DayServiceInterface
 {
+    private string $title = "If You Give A Seed A Fertilizer";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function generatePart1(array|\Generator $rows): string
     {
         $seedLocations = [];

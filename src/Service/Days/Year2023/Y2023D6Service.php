@@ -8,6 +8,13 @@ use App\Service\Days\DayServiceInterface;
 
 class Y2023D6Service implements DayServiceInterface
 {
+    private string $title = "Wait For It";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function generatePart1(array|\Generator $rows): string
     {
         $timeStringData = [];
