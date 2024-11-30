@@ -5,10 +5,10 @@
 {% block body %}
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
-            <h1 class="text-3xl text-black pb-6 text-center">Days 2023</h1>
+            <h1 class="text-3xl text-black pb-6 text-center">Days {{ year }}</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {% for i in 1..25 %}
-                    <a href="{{ path('app_day', {'day': i }) }}" class="text-center py-4 px-4 rounded-md border border-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 hover:text-white duration-300"><h3>Day {{ i }}</h3></a>
+                    <a href="{{ path('app_day', {'day': i , 'year': year}) }}" class="text-center py-4 px-4 rounded-md border border-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 hover:text-white duration-300"><h3>Day {{ i }}</h3></a>
                 {% endfor %}
             </div>
         </main>

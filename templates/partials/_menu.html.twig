@@ -2,7 +2,7 @@
 <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
     <div class="w-1/2"></div>
     <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
-        Advent of code 2023
+        Advent of code
     </div>
 </header>
 
@@ -18,7 +18,8 @@
 
     <!-- Dropdown Nav -->
     <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4 overflow-y-auto">
-        <a href="{{ path('app_days') }}" class="flex items-center text-white py-4 pl-6 nav-item">2023</a>
+        <a href="{{ path('app_year_days', {'year': 2023}) }}" class="flex items-center text-white py-4 pl-6 nav-item">2023</a>
+        <a href="{{ path('app_year_days', {'year': 2024}) }}" class="flex items-center text-white py-4 pl-6 nav-item">2024</a>
 {#        {% include 'partials/_aside_item_list.html.twig' %}#}
     </nav>
 </header>

@@ -3,36 +3,60 @@
 namespace App\Controller;
 
 use App\Form\DayType;
-use App\Service\Days\Day10Service;
-use App\Service\Days\Day11Service;
-use App\Service\Days\Day12Service;
-use App\Service\Days\Day13Service;
-use App\Service\Days\Day14Service;
-use App\Service\Days\Day15Service;
-use App\Service\Days\Day16Service;
-use App\Service\Days\Day17Service;
-use App\Service\Days\Day18Service;
-use App\Service\Days\Day19Service;
-use App\Service\Days\Day2Service;
-use App\Service\Days\Day20Service;
-use App\Service\Days\Day21Service;
-use App\Service\Days\Day22Service;
-use App\Service\Days\Day23Service;
-use App\Service\Days\Day24Service;
-use App\Service\Days\Day25Service;
-use App\Service\Days\Day3Service;
-use App\Service\Days\Day4Service;
-use App\Service\Days\Day5Service;
-use App\Service\Days\Day6Service;
-use App\Service\Days\Day7Service;
-use App\Service\Days\Day8Service;
-use App\Service\Days\Day9Service;
+use App\Service\Days\Year2023\Y2023D10Service;
+use App\Service\Days\Year2023\Y2023D11Service;
+use App\Service\Days\Year2023\Y2023D12Service;
+use App\Service\Days\Year2023\Y2023D13Service;
+use App\Service\Days\Year2023\Y2023D14Service;
+use App\Service\Days\Year2023\Y2023D15Service;
+use App\Service\Days\Year2023\Y2023D16Service;
+use App\Service\Days\Year2023\Y2023D17Service;
+use App\Service\Days\Year2023\Y2023D18Service;
+use App\Service\Days\Year2023\Y2023D19Service;
+use App\Service\Days\Year2023\Y2023D20Service;
+use App\Service\Days\Year2023\Y2023D21Service;
+use App\Service\Days\Year2023\Y2023D22Service;
+use App\Service\Days\Year2023\Y2023D23Service;
+use App\Service\Days\Year2023\Y2023D24Service;
+use App\Service\Days\Year2023\Y2023D25Service;
+use App\Service\Days\Year2023\Y2023D2Service;
+use App\Service\Days\Year2023\Y2023D3Service;
+use App\Service\Days\Year2023\Y2023D4Service;
+use App\Service\Days\Year2023\Y2023D5Service;
+use App\Service\Days\Year2023\Y2023D6Service;
+use App\Service\Days\Year2023\Y2023D7Service;
+use App\Service\Days\Year2023\Y2023D8Service;
+use App\Service\Days\Year2023\Y2023D9Service;
+use App\Service\Days\Year2023\Y2023D1Service;
+use App\Service\Days\Year2024\Y2024D10Service;
+use App\Service\Days\Year2024\Y2024D11Service;
+use App\Service\Days\Year2024\Y2024D12Service;
+use App\Service\Days\Year2024\Y2024D13Service;
+use App\Service\Days\Year2024\Y2024D14Service;
+use App\Service\Days\Year2024\Y2024D15Service;
+use App\Service\Days\Year2024\Y2024D16Service;
+use App\Service\Days\Year2024\Y2024D17Service;
+use App\Service\Days\Year2024\Y2024D18Service;
+use App\Service\Days\Year2024\Y2024D19Service;
+use App\Service\Days\Year2024\Y2024D1Service;
+use App\Service\Days\Year2024\Y2024D20Service;
+use App\Service\Days\Year2024\Y2024D21Service;
+use App\Service\Days\Year2024\Y2024D22Service;
+use App\Service\Days\Year2024\Y2024D23Service;
+use App\Service\Days\Year2024\Y2024D24Service;
+use App\Service\Days\Year2024\Y2024D25Service;
+use App\Service\Days\Year2024\Y2024D2Service;
+use App\Service\Days\Year2024\Y2024D3Service;
+use App\Service\Days\Year2024\Y2024D4Service;
+use App\Service\Days\Year2024\Y2024D5Service;
+use App\Service\Days\Year2024\Y2024D6Service;
+use App\Service\Days\Year2024\Y2024D7Service;
+use App\Service\Days\Year2024\Y2024D8Service;
+use App\Service\Days\Year2024\Y2024D9Service;
 use App\Service\Tools\FileOptions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Service\Days\Day1Service;
 
 class AbstractDayController extends AbstractController
 {
@@ -41,46 +65,72 @@ class AbstractDayController extends AbstractController
     public function __construct()
     {
         $this->dayClass = [
-            1 => ['class' => Day1Service::class, 'title' => 'Trebuchet?!'],
-            2 => ['class' => Day2Service::class, 'title' => 'Cube Conundrum'],
-            3 => ['class' => Day3Service::class, 'title' => 'Gear Ratios'],
-            4 => ['class' => Day4Service::class, 'title' => 'Scratchcards'],
-            5 => ['class' => Day5Service::class, 'title' => 'If You Give A Seed A Fertilizer'],
-            6 => ['class' => Day6Service::class, 'title' => 'Wait For It'],
-            7 => ['class' => Day7Service::class, 'title' => 'Camel Cards'],
-            8 => ['class' => Day8Service::class, 'title' => 'Haunted Wasteland'],
-            9 => ['class' => Day9Service::class, 'title' => 'Mirage Maintenance'],
-            10 => ['class' => Day10Service::class, 'title' => 'Pipe Maze'],
-            11 => ['class' => Day11Service::class, 'title' => 'Cosmic Expansion'],
-            12 => ['class' => Day12Service::class, 'title' => 'Hot Springs'],
-            13 => ['class' => Day13Service::class, 'title' => 'Point of Incidence'],
-            14 => ['class' => Day14Service::class, 'title' => 'Parabolic Reflector Dish'],
-            15 => ['class' => Day15Service::class, 'title' => 'Lens Library'],
-            16 => ['class' => Day16Service::class, 'title' => 'The Floor Will Be Lava'],
-            17 => ['class' => Day17Service::class, 'title' => 'Clumsy Crucible'],
-            18 => ['class' => Day18Service::class, 'title' => 'Lavaduct Lagoon'],
-            19 => ['class' => Day19Service::class, 'title' => 'Aplenty'],
-            20 => ['class' => Day20Service::class, 'title' => 'Pulse Propagation'],
-            21 => ['class' => Day21Service::class, 'title' => '???'],
-            22 => ['class' => Day22Service::class, 'title' => '???'],
-            23 => ['class' => Day23Service::class, 'title' => '???'],
-            24 => ['class' => Day24Service::class, 'title' => '???'],
-            25 => ['class' => Day25Service::class, 'title' => '???']
+            20231 => ['class' => Y2023D1Service::class, 'title' => 'Trebuchet?!'],
+            20232 => ['class' => Y2023D2Service::class, 'title' => 'Cube Conundrum'],
+            20233 => ['class' => Y2023D3Service::class, 'title' => 'Gear Ratios'],
+            20234 => ['class' => Y2023D4Service::class, 'title' => 'Scratchcards'],
+            20235 => ['class' => Y2023D5Service::class, 'title' => 'If You Give A Seed A Fertilizer'],
+            20236 => ['class' => Y2023D6Service::class, 'title' => 'Wait For It'],
+            20237 => ['class' => Y2023D7Service::class, 'title' => 'Camel Cards'],
+            20238 => ['class' => Y2023D8Service::class, 'title' => 'Haunted Wasteland'],
+            20239 => ['class' => Y2023D9Service::class, 'title' => 'Mirage Maintenance'],
+            202310 => ['class' => Y2023D10Service::class, 'title' => 'Pipe Maze'],
+            202311 => ['class' => Y2023D11Service::class, 'title' => 'Cosmic Expansion'],
+            202312 => ['class' => Y2023D12Service::class, 'title' => 'Hot Springs'],
+            202313 => ['class' => Y2023D13Service::class, 'title' => 'Point of Incidence'],
+            202314 => ['class' => Y2023D14Service::class, 'title' => 'Parabolic Reflector Dish'],
+            202315 => ['class' => Y2023D15Service::class, 'title' => 'Lens Library'],
+            202316 => ['class' => Y2023D16Service::class, 'title' => 'The Floor Will Be Lava'],
+            202317 => ['class' => Y2023D17Service::class, 'title' => 'Clumsy Crucible'],
+            202318 => ['class' => Y2023D18Service::class, 'title' => 'Lavaduct Lagoon'],
+            202319 => ['class' => Y2023D19Service::class, 'title' => 'Aplenty'],
+            202320 => ['class' => Y2023D20Service::class, 'title' => 'Pulse Propagation'],
+            202321 => ['class' => Y2023D21Service::class, 'title' => '???'],
+            202322 => ['class' => Y2023D22Service::class, 'title' => '???'],
+            202323 => ['class' => Y2023D23Service::class, 'title' => '???'],
+            202324 => ['class' => Y2023D24Service::class, 'title' => '???'],
+            202325 => ['class' => Y2023D25Service::class, 'title' => '???'],
+            20241 => ['class' => Y2024D1Service::class, 'title' => '???'],
+            20242 => ['class' => Y2024D2Service::class, 'title' => '???'],
+            20243 => ['class' => Y2024D3Service::class, 'title' => '???'],
+            20244 => ['class' => Y2024D4Service::class, 'title' => '???'],
+            20245 => ['class' => Y2024D5Service::class, 'title' => '???'],
+            20246 => ['class' => Y2024D6Service::class, 'title' => '???'],
+            20247 => ['class' => Y2024D7Service::class, 'title' => '???'],
+            20248 => ['class' => Y2024D8Service::class, 'title' => '???'],
+            20249 => ['class' => Y2024D9Service::class, 'title' => '???'],
+            202410 => ['class' => Y2024D10Service::class, 'title' => '???'],
+            202411 => ['class' => Y2024D11Service::class, 'title' => '???'],
+            202412 => ['class' => Y2024D12Service::class, 'title' => '???'],
+            202413 => ['class' => Y2024D13Service::class, 'title' => '???'],
+            202414 => ['class' => Y2024D14Service::class, 'title' => '???'],
+            202415 => ['class' => Y2024D15Service::class, 'title' => '???'],
+            202416 => ['class' => Y2024D16Service::class, 'title' => '???'],
+            202417 => ['class' => Y2024D17Service::class, 'title' => '???'],
+            202418 => ['class' => Y2024D18Service::class, 'title' => '???'],
+            202419 => ['class' => Y2024D19Service::class, 'title' => '???'],
+            202420 => ['class' => Y2024D20Service::class, 'title' => '???'],
+            202421 => ['class' => Y2024D21Service::class, 'title' => '???'],
+            202422 => ['class' => Y2024D22Service::class, 'title' => '???'],
+            202423 => ['class' => Y2024D23Service::class, 'title' => '???'],
+            202424 => ['class' => Y2024D24Service::class, 'title' => '???'],
+            202425 => ['class' => Y2024D25Service::class, 'title' => '???']
         ];
     }
 
-    public function renderDayPage(Request $request, FileOptions $fileOptions, int $day): Response
+    public function renderDayPage(Request $request, FileOptions $fileOptions, int $year, int $day): Response
     {
-        if (!isset($this->dayClass[$day])) {
-            return $this->redirectToRoute('app_home');
+        $index = $year.$day;
+        if (!isset($this->dayClass[$index])) {
+            return $this->redirectToRoute('app_year_days', ['year' => $year]);
         }
-        $dayService = new $this->dayClass[$day]['class'];
+        $dayService = new $this->dayClass[$index]['class'];
         $form = $this->createForm(DayType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-            $rows = $fileOptions->getDayInput($formData, $day);
+            $rows = $fileOptions->getDayInput($formData, $year, $day);
 
             if ($formData['day_part'] === 1) {
                 $result = $dayService->generatePart1($rows);
@@ -93,7 +143,8 @@ class AbstractDayController extends AbstractController
 
         return $this->render('day.html.twig', [
             'day_nr' => $day,
-            'day_title' => $this->dayClass[$day]['title'],
+            'year' => $year,
+            'day_title' => $this->dayClass[$index]['title'],
             'result' => $result,
             'form' => $form,
         ]);
