@@ -15,37 +15,63 @@ class Y2024D1Service implements DayServiceInterface
 
     public function generatePart1(array|\Generator $rows): string
     {
-        // explode row on 3 spaces (any spaces with regex) and make 2 arrays
-        // order both arrays asc and loop over them to calculate the diff
-        // keep a total of the diff (array_sum())
-        $leftArray = [];
-        $rightArray = [];
-
-        foreach ($rows as $row) {
-            [$left, $right] = explode("   ", $row);
-            $leftArray[] = $left;
-            $rightArray[] = $right;
-        }
-
-        $totalDiff = $this->getDiff($leftArray, $rightArray);
-
-        return $totalDiff;
-    }
-
-    private function getDiff($leftValueArray, $rightValueArray): int
-    {
-        $totalDiff = 0;
-        sort($leftValueArray);
-        sort($rightValueArray);
-        foreach ($leftValueArray as $key => $leftValue) {
-            $totalDiff += abs($leftValue - $rightValueArray[$key]);
-        }
-
-        return $totalDiff;
+        return $this->calculateDiff($rows);
     }
 
     public function generatePart2(array|\Generator $rows): string
     {
-        return 0;
+        return $this->calculateSum($rows);
+    }
+
+    //
+    // helper functions below
+    //
+
+    private function calculateDiff(array|\Generator $rows): int
+    {
+        $arrayData = $this->createLeftAndRightArray($rows);
+
+        return $this->getDiff($arrayData);
+    }
+
+    private function createLeftAndRightArray(array|\Generator $rows): array
+    {
+        $arrayData = ['left' => [], 'right' => []];
+
+        foreach ($rows as $row) {
+            [$left, $right] = explode("   ", $row);
+            $arrayData['left'][] = $left;
+            $arrayData['right'][] = $right;
+        }
+        return $arrayData;
+    }
+
+    private function getDiff(array $arrayData): int
+    {
+        $totalDiff = 0;
+        sort($arrayData['left']);
+        sort($arrayData['right']);
+        foreach ($arrayData['left'] as $key => $leftValue) {
+            $totalDiff += abs($leftValue - $arrayData['right'][$key]);
+        }
+
+        return $totalDiff;
+    }
+
+    private function calculateSum(array|\Generator $rows): int
+    {
+        $arrayData = $this->createLeftAndRightArray($rows);
+
+        return $this->getSum($arrayData);
+    }
+
+    private function getSum(array $arrayData): int
+    {
+        $totalSum = 0;
+        foreach ($arrayData['left'] as $leftValue) {
+            $totalSum += count(array_keys($arrayData['right'], $leftValue)) * $leftValue;
+        }
+
+        return $totalSum;
     }
 }

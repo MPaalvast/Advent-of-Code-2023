@@ -125,6 +125,6 @@ class DaySelector
 
     public function generatePart2(string $index, array|\Generator $rows): string
     {
-        return $this->container->get($index)->generatePart1($rows);
+        return $this->container->get($index)->generatePart2($rows);
     }
 }
