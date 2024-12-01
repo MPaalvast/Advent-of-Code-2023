@@ -6,7 +6,9 @@ namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
 use App\Service\Tools\DFSNode;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D23')]
 class Y2023D23Service implements DayServiceInterface
 {
     private string $title = "???";

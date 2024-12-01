@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D20')]
 class Y2023D20Service implements DayServiceInterface
 {
     private string $title = "Pulse Propagation";

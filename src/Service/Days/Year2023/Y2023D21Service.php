@@ -6,7 +6,9 @@ namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
 use App\Service\Tools\GridDumper;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D21')]
 class Y2023D21Service implements DayServiceInterface
 {
     private string $title = "???";

@@ -2,6 +2,9 @@
 
 namespace App\Service\Days;
 
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag]
 interface DayServiceInterface
 {
     public function getTitle(): string;

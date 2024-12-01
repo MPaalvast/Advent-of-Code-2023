@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DayController extends AbstractDayController
 {
 
-    #[Route('/{year}/days', name: 'app_year_days')]
+    #[Route('/{year}', name: 'app_year_days')]
     public function yearDays(Request $request, FileOptions $fileOptions, int $year): Response
     {
         return $this->render('days.html.twig', [
@@ -19,7 +19,7 @@ class DayController extends AbstractDayController
         ]);
     }
 
-    #[Route('/{year}/days/{day}', name: 'app_day')]
+    #[Route('/{year}/{day}', name: 'app_day')]
     public function day(
         Request $request,
         FileOptions $fileOptions,
