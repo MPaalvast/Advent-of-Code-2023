@@ -41,6 +41,10 @@ class Y2024D1Service implements DayServiceInterface
         $arrayData = ['left' => [], 'right' => []];
 
         foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
+            if (empty($row)) {
+                continue;
+            }
             [$left, $right] = explode("   ", $row);
             $arrayData['left'][] = $left;
             $arrayData['right'][] = $right;
