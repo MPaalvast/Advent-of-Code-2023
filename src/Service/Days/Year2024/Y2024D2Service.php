@@ -25,9 +25,6 @@ class Y2024D2Service implements DayServiceInterface
 
     public function generatePart2(array|\Generator $rows): string
     {
-        // same as part 1
-        // but for every row make different arrays where everytime a number is left out
-        // if is passes go to next if it fails change array
         return $this->calculateSafeDampenerLevels($rows);
     }
 
