@@ -10,8 +10,8 @@ class Y2024D2Service implements DayServiceInterface
 {
     private string $title = "Red-Nosed Reports";
 
-    private int $part1MinDiff = 1;
-    private int $part1MaxDiff = 3;
+    private int $minDiff = 1;
+    private int $maxDiff = 3;
 
     public function getTitle(): string
     {
@@ -76,8 +76,8 @@ class Y2024D2Service implements DayServiceInterface
         foreach ($rowLevelArray as $locationB) {
             $diff = abs($locationA - $locationB);
             if (
-                $diff < $this->part1MinDiff ||
-                $diff > $this->part1MaxDiff
+                $diff < $this->minDiff ||
+                $diff > $this->maxDiff
             ) {
                 return false;
             }
