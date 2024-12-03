@@ -5,9 +5,18 @@ declare(strict_types=1);
 namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D11')]
 class Y2023D11Service implements DayServiceInterface
 {
+    private string $title = "Cosmic Expansion";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function __construct(public array $normalizedGrid = [], public array $grid = [], public array $planetLocations = [], public array $emptyData = [])
     {
     }

@@ -5,9 +5,18 @@ declare(strict_types=1);
 namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D15')]
 class Y2023D15Service implements DayServiceInterface
 {
+    private string $title = "Lens Library";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function generatePart1(array|\Generator $rows): string
     {
         $stringParts = $this->getStringParts($rows);

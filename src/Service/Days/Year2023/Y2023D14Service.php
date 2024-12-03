@@ -5,9 +5,18 @@ declare(strict_types=1);
 namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D14')]
 class Y2023D14Service implements DayServiceInterface
 {
+    private string $title = "Parabolic Reflector Dish";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public function __construct(public array $grid = [], public int $maxRows = 0, public int $maxCol = 0)
     {
     }

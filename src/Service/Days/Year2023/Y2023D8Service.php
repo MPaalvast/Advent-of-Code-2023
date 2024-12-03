@@ -6,9 +6,18 @@ namespace App\Service\Days\Year2023;
 
 use App\Service\Days\DayServiceInterface;
 use App\Service\Tools\LCM;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
+#[AsTaggedItem('Y2023D8')]
 class Y2023D8Service implements DayServiceInterface
 {
+    private string $title = "Haunted Wasteland";
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
     public LCM $LCM;
     public function __construct()
     {
