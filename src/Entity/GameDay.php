@@ -28,7 +28,7 @@ class GameDay
     private ?string $title = null;
 
     #[ORM\Column(enumType: StatusEnum::class)]
-    private ?StatusEnum $status = null;
+    private ?StatusEnum $status = StatusEnum::INACTIVE;
 
     /**
      * @var Collection<int, GameDayResult>
@@ -89,9 +89,9 @@ class GameDay
         return $this;
     }
 
-    public function getStatus(): ?StatusEnum
+    public function getStatus(): string
     {
-        return $this->status;
+        return $this->status->value;
     }
 
     public function setStatus(StatusEnum $status): static
