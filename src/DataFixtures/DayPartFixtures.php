@@ -2,20 +2,20 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Day;
+use App\Entity\DayPart;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class DayFixtures extends Fixture implements OrderedFixtureInterface
+class DayPartFixtures extends Fixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 25; $i++) {
-            $day = new Day();
-            $day->setTitle($i);
-            $this->addReference('day_'.$i, $day);
-            $manager->persist($day);
+        for ($i = 1; $i <= 2; $i++) {
+            $dayPart = new DayPart();
+            $dayPart->setTitle($i);
+            $this->addReference('dayPart_'.$i, $dayPart);
+            $manager->persist($dayPart);
         }
 
         $manager->flush();
@@ -23,6 +23,6 @@ class DayFixtures extends Fixture implements OrderedFixtureInterface
 
     public function getOrder(): int
     {
-        return 99;
+        return 98;
     }
 }

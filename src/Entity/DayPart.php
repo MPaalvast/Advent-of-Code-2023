@@ -16,6 +16,11 @@ class DayPart
     #[ORM\Column]
     private ?int $Title = null;
 
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -21,6 +21,10 @@ class GameDayInput
     #[ORM\Column(type: Types::TEXT)]
     private ?string $input = null;
 
+    #[ORM\ManyToOne(inversedBy: 'gameDayInputs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?GameDay $gameDay = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +57,18 @@ class GameDayInput
     public function setInput(string $input): static
     {
         $this->input = $input;
+
+        return $this;
+    }
+
+    public function getGameDay(): ?GameDay
+    {
+        return $this->gameDay;
+    }
+
+    public function setGameDay(GameDay $gameDay): static
+    {
+        $this->gameDay = $gameDay;
 
         return $this;
     }

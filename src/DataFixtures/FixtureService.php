@@ -3,28 +3,33 @@
 namespace App\DataFixtures;
 
 use App\Entity\GameDay;
+use App\Entity\GameDayInput;
 use App\Entity\Year;
-use App\Repository\DayRepository;
 use Doctrine\Persistence\ObjectManager;
 
-class FixtureService
+readonly class FixtureService
 {
-    public function __construct(
-        private DayRepository $dayRepository,
-    )
-    {
-    }
-
-    public function makeGameDays(ObjectManager $manager, Year $year, \Iterator $gameDays): void
+    public function makeGameDays(ObjectManager $manager, Year $year, \Iterator $gameDays, array $dayParts): void
     {
         foreach ($gameDays as $gameDayData) {
-            $day = $this->dayRepository->findBy(['title' => $gameDayData['day']]);
             $gameDay = new GameDay();
             $gameDay->setTitle($gameDayData['title']);
-            $gameDay->setDay($day);
+            $gameDay->setDay($gameDayData['day']);
             $gameDay->setYear($year);
             $gameDay->setStatus($gameDayData['status']);
             $manager->persist($gameDay);
+
+            $i = 1;
+            foreach ($gameDayData['examples'] as $exampleData) {
+                if ($exampleData !== '' && isset($exampleData[$i])) {
+                    $gameDayInput = new GameDayInput();
+                    $gameDayInput->setGameDay($gameDay);
+                    $gameDayInput->setDayPart($dayParts[$i]);
+                    $gameDayInput->setInput($exampleData);
+                    $manager->persist($gameDayInput);
+                }
+                $i++;
+            }
         }
     }
 }
