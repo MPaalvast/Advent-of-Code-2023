@@ -173,7 +173,7 @@ class Y2024D4Service implements DayServiceInterface
 
             if ($canCheckUp && $canCheckRight && $canCheckDown && $canCheckLeft) {
                 $word1 = sprintf('%s%s%s', $this->grid[$x-1][$y-1], $this->grid[$x][$y], $this->grid[$x+1][$y+1]);
-                $word2 = sprintf('%s%s%s', $this->grid[$x+1][$y+1], $this->grid[$x][$y], $this->grid[$x-1][$y-1]);
+                $word2 = sprintf('%s%s%s', $this->grid[$x+1][$y-1], $this->grid[$x][$y], $this->grid[$x-1][$y+1]);
 
                 if (
                     (in_array($this->searchString, [$word1, strrev($word1)], true)) &&
