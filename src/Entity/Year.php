@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\StatusEnum;
 use App\Repository\YearRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,9 +25,17 @@ class Year
     #[ORM\OneToMany(targetEntity: GameDay::class, mappedBy: 'year')]
     private Collection $gameDays;
 
+    #[ORM\Column(enumType: StatusEnum::class)]
+    private ?StatusEnum $status = StatusEnum::INACTIVE;
+
     public function __construct()
     {
         $this->gameDays = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
     }
 
     public function getId(): ?int
@@ -79,6 +88,18 @@ class Year
                 $gameDay->setYear(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status->value;
+    }
+
+    public function setStatus(StatusEnum $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

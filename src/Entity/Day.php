@@ -14,7 +14,12 @@ class Day
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $Title = null;
+    private ?int $title = null;
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
 
     public function getId(): ?int
     {
@@ -30,12 +35,12 @@ class Day
 
     public function getTitle(): ?int
     {
-        return $this->Title;
+        return $this->title;
     }
 
-    public function setTitle(int $Title): static
+    public function setTitle(int $title): static
     {
-        $this->Title = $Title;
+        $this->title = $title;
 
         return $this;
     }

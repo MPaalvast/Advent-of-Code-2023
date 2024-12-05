@@ -16,6 +16,16 @@ class DayRepository extends ServiceEntityRepository
         parent::__construct($registry, Day::class);
     }
 
+    public function findOneByTitle(int $title): Day|null
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.title = :val')
+            ->setParameter('val', $title)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
 //    /**
 //     * @return Day[] Returns an array of Day objects
 //     */

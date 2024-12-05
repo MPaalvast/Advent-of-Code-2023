@@ -28,7 +28,7 @@ class GameDay
     private ?string $title = null;
 
     #[ORM\Column(enumType: StatusEnum::class)]
-    private ?StatusEnum $status = null;
+    private ?StatusEnum $status = StatusEnum::INACTIVE;
 
     /**
      * @var Collection<int, GameDayResult>
@@ -36,9 +36,21 @@ class GameDay
     #[ORM\OneToMany(targetEntity: GameDayResult::class, mappedBy: 'gameDay')]
     private Collection $gameDayResults;
 
+    /**
+     * @var Collection<int, GameDayInput>
+     */
+    #[ORM\OneToMany(targetEntity: GameDayInput::class, mappedBy: 'gameDay', orphanRemoval: true)]
+    private Collection $gameDayInputs;
+
     public function __construct()
     {
         $this->gameDayResults = new ArrayCollection();
+        $this->gameDayInputs = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
     }
 
     public function getId(): ?int
@@ -70,7 +82,7 @@ class GameDay
         return $this->day;
     }
 
-    public function setDay(?Day $day): static
+    public function setDay(Day $day): static
     {
         $this->day = $day;
 
@@ -89,9 +101,9 @@ class GameDay
         return $this;
     }
 
-    public function getStatus(): ?StatusEnum
+    public function getStatus(): string
     {
-        return $this->status;
+        return $this->status->value;
     }
 
     public function setStatus(StatusEnum $status): static
@@ -125,6 +137,36 @@ class GameDay
             // set the owning side to null (unless already changed)
             if ($gameDayResult->getGameDay() === $this) {
                 $gameDayResult->setGameDay(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GameDayInput>
+     */
+    public function getGameDayInputs(): Collection
+    {
+        return $this->gameDayInputs;
+    }
+
+    public function addGameDayInput(GameDayInput $gameDayInput): static
+    {
+        if (!$this->gameDayInputs->contains($gameDayInput)) {
+            $this->gameDayInputs->add($gameDayInput);
+            $gameDayInput->setGameDay($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGameDayInput(GameDayInput $gameDayInput): static
+    {
+        if ($this->gameDayInputs->removeElement($gameDayInput)) {
+            // set the owning side to null (unless already changed)
+            if ($gameDayInput->getGameDay() === $this) {
+                $gameDayInput->setGameDay(null);
             }
         }
 
