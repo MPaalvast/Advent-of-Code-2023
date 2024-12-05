@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Year;
 use App\Form\DayType;
 use App\Service\Tools\FileOptions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,10 +20,10 @@ class AbstractDayController extends AbstractController
     public function renderDayPage(
         Request $request,
         FileOptions $fileOptions,
-        int $year,
+        Year $year,
         int $day): Response
     {
-        $index = 'Y'.$year.'D'.$day;
+        $index = 'Y'.$year->getTitle().'D'.$day;
 
         $form = $this->createForm(DayType::class);
 
