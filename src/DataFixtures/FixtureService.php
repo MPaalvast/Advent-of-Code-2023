@@ -35,7 +35,7 @@ readonly class FixtureService
             foreach ($gameDayData['results'] as $resultData) {
                 $gameDayResult = new GameDayResult();
                 $gameDayResult->setGameDay($gameDay);
-                $gameDayResult->setDayPart($gameDayResult['part']);
+                $gameDayResult->setDayPart($resultData['part']);
                 $gameDayResult->setSolved($resultData['solved']);
                 $manager->persist($gameDayResult);
             }
