@@ -17,7 +17,7 @@ readonly class FixtureService
             $gameDay->setTitle($gameDayData['title']);
             $gameDay->setDay($gameDayData['day']);
             $gameDay->setYear($year);
-            $gameDay->setStatus($gameDayData['status']);
+            $gameDay->setActive($gameDayData['active']);
             $manager->persist($gameDay);
 
             $i = 1;
