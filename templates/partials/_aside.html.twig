@@ -5,8 +5,13 @@
         <a href="{{ path('app_home') }}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300"><\></a>
     </div>
     <nav class="text-white text-base font-semibold pt-3 overflow-y-auto">
-        <a href="{{ path('app_year_days', { 'year': 2023 }) }}" class="flex items-center text-white py-4 pl-6 nav-item">2023</a>
-        <a href="{{ path('app_year_days', { 'year': 2024 }) }}" class="flex items-center text-white py-4 pl-6 nav-item">2024</a>
+        {% for activeYear in list_active_years() %}
+            {% set active = '' %}
+            {% if year is defined and year.title == activeYear.title %}
+                {% set active = ' active' %}
+            {% endif %}
+            <a href="{{ path('app_year_days', { 'year': activeYear.title }) }}" class="flex items-center text-white py-4 pl-6 nav-item {{ active }}">{{ activeYear.title}}</a>
+        {% endfor %}
 {#        {% include 'partials/_aside_item_list.html.twig' %}#}
     </nav>
 </aside>

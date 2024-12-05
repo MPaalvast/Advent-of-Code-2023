@@ -9,7 +9,7 @@
 .upgrade-btn { background: #1947ee; }
 .upgrade-btn:hover { background: #0038fd; }
 .active-nav-link { background: #1947ee; }
-.nav-item:hover { background: #1947ee; }
+.nav-item:hover, .nav-item.active { background: #1947ee; }
 .account-link:hover { background: #0284c7; }
 
 body {
