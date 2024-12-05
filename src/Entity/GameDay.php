@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Model\StatusEnum;
 use App\Repository\GameDayRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -27,9 +26,6 @@ class GameDay
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(enumType: StatusEnum::class)]
-    private ?StatusEnum $status = StatusEnum::INACTIVE;
-
     /**
      * @var Collection<int, GameDayResult>
      */
@@ -41,6 +37,9 @@ class GameDay
      */
     #[ORM\OneToMany(targetEntity: GameDayInput::class, mappedBy: 'gameDay', orphanRemoval: true)]
     private Collection $gameDayInputs;
+
+    #[ORM\Column]
+    private ?bool $active = false;
 
     public function __construct()
     {
@@ -101,18 +100,6 @@ class GameDay
         return $this;
     }
 
-    public function getStatus(): string
-    {
-        return $this->status->value;
-    }
-
-    public function setStatus(StatusEnum $status): static
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, GameDayResult>
      */
@@ -169,6 +156,18 @@ class GameDay
                 $gameDayInput->setGameDay(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
 
         return $this;
     }

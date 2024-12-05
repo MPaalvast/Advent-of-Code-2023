@@ -2,11 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\GameDay;
 use App\Entity\GameDayResult;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class GameDayResultCrudController extends AbstractCrudController
 {
@@ -15,14 +15,17 @@ class GameDayResultCrudController extends AbstractCrudController
         return GameDayResult::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            AssociationField::new('gameDay')->formatValue(function (GameDay $gameDay) {
+                return $gameDay->getYear()?->getTitle();
+            }),
+            AssociationField::new('gameDay')->formatValue(function (GameDay $gameDay) {
+                return $gameDay->getDay()?->getTitle();
+            }),
+            AssociationField::new('dayPart'),
+            BooleanField::new('solved'),
         ];
     }
-    */
 }
