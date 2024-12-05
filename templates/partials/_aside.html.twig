@@ -6,11 +6,7 @@
     </div>
     <nav class="text-white text-base font-semibold pt-3 overflow-y-auto">
         {% for activeYear in list_active_years() %}
-            {% set active = '' %}
-            {% if year is defined and year.title == activeYear.title %}
-                {% set active = ' active' %}
-            {% endif %}
-            <a href="{{ path('app_year_days', { 'year': activeYear.title }) }}" class="flex items-center text-white py-4 pl-6 nav-item {{ active }}">{{ activeYear.title}}</a>
+            <a href="{{ path('app_year_days', { 'year': activeYear.title }) }}" class="flex items-center text-white py-4 pl-6 nav-item {% if year is defined and year.title == activeYear.title %} active {% endif %}">{{ activeYear.title}}</a>
         {% endfor %}
 {#        {% include 'partials/_aside_item_list.html.twig' %}#}
     </nav>

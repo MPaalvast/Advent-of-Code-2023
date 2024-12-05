@@ -52,7 +52,7 @@ class DayController extends AbstractDayController
         try {
             return $this->renderDayPage($request, $fileOptions, $yearEntity, $day);
         } catch (NotFoundHttpException $e) {
-            throw $this->createNotFoundException(sprintf('Day "%s" of "%s" not found.', $day, $year), previous: $e);
+            throw $this->createNotFoundException(sprintf('Day "%s" of "%s" not found.', $day, $yearEntity->getTitle()), previous: $e);
         }
 
     }
