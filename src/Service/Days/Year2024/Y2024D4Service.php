@@ -162,27 +162,31 @@ class Y2024D4Service implements DayServiceInterface
 
     private function findXStringInArray(): void
     {
-        $spaceFromSide = 1;
+        $spaceFromSide = floor(strlen($this->searchString)/2);
         foreach ($this->startPoints as $startPoint) {
-            $x = $startPoint['x'];
-            $y = $startPoint['y'];
-            $canCheckUp = $startPoint['x'] >= $spaceFromSide;
-            $canCheckRight = $startPoint['y'] < ($this->maxYIndex - $spaceFromSide);
-            $canCheckDown = $startPoint['x'] < ($this->maxXIndex - $spaceFromSide);
-            $canCheckLeft = $startPoint['y'] >= $spaceFromSide;
+            $this->searchXPattern($startPoint, $spaceFromSide);
+        }
+    }
 
-            if ($canCheckUp && $canCheckRight && $canCheckDown && $canCheckLeft) {
-                $word1 = sprintf('%s%s%s', $this->grid[$x-1][$y-1], $this->grid[$x][$y], $this->grid[$x+1][$y+1]);
-                $word2 = sprintf('%s%s%s', $this->grid[$x+1][$y-1], $this->grid[$x][$y], $this->grid[$x-1][$y+1]);
+    private function searchXPattern(array$startPoint, int $spaceFromSide): void
+    {
+        $x = $startPoint['x'];
+        $y = $startPoint['y'];
+        $canCheckUp = $startPoint['x'] >= $spaceFromSide;
+        $canCheckRight = $startPoint['y'] < ($this->maxYIndex - $spaceFromSide);
+        $canCheckDown = $startPoint['x'] < ($this->maxXIndex - $spaceFromSide);
+        $canCheckLeft = $startPoint['y'] >= $spaceFromSide;
 
-                if (
-                    (in_array($this->searchString, [$word1, strrev($word1)], true)) &&
-                    (in_array($this->searchString, [$word2, strrev($word2)], true))
-                ) {
-                    $this->total++;
-                }
+        if ($canCheckUp && $canCheckRight && $canCheckDown && $canCheckLeft) {
+            $word1 = sprintf('%s%s%s', $this->grid[$x-1][$y-1], $this->grid[$x][$y], $this->grid[$x+1][$y+1]);
+            $word2 = sprintf('%s%s%s', $this->grid[$x+1][$y-1], $this->grid[$x][$y], $this->grid[$x-1][$y+1]);
+
+            if (
+                (in_array($this->searchString, [$word1, strrev($word1)], true)) &&
+                (in_array($this->searchString, [$word2, strrev($word2)], true))
+            ) {
+                $this->total++;
             }
-
         }
     }
 }
