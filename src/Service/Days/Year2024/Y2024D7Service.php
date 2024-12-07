@@ -34,6 +34,10 @@ class Y2024D7Service implements DayServiceInterface
         return $this->total;
     }
 
+    //
+    // helper functions below
+    //
+
     private function getCorrectResults(array|\Generator $rows, bool $canMerge = false): void
     {
         foreach ($rows as $x => $row) {

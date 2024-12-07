@@ -10,21 +10,14 @@ class Y2024D6Service implements DayServiceInterface
 {
     private string $title = "Guard Gallivant";
 
-    private int $maxXIndex = 0;
-
-    private int $maxYIndex = 0;
-
     private array $grid = [];
 
     private array $currentPoint = [];
 
     private array $visitedFieldsData = [];
 
-    private array $walkedFields = [];
-
     private string $currentDirection = '';
 
-    private array $blockingFields = [];
     private array $loopingFields = [];
 
     private array $nextDirection = [
@@ -51,19 +44,9 @@ class Y2024D6Service implements DayServiceInterface
 
     public function generatePart2(array|\Generator $rows): string
     {
-        // same as part 1
-        // but remember the direction of the fields
-            // maybe it can have 2 directions???
-        // when the next field is not #
-            // check the right path for the current position until you see a # or a field with the same direction as you check
-                // the next field in the current direction is an obstruction
-
         $this->generateGrid($rows);
         $this->move(true);
-//        $this->findLoops();
         $this->calculateLoopOptions();
-
-//        dump($this->visitedFields);
 
         return $this->total;
     }
@@ -92,21 +75,15 @@ class Y2024D6Service implements DayServiceInterface
                     };
                     $this->visitedFieldsData[$x . '-' . $y][$this->currentDirection] = $this->currentDirection;
                 }
-                if ($rowYValue === '#') {
-                    $this->blockingFields[$x . '-' . $y] = ['x' => $x, 'y' => $y];
-                }
             }
             $this->grid[] = $gridRow;
         }
-        $this->maxYIndex = count($this->grid[0]);
-        $this->maxXIndex = count($this->grid);
     }
 
     private function move(bool $findLoops = false): void
     {
         $currentX = $this->currentPoint['x'];
         $currentY = $this->currentPoint['y'];
-        $this->walkedFields[] = $currentX . '-' . $currentY;
         while (true) {
             [$nextX, $nextY] = $this->getNextCoordinates($currentX, $currentY, $this->currentDirection);
             if (!isset($this->grid[$nextX][$nextY])) {
@@ -122,18 +99,13 @@ class Y2024D6Service implements DayServiceInterface
 
             $nextIndex = $nextX . '-' . $nextY;
 
-//            if (
-//                $findLoops &&
-//                !in_array($nextIndex, $walkedFields, true) &&
-////                !isset($this->visitedFields[$nextIndex]) &&
-////                !in_array($nextIndex, $this->loopingFields, true) &&
-//                $this->findLoop($walkedFields))
-//            {
-//                $this->loopingFields[] = $nextIndex;
-//            }
-
-            if (!in_array($nextIndex, $this->walkedFields, true)) {
-                $this->walkedFields[] = $nextIndex;
+            if (
+                $findLoops &&
+                !isset($this->visitedFieldsData[$nextIndex]) &&
+                !in_array($nextIndex, $this->loopingFields, true) &&
+                $this->findLoop($nextX, $nextY))
+            {
+                $this->loopingFields[] = $nextIndex;
             }
 
             if (!isset($this->visitedFieldsData[$nextIndex])) {
@@ -147,96 +119,45 @@ class Y2024D6Service implements DayServiceInterface
         }
     }
 
-//    private function findLoops(): void
-//    {
-//        // get first field
-//        // while $visitedFields is not empty
-//        // array shift the next field from direction
-//        // added to the new visited fields
-//
-//        // walk the next direction
-//        // if
-//        // you find a value in $visitedFields and the direction is the same
-//        // loop found
-//
-//        // but
-//        // if the blocking field is in the new visited fields
-//        // then it can not be used because you block the original path to the loop.
-//        // else
-//        // add the loop
-//
-////        foreach ($this->visitedFields as $fieldDirections) {
-////            // walk the next direction
-////            // if
-////                // you find a value in $this->visitedFields and the direction is the same
-////                // loop found
-////        }
-//
-//        $visitedFields = $this->visitedFields;
-//        $currentX = $this->currentPoint['x'];
-//        $currentY = $this->currentPoint['y'];
-//        $currentDirection = $this->currentDirection;
-//
-//        $walkedList = [];
-//
-//        while (!empty($visitedFields)) {
-//            $index = $currentX . '-' . $currentY;
-//            $walkedList[] = $index;
-//            if (count($visitedFields[$index]) > 1) {
-//                unset($visitedFields[$index][$currentDirection]);
-//            }
-//        }
-//    }
+    private function findLoop(int $blockedX, int $blockedY): bool
+    {
+         $direction = $this->currentDirection;
+         $currentX = $this->currentPoint['x'];
+         $currentY = $this->currentPoint['y'];
+         $visitedFields = $this->visitedFieldsData;
+         while (true) {
+             $grid = $this->grid;
+             [$nextX, $nextY] = $this->getNextCoordinates($currentX, $currentY, $direction);
+             if (!isset($grid[$nextX][$nextY])) {
+                 // moved of the grid
+                 return false;
+             }
 
-//    private function findLoop(array $walkedFields): bool
-//    {
-//         $direction = $this->currentDirection;
-//         $currentX = $this->currentPoint['x'];
-//         $currentY = $this->currentPoint['y'];
-//         $directionToCheck = $this->nextDirection[$direction];
-//         $visitedFields = $this->visitedFieldsData;
-////         $i = 0;
-//         while (true) {
-//             [$nextX, $nextY] = $this->getNextCoordinates($currentX, $currentY, $directionToCheck);
-////             dump($nextX, $nextY, $directionToCheck);
-//             if (!isset($this->grid[$nextX][$nextY])) {
-//                 return false;
-//             }
-//
-//             // TODO: This has to be turned on when fixed -> fix multiple directions
-//             if ($this->grid[$nextX][$nextY] === '#') {
-//                 // turn to the next direction
-//                 $directionToCheck = $this->nextDirection[$directionToCheck];
-//                 continue;
-//             }
-//
-//             $nextIndex = $nextX . '-' . $nextY;
-//             if (
-//                 isset($visitedFields[$nextIndex][$directionToCheck])
-////                 && !in_array($nextIndex, $walkedFields, true)
-//             ) {
-//                 return true;
-//             }
-//
-//             //
-//                 // navigate through and collect visited fields
-//                 if (!isset($visitedFields[$nextIndex])) {
-//                     // add to the visited fields en move currentPoint to the new location
-//                     $visitedFields[$nextIndex][$directionToCheck] = $directionToCheck;
-//                     // i think this has to be an array with multiple directions
-//                 } else {
-//                     $visitedFields[$nextIndex][$directionToCheck] = $directionToCheck;
-//                 }
-//             //
-//
-////             $walkedFields[] = $nextIndex;
-//             $currentX = $nextX;
-//             $currentY = $nextY;
-////             $i++;
-//         }
-////         dump($walkedFields);
-//         return false;
-//    }
+             if (
+                 $grid[$nextX][$nextY] === '#'
+                 || ($nextX === $blockedX && $nextY === $blockedY)
+             ) {
+                 // turn to the next direction
+                 $direction = $this->nextDirection[$direction];
+                 continue;
+             }
+
+             $nextIndex = $nextX . '-' . $nextY;
+             if (isset($visitedFields[$nextIndex][$direction])) {
+                 return true;
+             }
+
+             if (!isset($visitedFields[$nextIndex])) {
+                 $visitedFields[$nextIndex][$direction] = $direction;
+             } else {
+                 $visitedFields[$nextIndex][$direction] = $direction;
+             }
+
+             $currentX = $nextX;
+             $currentY = $nextY;
+         }
+         return false;
+    }
 
     private function getNextCoordinates(int $x, int $y, string $direction): array
     {
@@ -258,9 +179,4 @@ class Y2024D6Service implements DayServiceInterface
     {
         $this->total = count($this->loopingFields);
     }
-
-    // Part2: result 578 to low
-    // Part2: result 2440 to high
-    // Part2: result 2350 to high
-    // Part2: result 2087 not correct
 }
