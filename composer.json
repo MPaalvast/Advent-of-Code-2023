@@ -5,6 +5,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.2",
+        "ext-bcmath": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/dbal": "^3",
@@ -19,12 +20,13 @@
         "symfony/framework-bundle": "7.2.*",
         "symfony/monolog-bundle": "^3.0",
         "symfony/runtime": "7.2.*",
+        "symfony/stimulus-bundle": "^2.22",
         "symfony/twig-bundle": "7.2.*",
+        "symfony/ux-chartjs": "^2.22",
         "symfony/webpack-encore-bundle": "^2.1",
         "symfony/yaml": "7.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|v3.14.2",
-        "ext-bcmath": "*"
+        "twig/twig": "^2.12|v3.14.2"
     },
     "config": {
         "allow-plugins": {
