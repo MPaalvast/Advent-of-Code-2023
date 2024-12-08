@@ -127,7 +127,6 @@ EOD;
 #.........
 ......#...
 EOD;
-;
     }
 
     public function day6Example2(): string
@@ -148,7 +147,6 @@ EOD;
 21037: 9 7 18 13
 292: 11 6 16 20
 EOD;
-;
     }
 
     public function day7Example2(): string
@@ -158,12 +156,25 @@ EOD;
 
     public function day8Example1(): string
     {
-        return '';
+        return <<<'EOD'
+............
+........0...
+.....0......
+.......0....
+....0.......
+......A.....
+............
+............
+........A...
+.........A..
+............
+............
+EOD;
     }
 
     public function day8Example2(): string
     {
-        return '';
+        return $this->day8Example1();
     }
 
     public function day9Example1(): string
