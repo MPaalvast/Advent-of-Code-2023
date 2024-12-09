@@ -13,6 +13,12 @@ class Y2024D9Service implements DayServiceInterface
     private int $total = 0;
 
     private array $blockAndFileArray = [];
+    private array $fileArray = [];
+    private array $blockArray = [];
+
+    private array $blockAndFileSortedArray = [];
+
+    private string $blockAndFileString = '';
 
     public function getTitle(): string
     {
@@ -30,12 +36,20 @@ class Y2024D9Service implements DayServiceInterface
 
     public function generatePart2(array|\Generator $rows): string
     {
+        $this->getBlockAndFileArrayTotal($rows);
+        $this->moveTotalFileBlocks();
+
         return $this->total;
     }
 
     private function getBlockAndFileArray(array|\Generator $rows): void
     {
         foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
+            if (empty($row)) {
+                continue;
+            }
+
             $parts = str_split($row);
             $fileIndex = 0;
             $i = 0;
@@ -48,50 +62,166 @@ class Y2024D9Service implements DayServiceInterface
                     $fileIndex++;
                 } else {
                     // space
-                    for ($y=0; $y<(int)$part; $y++) {
-                        $this->blockAndFileArray[] = '.';
+                    if ((int)$part > 0) {
+                        for ($y = 0; $y < (int)$part; $y++) {
+                            $this->blockAndFileArray[] = '.';
+                        }
                     }
                 }
 
                 $i++;
             }
         }
+        dump($this->blockAndFileArray);
+    }
+
+    private function getBlockAndFileArrayTotal(array|\Generator $rows): void
+    {
+        foreach ($rows as $row) {
+            $row = trim(preg_replace('/\r+/', '', $row));
+            if (empty($row)) {
+                continue;
+            }
+            $parts = str_split($row);
+            $fileIndex = 0;
+            $i = 0;
+
+            foreach ($parts as $part) {
+                if ($i % 2 === 0) {
+                    // file
+                    $this->fileArray[] = [$fileIndex => $part];
+                    $fileIndex++;
+                } else {
+                    // space
+                    $this->blockArray[] = (int)$part;
+                }
+
+                $i++;
+            }
+        }
+//        dump($this->fileArray);
+//        dump($this->blockArray);
     }
 
     private function moveFileBlocks(): void
     {
-        // while . is before last number
-            // switch . and number
+        $frontArray = [];
+        $backArray = [];
+        $array = $this->blockAndFileArray;
 
-        // find all . in array and keep key
-//        [$dotPos, $nrPos, $nr] = $this->getStrPosData();
-//        while ($dotPos < $nrPos) {
-//
-//            $this->blockAndFileString = substr_replace($this->blockAndFileString, $nr, $dotPos, 1);
-//            $this->blockAndFileString = substr_replace($this->blockAndFileString, '.', $nrPos, 1);
-//
-//            [$dotPos, $nrPos, $nr] = $this->getStrPosData();
-//
-//        }
-//        dd($this->blockAndFileString);
+        while (!empty($array)) {
+            $frontChar = array_shift($array);
+            if ($frontChar !== '.') {
+                // voeg de waarde aan de start string toe
+                $frontArray[] = $frontChar;
+            } else {
+                // haal het laatste getal op in de $array
+                while (!empty($array)) {
+                    $backChar = array_pop($array);
+                    array_unshift($backArray, '.');
+                    if ($backChar !== '.') {
+                        $frontArray[] = $backChar;
+                        break;
+                    }
+                }
+            }
+        }
+
+        $this->blockAndFileSortedArray = array_merge($frontArray, $backArray);
     }
 
-    private function getStrPosData(): array
+    private function moveTotalFileBlocks(): void
     {
-//        $dotPos = strpos($this->blockAndFileString, '.');
-//        preg_match('/(\d)\D*$/', $this->blockAndFileString, $nr);
-//        $nrPos = strrpos($this->blockAndFileString, $nr[1]);
-//
-//        return [$dotPos, $nrPos, $nr[1]];
+//        $array = $this->blockAndFileArray;
+//        foreach (array_reverse($array) as $part) {
+//            array_search('');
+//        }
     }
 
     private function calculateChecksum(): void
     {
-        foreach ($this->blockAndFileArray as $index => $part) {
+        foreach ($this->blockAndFileSortedArray as $index => $part) {
             if ($part === '.') {
                 break;
             }
             $this->total += (int)$index * (int)$part;
         }
     }
+
+//$input = 2333133121414131402;
+//
+//$fileIndex = 2313244342
+//$space = 333111110
+//
+//$test = [
+//0 => [
+//0 => 2
+//],
+//1 => [
+//1 => 3
+//],
+//2 => [
+//2 => 1
+//],
+//3 => [
+//3 => 3
+//],
+//4 => [
+//4 => 2
+//],
+//5 => [
+//5 => 4
+//],
+//6 => [
+//6 => 4
+//],
+//7 => [
+//7 => 3
+//],
+//8 => [
+//8 => 4
+//],
+//9 => [
+//9 => 2
+//],
+//]
+//
+//$test1 = [
+//0 => 2
+//1 => 3
+//2 => 1
+//3 => 3
+//4 => 2
+//5 => 4
+//6 => 4
+//7 => 3
+//8 => 4
+//9 => 2
+//]
+//
+//calculate count(index) * value
+//    // 123 => 4 = 3*4 = 12
+//    // 9 => 2 = 1*2 = 2
+//$calculatedValue = 2
+//
+//$index = array_find_key($testDot, function (int $value) use (int $calculatedValue) {
+//    return $value >= $calculatedValue;
+//});
+//
+//// $textDot[$index] -= $calculatedValue;
+//// $textDot[9] += $calculatedValue;
+//// $test[$index] = $test[$index] + [9 => 2] // <-- $test1
+//// unset($test[9][9])
+//
+//$testDot = [
+//    0 => 3,
+//    1 => 3,
+//    2 => 3,
+//    3 => 1,
+//    4 => 1,
+//    5 => 1,
+//    6 => 1,
+//    7 => 1,
+//    8 => 0,
+//]
 }
