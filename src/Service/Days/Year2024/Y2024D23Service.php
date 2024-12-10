@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 class Y2024D23Service implements DayServiceInterface
 {
     private string $title = "???";
+    private int $total = 0;
 
     public function getTitle(): string
     {
@@ -17,11 +18,11 @@ class Y2024D23Service implements DayServiceInterface
 
     public function generatePart1(array|\Generator $rows): string
     {
-        return 0;
+        return $this->total;
     }
 
     public function generatePart2(array|\Generator $rows): string
     {
-        return 0;
+        return $this->total;
     }
 }
