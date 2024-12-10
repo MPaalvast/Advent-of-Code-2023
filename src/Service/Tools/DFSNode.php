@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Service\Tools;
 
+/**
+ * Bron: https://gist.github.com/ackintosh/5791383
+ */
 class DFSNode
 {
     public function __construct(public string $name = '', public array $linked = [])
