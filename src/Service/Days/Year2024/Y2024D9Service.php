@@ -110,8 +110,9 @@ class Y2024D9Service implements DayServiceInterface
 
         foreach ($fileArrayReversed as $part) {
             $fileId = key($part);
-            $fileDiskSize = strlen($fileId) * $part[$fileId];
-
+//            $fileDiskSize = strlen($fileId) * $part[$fileId];
+            $fileDiskSize = $part[$fileId];
+//dump($part);
             foreach ($this->blockArray as $key => $value) {
                 if ($key > $fileId) {
                     break;
@@ -130,6 +131,7 @@ class Y2024D9Service implements DayServiceInterface
                 }
             }
         }
+//        dump($this->fileArray);
     }
 
     private function calculateChecksum(): void
@@ -166,4 +168,5 @@ class Y2024D9Service implements DayServiceInterface
 // 14295934907371 => to high
 // 8187318443496 => to high
 // 7051071286497 => to high
+// 6426104779092 => ???
 }
