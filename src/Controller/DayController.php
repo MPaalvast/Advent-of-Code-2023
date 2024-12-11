@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\GameDayRepository;
 use App\Repository\YearRepository;
-use App\Service\Tools\FileOptions;
+use App\Service\Tools\DayInputOptions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -39,7 +39,7 @@ class DayController extends AbstractDayController
     #[Route('/{year}/{day}', name: 'app_day')]
     public function day(
         Request $request,
-        FileOptions $fileOptions,
+        DayInputOptions $DayInputOptions,
         int $year,
         int $day
     ): Response
@@ -50,7 +50,7 @@ class DayController extends AbstractDayController
         }
 
         try {
-            return $this->renderDayPage($request, $fileOptions, $yearEntity, $day);
+            return $this->renderDayPage($request, $DayInputOptions, $yearEntity, $day);
         } catch (NotFoundHttpException $e) {
             throw $this->createNotFoundException(sprintf('Day "%s" of "%s" not found.', $day, $yearEntity->getTitle()), previous: $e);
         }

@@ -179,32 +179,43 @@ EOD;
 
     public function day9Example1(): string
     {
-        return '';
+        return '2333133121414131402';
     }
 
     public function day9Example2(): string
     {
-        return '';
+        return $this->day9Example1();
     }
 
     public function day10Example1(): string
     {
-        return '';
+        return <<<'EOD'
+89010123
+78121874
+87430965
+96549874
+45678903
+32019012
+01329801
+10456732
+EOD;
+
     }
 
     public function day10Example2(): string
     {
-        return '';
+        return $this->day10Example1();
+
     }
 
     public function day11Example1(): string
     {
-        return '';
+        return '125 17';
     }
 
     public function day11Example2(): string
     {
-        return '';
+        return $this->day11Example1();
     }
 
     public function day12Example1(): string
