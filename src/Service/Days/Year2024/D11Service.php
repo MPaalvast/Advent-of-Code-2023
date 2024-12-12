@@ -36,6 +36,10 @@ class D11Service implements DayServiceInterface
         return $this->total;
     }
 
+    //
+    // helper functions below
+    //
+
     private function getStones(array|\Generator $rows): void
     {
         foreach ($rows as $row) {

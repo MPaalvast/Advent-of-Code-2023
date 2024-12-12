@@ -48,7 +48,7 @@ class Config2024Fixtures extends Fixture implements DependentFixtureInterface
         yield ['day' => $this->getReference('day_9', Day::class), 'title' => "Disk Fragmenter", 'active' => true, 'examples' => $this->examples->getDay9Examples(), 'results' => $this->gameDayPartResultIterator(9)];
         yield ['day' => $this->getReference('day_10', Day::class), 'title' => "Hoof It", 'active' => true, 'examples' => $this->examples->getDay10Examples(), 'results' => $this->gameDayPartResultIterator(10)];
         yield ['day' => $this->getReference('day_11', Day::class), 'title' => "Plutonian Pebbles", 'active' => true, 'examples' => $this->examples->getDay11Examples(), 'results' => $this->gameDayPartResultIterator(11)];
-        yield ['day' => $this->getReference('day_12', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay12Examples(), 'results' => $this->gameDayPartResultIterator(12)];
+        yield ['day' => $this->getReference('day_12', Day::class), 'title' => "Garden Groups", 'active' => true, 'examples' => $this->examples->getDay12Examples(), 'results' => $this->gameDayPartResultIterator(12)];
         yield ['day' => $this->getReference('day_13', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay13Examples(), 'results' => $this->gameDayPartResultIterator(13)];
         yield ['day' => $this->getReference('day_14', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay14Examples(), 'results' => $this->gameDayPartResultIterator(14)];
         yield ['day' => $this->getReference('day_15', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay15Examples(), 'results' => $this->gameDayPartResultIterator(15)];

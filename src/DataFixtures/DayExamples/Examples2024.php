@@ -220,12 +220,23 @@ EOD;
 
     public function day12Example1(): string
     {
-        return '';
+        return <<<'EOD'
+RRRRIICCFF
+RRRRIICCCF
+VVRRRCCFFF
+VVRCCCJFFF
+VVVVCJJCFE
+VVIVCCJJEE
+VVIIICJJEE
+MIIIIIJJEE
+MIIISIJEEE
+MMMISSJEEE
+EOD;
     }
 
     public function day12Example2(): string
     {
-        return '';
+        return $this->day12Example1();
     }
 
     public function day13Example1(): string
