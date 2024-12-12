@@ -12,8 +12,15 @@ class D12Service implements DayServiceInterface
     private int $total = 0;
     private array $grid = [];
     private array $regions = [];
+    private array $nextRegionFields = [];
+    private string $regionValue = '';
+    private bool $countRegionBorders = false;
+    private array $regionBorders = [];
     private array $currentRegion = [];
+    private int $currentRegionBorders = 0;
     private array $knownRegionFields = [];
+
+    private array $testDump = [];
 
     public function getTitle(): string
     {
@@ -47,6 +54,13 @@ class D12Service implements DayServiceInterface
 
     public function generatePart2(array|\Generator $rows): string
     {
+        $this->countRegionBorders = true;
+        $this->generateGrid($rows);
+        $this->generateRegionArray();
+        $this->calculateStraitBorders();
+        ksort($this->testDump);
+        dump($this->testDump);
+
         return $this->total;
     }
 
@@ -57,7 +71,17 @@ class D12Service implements DayServiceInterface
     private function calculateBorders(): void
     {
         foreach ($this->regions as $region) {
-            $this->total += (count($region) * array_sum($region));
+            $this->total += (count($region['regionFields']) * array_sum($region['regionFields']));
+        }
+    }
+
+    private function calculateStraitBorders(): void
+    {
+//        dump($this->total);
+        foreach ($this->regions as $region) {
+//            dump((count($region['regionFields']) * $region['straitBorders']));
+            $this->total += (count($region['regionFields']) * $region['straitBorders']);
+//            dump('Total = ' .$this->total);
         }
     }
 
@@ -73,136 +97,163 @@ class D12Service implements DayServiceInterface
         }
     }
     
-    private function generateRegionArray()
+    private function generateRegionArray(): void
     {
         foreach ($this->grid as $x => $row) {
             foreach ($row as $y => $regionValue) {
                 if (!in_array($x . '-' . $y, $this->knownRegionFields, true)) {
-                    $this->makeRegion($x, $y, $regionValue);
+                    $this->regionValue = $regionValue;
+                    $this->makeRegion($x, $y);
                 }
             }
         }
     }
 
-    private function makeRegion(int $x, int $y, string $regionValue)
+    private function makeRegion(int $x, int $y): void
     {
         $this->currentRegion = [];
-        $this->findNeighbourRegions([['x' => $x, 'y' => $y]], $regionValue);
-        
-        $this->regions[] = $this->currentRegion;
+        $this->findNeighbourRegions([['x' => $x, 'y' => $y]]);
+//        if ($this->regionValue === 'Y') {
+//            dump('Y => ' . $this->currentRegionBorders);
+//            dump('--------');
+//        }
+//        if (!isset($this->testDump[$this->regionValue])) {
+//            $this->testDump[$this->regionValue] = [];
+//        }
+//        $this->testDump[$this->regionValue][] = count($this->currentRegion);
+        dump('A region of ' . $this->regionValue . ' plants with price ' . count($this->currentRegion) . ' * ' . $this->currentRegionBorders . ' = ' . (count($this->currentRegion) * $this->currentRegionBorders));
+        $this->regions[] = [
+            'regionFields' => $this->currentRegion,
+            'straitBorders' => $this->currentRegionBorders,
+        ];
+
     }
 
-    private function findNeighbourRegions(array $regionFields, string $regionValue)
+    private function findNeighbourRegions(array $regionFields): void
     {
-        $allNextRegionFields = [];
-        foreach ($regionFields as $field) {
+        $this->currentRegionBorders = 0;
+        while (!empty($regionFields)) {
+            $field = array_shift($regionFields);
+
             if (in_array($field['x'] . '-' . $field['y'], $this->knownRegionFields, true)) {
                 continue;
             }
-
-            $nextRegionFields = $this->getRegionFields($field, $regionValue);
+            $this->nextRegionFields = $this->getRegionFields($field);
             $this->knownRegionFields[] = $field['x'] . '-' . $field['y'];
-            $this->currentRegion[$field['x'] . '-' . $field['y']] = 4-count($nextRegionFields);
+            $this->currentRegion[$field['x'] . '-' . $field['y']] = 4-count($this->nextRegionFields);
+            $this->removeKnownRegionFields();
 
-            $nextRegionFields = $this->removeKnownRegionFields($nextRegionFields);
-            $allNextRegionFields = array_merge($allNextRegionFields, $nextRegionFields);
-        }
-        if (!empty($allNextRegionFields)) {
-            $this->findNeighbourRegions($allNextRegionFields, $regionValue);
+            array_push($regionFields, ...$this->nextRegionFields);
         }
     }
 
-    private function removeKnownRegionFields(array $nextRegionFields): array
+    private function removeKnownRegionFields(): void
     {
-        foreach ($nextRegionFields as $key => $field) {
+        foreach ($this->nextRegionFields as $key => $field) {
             if (in_array($field['x'] . '-' . $field['y'], $this->knownRegionFields, true)) {
-                unset($nextRegionFields[$key]);
+                unset($this->nextRegionFields[$key]);
             }
         }
-
-        return $nextRegionFields;
     }
 
-    private function getRegionFields(array $field, string $regionValue): array
+    private function getRegionFields(array $field): array
     {
         $nextRegionFields = [];
+        $indexL = $field['x'] . '-' . $field['y']-1;
+        $indexU = $field['x']-1 . '-' . $field['y'];
+        $indexD = $field['x']+1 . '-' . $field['y'];
+        $indexR = $field['x'] . '-' . $field['y']+1;
+        $indexLU = $field['x']-1 . '-' . $field['y']-1;
+        $indexLD = $field['x']+1 . '-' . $field['y']-1;
+        $indexRU = $field['x']-1 . '-' . $field['y']+1;
+        $indexRD = $field['x']+1 . '-' . $field['y']+1;
+
+        $borders = 0;
+        $borderType = '';
         // look up
-        if ($this->checkRegionField(['x' => $field['x']-1, 'y' => $field['y']], $regionValue)) {
+        if ($this->checkRegionField(['x' => $field['x']-1, 'y' => $field['y']])) {
             $nextRegionFields[] = ['x' => $field['x']-1, 'y' => $field['y']];
+        } elseif (
+            $this->countRegionBorders &&
+            (
+                !isset($this->currentRegion[$indexL]) ||
+                isset($this->currentRegion[$indexLU]) ||
+                (
+                    isset($this->grid[$field['x']-1][$field['y']-1]) &&
+                    $this->grid[$field['x']-1][$field['y']-1] === $this->regionValue &&
+                    $this->grid[$field['x']][$field['y']-1] === $this->regionValue
+                )
+            ) && (
+                !isset($this->currentRegion[$indexR]) ||
+                isset($this->currentRegion[$indexRU]) ||
+                (
+                    isset($this->grid[$field['x']-1][$field['y']+1]) &&
+                    $this->grid[$field['x']-1][$field['y']+1] === $this->regionValue &&
+                    $this->grid[$field['x']][$field['y']+1] === $this->regionValue
+                )
+            )
+        ) {
+            $this->currentRegionBorders++;
+            $borderType .= ' U';
+            $borders++;
         }
         // look right
-        if ($this->checkRegionField(['x' => $field['x'], 'y' => $field['y']+1], $regionValue)) {
+        if ($this->checkRegionField(['x' => $field['x'], 'y' => $field['y']+1])) {
             $nextRegionFields[] = ['x' => $field['x'], 'y' => $field['y']+1];
+        } elseif (
+            $this->countRegionBorders &&
+            (!isset($this->currentRegion[$indexU]) || isset($this->currentRegion[$indexRU]) || (isset($this->grid[$field['x']-1][$field['y']+1]) && $this->grid[$field['x']-1][$field['y']+1] === $this->regionValue && $this->grid[$field['x']-1][$field['y']] === $this->regionValue)) &&
+            (!isset($this->currentRegion[$indexD]) || isset($this->currentRegion[$indexRD]) || (isset($this->grid[$field['x']+1][$field['y']+1]) && $this->grid[$field['x']+1][$field['y']+1] === $this->regionValue && $this->grid[$field['x']+1][$field['y']] === $this->regionValue))
+        ) {
+            $this->currentRegionBorders++;
+            $borderType .= ' R';
+            $borders++;
         }
         // look down
-        if ($this->checkRegionField(['x' => $field['x']+1, 'y' => $field['y']], $regionValue)) {
+        if ($this->checkRegionField(['x' => $field['x']+1, 'y' => $field['y']])) {
             $nextRegionFields[] = ['x' => $field['x']+1, 'y' => $field['y']];
+        } elseif (
+            $this->countRegionBorders &&
+            (!isset($this->currentRegion[$indexL]) || isset($this->currentRegion[$indexLD]) || (isset($this->grid[$field['x']+1][$field['y']-1]) && $this->grid[$field['x']+1][$field['y']-1] === $this->regionValue && $this->grid[$field['x']][$field['y']-1] === $this->regionValue)) &&
+            (!isset($this->currentRegion[$indexR]) || isset($this->currentRegion[$indexRD]) || (isset($this->grid[$field['x']+1][$field['y']+1]) && $this->grid[$field['x']+1][$field['y']+1] === $this->regionValue && $this->grid[$field['x']][$field['y']+1] === $this->regionValue))
+        ) {
+            $this->currentRegionBorders++;
+            $borderType .= ' D';
+            $borders++;
         }
         // look left
-        if ($this->checkRegionField(['x' => $field['x'], 'y' => $field['y']-1], $regionValue)) {
+        if ($this->checkRegionField(['x' => $field['x'], 'y' => $field['y']-1])) {
             $nextRegionFields[] = ['x' => $field['x'], 'y' => $field['y']-1];
+        } elseif (
+            $this->countRegionBorders &&
+            (!isset($this->currentRegion[$indexU]) || isset($this->currentRegion[$indexLU]) || (isset($this->grid[$field['x']-1][$field['y']-1]) && $this->grid[$field['x']-1][$field['y']-1] === $this->regionValue  && $this->grid[$field['x']-1][$field['y']] === $this->regionValue)) &&
+            (!isset($this->currentRegion[$indexD]) || isset($this->currentRegion[$indexLD]) || (isset($this->grid[$field['x']+1][$field['y']-1]) && $this->grid[$field['x']+1][$field['y']-1] === $this->regionValue  && $this->grid[$field['x']+1][$field['y']] === $this->regionValue))
+        ) {
+            $this->currentRegionBorders++;
+            $borderType .= ' L';
+            $borders++;
+        }
+
+        if ($this->regionValue === 'Z') {
+//            dump($field['x'] . '-' . $field['y'] . ' BorderTypes:' . $borderType . ' Borders:' . $borders);
         }
 
         return $nextRegionFields;
     }
 
-    private function checkRegionField(array $array, string $regionValue): bool
+    private function checkRegionField(array $array): bool
     {
         if (!isset($this->grid[$array['x']][$array['y']])) {
             return false;
         }
-        if ($this->grid[$array['x']][$array['y']] !== $regionValue) {
+        if ($this->grid[$array['x']][$array['y']] !== $this->regionValue) {
             return false;
         }
 
         return true;
     }
 
-    // "0-125" => 3
-    // "1-125" => 1
-    // "2-125" => 1
-    // "1-124" => 1
-    // "3-125" => 3
-    // "2-124" => 2
-    // "1-123" => 2
-    // "1-122" => 3
-
-    //    0
-    // 0000
-    //   00
-    //    0
-    // BBB BBB BBB BBB BBB
-    // BAB BAA BAA AAA BBA
-    // BBB BBB BAB BBB BAA
-
-    // first field
-        // 0 neighbours => 4 sides
-        // 1 neighbour  => 3 sides
-        // 2 neighbours => 2 sides
-    // the rest
-        // 1 neighbour
-            // check the fields next to the 1 neighbour in your 9 square grid
-                // 0 => 1 side
-                // 1 => 2 sides
-                // 2 => 3 sides
-        // 2 neighbours
-            //
-        // 3 neighbours
-
-    // if a field has 0 neighbours
-        // add 4 sides to the region
-    // if a field has 1 neighbour
-        // check the 2 diagonal fields on the side that has a neighbour
-            // if 0 is in the region
-                // add 1 side to the region
-            // if 1 is in the region
-                // add 2 sides to the region
-            // if 2 is in the region
-                // add 3 sides to the region
-        // add 3 sides to the region
-    // if a field has 2 neighbours
-        // add 1 side to the region
-    // if a field has 3 neighbours
-        // check the 2 diagonal fields on the side that has no neighbour
-        // if
+// 860761 => to low
+// 867910 => to low
+// 877626 => not correct
 }
