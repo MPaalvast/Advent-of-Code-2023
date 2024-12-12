@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
-use App\Service\Tools\FileOptions;
+use App\Repository\GameDayRepository;
+use App\Repository\YearRepository;
+use App\Service\Tools\DayInputOptions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -11,26 +13,49 @@ use Symfony\Component\Routing\Annotation\Route;
 class DayController extends AbstractDayController
 {
 
-    #[Route('/{year}', name: 'app_year_days')]
-    public function yearDays(Request $request, FileOptions $fileOptions, int $year): Response
+    public function __construct(
+        DaySelector $daySelector,
+        private readonly GameDayRepository $gameDayRepository,
+        private readonly YearRepository $yearRepository,
+    )
     {
+        parent::__construct($daySelector);
+    }
+
+    #[Route('/{year}', name: 'app_year_days')]
+    public function yearDays(int $year): Response
+    {
+        $yearEntity = $this->yearRepository->findOneBy(['title' => $year]);
+        if (null === $yearEntity) {
+            throw $this->createNotFoundException(sprintf('Year "%s" not found.', $year));
+        }
+
         return $this->render('days.html.twig', [
-            'year' => $year,
+            'year' => $yearEntity,
+            'yearGameDays' => $this->gameDayRepository->findBy(['year' => $yearEntity]),
         ]);
     }
 
     #[Route('/{year}/{day}', name: 'app_day')]
     public function day(
         Request $request,
-        FileOptions $fileOptions,
+        DayInputOptions $DayInputOptions,
         int $year,
         int $day
     ): Response
     {
+        $yearEntity = $this->yearRepository->findOneBy(['title' => $year]);
+        if (null === $yearEntity) {
+            throw $this->createNotFoundException(sprintf('Year "%s" not found.', $year));
+        }
+        $gameDayEntity = $this->gameDayRepository->findOneBy(['year' => $yearEntity, 'day' => $day]);
+        if (null === $gameDayEntity) {
+            throw $this->createNotFoundException(sprintf('GameDay "%s" not found.', $gameDayEntity));
+        }
         try {
-            return $this->renderDayPage($request, $fileOptions, $year, $day);
+            return $this->renderDayPage($request, $DayInputOptions, $yearEntity, $gameDayEntity);
         } catch (NotFoundHttpException $e) {
-            throw $this->createNotFoundException(sprintf('Day "%s" of "%s" not found.', $day, $year), previous: $e);
+            throw $this->createNotFoundException(sprintf('Day "%s" of "%s" not found.', $day, $yearEntity->getTitle()), previous: $e);
         }
 
     }

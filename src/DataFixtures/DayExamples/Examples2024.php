@@ -76,72 +76,146 @@ EOT;
 
     public function day5Example1(): string
     {
-        return '';
+        return <<<'EOD'
+47|53
+97|13
+97|61
+97|47
+75|29
+61|13
+75|53
+29|13
+97|29
+53|29
+61|53
+97|53
+61|29
+47|13
+75|47
+97|75
+47|61
+75|61
+47|29
+75|13
+53|13
+
+75,47,61,53,29
+97,61,53,29,13
+75,29,13
+75,97,47,61,53
+61,13,29
+97,13,75,29,47
+EOD;
     }
 
     public function day5Example2(): string
     {
-        return '';
+        return $this->day5Example1();
     }
 
     public function day6Example1(): string
     {
-        return '';
+        return <<<'EOD'
+....#.....
+.........#
+..........
+..#.......
+.......#..
+..........
+.#..^.....
+........#.
+#.........
+......#...
+EOD;
     }
 
     public function day6Example2(): string
     {
-        return '';
+        return $this->day6Example1();
     }
 
     public function day7Example1(): string
     {
-        return '';
+        return <<<'EOD'
+190: 10 19
+3267: 81 40 27
+83: 17 5
+156: 15 6
+7290: 6 8 6 15
+161011: 16 10 13
+192: 17 8 14
+21037: 9 7 18 13
+292: 11 6 16 20
+EOD;
     }
 
     public function day7Example2(): string
     {
-        return '';
+        return $this->day7Example1();
     }
 
     public function day8Example1(): string
     {
-        return '';
+        return <<<'EOD'
+............
+........0...
+.....0......
+.......0....
+....0.......
+......A.....
+............
+............
+........A...
+.........A..
+............
+............
+EOD;
     }
 
     public function day8Example2(): string
     {
-        return '';
+        return $this->day8Example1();
     }
 
     public function day9Example1(): string
     {
-        return '';
+        return '2333133121414131402';
     }
 
     public function day9Example2(): string
     {
-        return '';
+        return $this->day9Example1();
     }
 
     public function day10Example1(): string
     {
-        return '';
+        return <<<'EOD'
+89010123
+78121874
+87430965
+96549874
+45678903
+32019012
+01329801
+10456732
+EOD;
+
     }
 
     public function day10Example2(): string
     {
-        return '';
+        return $this->day10Example1();
+
     }
 
     public function day11Example1(): string
     {
-        return '';
+        return '125 17';
     }
 
     public function day11Example2(): string
     {
-        return '';
+        return $this->day11Example1();
     }
 
     public function day12Example1(): string

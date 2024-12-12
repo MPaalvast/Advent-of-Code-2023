@@ -7,9 +7,23 @@
         <main class="w-full flex-grow p-6">
             <h1 class="text-3xl text-black pb-6 text-center">Days {{ year }}</h1>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {% for i in 1..25 %}
-                    <a href="{{ path('app_day', {'day': i , 'year': year}) }}" class="text-center py-4 px-4 rounded-md border border-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 hover:text-white duration-300"><h3>Day {{ i }}</h3></a>
+                {% for gameDay in yearGameDays %}
+                    {% if gameDay.active %}
+                        <a href="{{ path('app_day', {'day': gameDay.day.title , 'year': year.title}) }}" class="text-center py-4 px-4 rounded-md border border-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 hover:text-white duration-300">
+                            <h3>Day {{ gameDay.day.title }}</h3>
+                            <div>{{ gameDay.title }}</div>
+                            <div>{{ _self.getStars(gameDay.gameDayResults) }}</div>
+                        </a>
+                    {% else %}
+                        <span class="text-center py-4 px-4 rounded-md border border-slate-800 bg-gray-300">
+                            <h3>Day {{ gameDay.day.title }}</h3>
+                            <span>{{ gameDay.title }}</span>
+                            <br/>
+                            <span>{{ _self.getStars(gameDay.gameDayResults) }}</span>
+                        </span>
+                    {% endif %}
                 {% endfor %}
+
             </div>
         </main>
 
@@ -18,3 +32,17 @@
         </footer>
     </div>
 {% endblock %}
+
+{% macro getStars(results) %}
+    {% for dayResult in results %}
+        {% if dayResult.solved %}
+            <span class="icon text-yellow-500">
+                <i class="fas fa-star"></i>
+            </span>
+        {% else %}
+            <span class="icon">
+                <i class="far fa-star"></i>
+            </span>
+        {%  endif %}
+    {% endfor %}
+{% endmacro %}

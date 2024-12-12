@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Day {{ day_nr }}{% endblock %}
+{% block title %}Day {{ game_day.day.title }}{% endblock %}
 
 {% block body %}
     <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
         <main class="w-full flex-grow p-6">
             <a href="{{ path('app_year_days', {'year': year }) }}" class="absolute right-6 px-3 md:px-4 py-1 md:py-2 bg-sky-600 border border-sky-600 text-white rounded-lg hover:bg-sky-700"><- Back</a>
             <h1 class="text-4xl text-black pb-6 text-center">{{ year }}</h1>
-            <h2 class="text-3xl text-black pb-6 text-center">Day {{ day_nr }}</h2>
-            <h3 class="text-2xl text-black pb-6 text-center">--- {{ day_title}} ---</h3>
+            <h2 class="text-3xl text-black pb-6 text-center">Day {{ game_day.day.title }}</h2>
+            <h3 class="text-2xl text-black pb-6 text-center">--- {{ game_day.title}} ---</h3>
             <fieldset class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-8">
                 {{ form(form) }}
             </fieldset>

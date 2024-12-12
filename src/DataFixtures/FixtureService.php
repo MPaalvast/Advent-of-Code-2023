@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\GameDay;
 use App\Entity\GameDayInput;
+use App\Entity\GameDayResult;
 use App\Entity\Year;
 use Doctrine\Persistence\ObjectManager;
 
@@ -16,7 +17,7 @@ readonly class FixtureService
             $gameDay->setTitle($gameDayData['title']);
             $gameDay->setDay($gameDayData['day']);
             $gameDay->setYear($year);
-            $gameDay->setStatus($gameDayData['status']);
+            $gameDay->setActive($gameDayData['active']);
             $manager->persist($gameDay);
 
             $i = 1;
@@ -29,6 +30,14 @@ readonly class FixtureService
                     $manager->persist($gameDayInput);
                 }
                 $i++;
+            }
+
+            foreach ($gameDayData['results'] as $resultData) {
+                $gameDayResult = new GameDayResult();
+                $gameDayResult->setGameDay($gameDay);
+                $gameDayResult->setDayPart($resultData['part']);
+                $gameDayResult->setSolved($resultData['solved']);
+                $manager->persist($gameDayResult);
             }
         }
     }

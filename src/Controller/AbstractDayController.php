@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\GameDay;
+use App\Entity\Year;
 use App\Form\DayType;
-use App\Service\Tools\FileOptions;
+use App\Service\Tools\DayInputOptions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,18 +20,19 @@ class AbstractDayController extends AbstractController
 
     public function renderDayPage(
         Request $request,
-        FileOptions $fileOptions,
-        int $year,
-        int $day): Response
+        DayInputOptions $DayInputOptions,
+        Year $year,
+        GameDay $gameDay
+    ): Response
     {
-        $index = 'Y'.$year.'D'.$day;
+        $index = 'Y'.$year->getTitle().'D'.$gameDay->getDay()?->getTitle();
 
         $form = $this->createForm(DayType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-            $rows = $fileOptions->getDayInput($formData, $year, $day);
+            $rows = $DayInputOptions->getDayInput($formData, $year, $gameDay);
 
             if ($formData['day_part'] === 1) {
                 $result = $this->daySelector->generatePart1($index, $rows);
@@ -41,7 +44,7 @@ class AbstractDayController extends AbstractController
         }
 
         return $this->render('day.html.twig', [
-            'day_nr' => $day,
+            'game_day' => $gameDay,
             'year' => $year,
             'day_title' => $this->daySelector->getTitle($index),
             'result' => $result,

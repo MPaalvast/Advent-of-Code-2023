@@ -42,7 +42,7 @@ class GameDayInput
         return $this->dayPart;
     }
 
-    public function setDayPart(?DayPart $dayPart): static
+    public function setDayPart(DayPart $dayPart): static
     {
         $this->dayPart = $dayPart;
 
