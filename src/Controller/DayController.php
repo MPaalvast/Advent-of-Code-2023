@@ -48,9 +48,12 @@ class DayController extends AbstractDayController
         if (null === $yearEntity) {
             throw $this->createNotFoundException(sprintf('Year "%s" not found.', $year));
         }
-
+        $gameDayEntity = $this->gameDayRepository->findOneBy(['year' => $yearEntity, 'day' => $day]);
+        if (null === $gameDayEntity) {
+            throw $this->createNotFoundException(sprintf('GameDay "%s" not found.', $gameDayEntity));
+        }
         try {
-            return $this->renderDayPage($request, $DayInputOptions, $yearEntity, $day);
+            return $this->renderDayPage($request, $DayInputOptions, $yearEntity, $gameDayEntity);
         } catch (NotFoundHttpException $e) {
             throw $this->createNotFoundException(sprintf('Day "%s" of "%s" not found.', $day, $yearEntity->getTitle()), previous: $e);
         }

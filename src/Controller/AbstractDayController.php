@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\GameDay;
 use App\Entity\Year;
 use App\Form\DayType;
 use App\Service\Tools\DayInputOptions;
@@ -21,17 +22,17 @@ class AbstractDayController extends AbstractController
         Request $request,
         DayInputOptions $DayInputOptions,
         Year $year,
-        int $day
+        GameDay $gameDay
     ): Response
     {
-        $index = 'Y'.$year->getTitle().'D'.$day;
+        $index = 'Y'.$year->getTitle().'D'.$gameDay->getDay()?->getTitle();
 
         $form = $this->createForm(DayType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-            $rows = $DayInputOptions->getDayInput($formData, $year, $day);
+            $rows = $DayInputOptions->getDayInput($formData, $year, $gameDay);
 
             if ($formData['day_part'] === 1) {
                 $result = $this->daySelector->generatePart1($index, $rows);
@@ -43,7 +44,7 @@ class AbstractDayController extends AbstractController
         }
 
         return $this->render('day.html.twig', [
-            'day_nr' => $day,
+            'game_day' => $gameDay,
             'year' => $year,
             'day_title' => $this->daySelector->getTitle($index),
             'result' => $result,
