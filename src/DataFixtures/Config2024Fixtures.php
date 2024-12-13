@@ -49,7 +49,7 @@ class Config2024Fixtures extends Fixture implements DependentFixtureInterface
         yield ['day' => $this->getReference('day_10', Day::class), 'title' => "Hoof It", 'active' => true, 'examples' => $this->examples->getDay10Examples(), 'results' => $this->gameDayPartResultIterator(10)];
         yield ['day' => $this->getReference('day_11', Day::class), 'title' => "Plutonian Pebbles", 'active' => true, 'examples' => $this->examples->getDay11Examples(), 'results' => $this->gameDayPartResultIterator(11)];
         yield ['day' => $this->getReference('day_12', Day::class), 'title' => "Garden Groups", 'active' => true, 'examples' => $this->examples->getDay12Examples(), 'results' => $this->gameDayPartResultIterator(12)];
-        yield ['day' => $this->getReference('day_13', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay13Examples(), 'results' => $this->gameDayPartResultIterator(13)];
+        yield ['day' => $this->getReference('day_13', Day::class), 'title' => "Claw Contraption", 'active' => false, 'examples' => $this->examples->getDay13Examples(), 'results' => $this->gameDayPartResultIterator(13)];
         yield ['day' => $this->getReference('day_14', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay14Examples(), 'results' => $this->gameDayPartResultIterator(14)];
         yield ['day' => $this->getReference('day_15', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay15Examples(), 'results' => $this->gameDayPartResultIterator(15)];
         yield ['day' => $this->getReference('day_16', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay16Examples(), 'results' => $this->gameDayPartResultIterator(16)];
@@ -82,10 +82,10 @@ class Config2024Fixtures extends Fixture implements DependentFixtureInterface
                 yield ['part' => $this->getReference('dayPart_2', DayPart::class), 'solved' => true];
                 break;
             case 12:
+            case 13:
                 yield ['part' => $this->getReference('dayPart_1', DayPart::class), 'solved' => true];
                 yield ['part' => $this->getReference('dayPart_2', DayPart::class), 'solved' => false];
                 break;
-            case 13:
             case 14:
             case 15:
             case 16:
