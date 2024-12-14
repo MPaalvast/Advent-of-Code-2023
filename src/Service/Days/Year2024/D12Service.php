@@ -234,9 +234,9 @@ class D12Service implements DayServiceInterface
             $borders++;
         }
 
-        if ($this->regionValue === 'Z') {
+//        if ($this->regionValue === 'Z') {
 //            dump($field['x'] . '-' . $field['y'] . ' BorderTypes:' . $borderType . ' Borders:' . $borders);
-        }
+//        }
 
         return $nextRegionFields;
     }
