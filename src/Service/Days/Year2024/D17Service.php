@@ -29,7 +29,7 @@ class D17Service implements DayServiceInterface
 
     public function generatePart2(array|\Generator $rows): string
     {
-        return $this->total;
+        return 0;
     }
 
     private function initComputer($rows): void
@@ -60,8 +60,6 @@ class D17Service implements DayServiceInterface
             $operand = $this->computer['program'][$this->CP];
             $literalOperand = $this->computer['program'][$this->CP+1];
             $this->operandAction($operand, $literalOperand);
-
-
         }
     }
 
@@ -137,7 +135,6 @@ class D17Service implements DayServiceInterface
      */
     private function bxl(int $literalOperand): void
     {
-        //$a ^ $b
         $this->computer['register']['B'] ^= $literalOperand;
         $this->increasePointer();
     }
@@ -149,9 +146,6 @@ class D17Service implements DayServiceInterface
     private function bst(int $literalOperand): void
     {
         $comboOperand = $this->getComboOperandValue($literalOperand);
-        // modulo => %
-        // $binaryValue = printf("%b", $n);
-        // substr($binaryValue, -3)
         $result = $comboOperand % 8;
         $binaryValue = decbin($result);
         $this->computer['register']['B'] = bindec(substr($binaryValue, -3));
@@ -169,8 +163,6 @@ class D17Service implements DayServiceInterface
             $this->setPointer($literalOperand);
             return;
         }
-        // if a = 0 => return; <- ??? instructionPointer has to increase???
-        // else set instructionPointer to the value $literalOperand
         $this->increasePointer();
     }
 
@@ -180,7 +172,6 @@ class D17Service implements DayServiceInterface
      */
     private function bxc(int $literalOperand): void
     {
-        //$a ^ $b
         $this->computer['register']['B'] ^= $this->computer['register']['C'];
         $this->increasePointer();
     }
@@ -211,5 +202,10 @@ class D17Service implements DayServiceInterface
     private function setOutput(): void
     {
         $this->output = implode (',', $this->computer['output']);
+    }
+
+    private function getRegisterValue(string $index): string
+    {
+        return $this->computer['register'][$index];
     }
 }
