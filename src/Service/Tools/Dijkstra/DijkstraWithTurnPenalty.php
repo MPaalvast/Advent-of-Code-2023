@@ -78,24 +78,17 @@ class DijkstraWithTurnPenalty
                     [$cx, $cy] = array_map('intval', explode('-', $current));
                     [$nx, $ny] = array_map('intval', explode('-', $neighbour));
                     if (
-                        ($px === $cx && $cx === $nx)
-                        || ($py === $cy && $cy === $ny)
-                    ) {} else {
+                        !(($px === $cx && $cx === $nx)
+                        || ($py === $cy && $cy === $ny))
+                    ) {
                         $alt += $penalty;
                     }
                 } else {
                     [$cx, $cy] = array_map('intval', explode('-', $current));
-//                    [$nx, $ny] = array_map('intval', explode('-', $neighbour));
                     if ($neighbour !== $cx . '' . $cy+1) {
                         $alt += $penalty;
                     }
                 }
-
-                // get previous node
-                // if you make a turn
-                    // add $penalty to the $alt
-
-
 
                 if ($alt < $this->distances[$neighbour]) {
                     $this->distances[$neighbour] = $alt;

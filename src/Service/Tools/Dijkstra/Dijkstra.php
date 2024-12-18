@@ -135,7 +135,7 @@ class Dijkstra
      * [n] => [destination, total cost]
      *
      * @param Int $destination
-     * @return Array
+     * @return array|false
      */
     public function shortestPathTo($destination)
     {
@@ -150,6 +150,9 @@ class Dijkstra
 
         // Select previous node and loop until source is found.
         $previous_node = $this->previous[$destination];
+        if ($previous_node === null) {
+            return false;
+        }
         while ($previous_node != $this->source) {
             // Not the source?  Push into the array, but in place [0]
             array_unshift($shortest_path, [
