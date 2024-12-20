@@ -4,11 +4,13 @@ namespace App\Service\Days\Year2024;
 
 use App\Service\Days\DayServiceInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
-
 #[AsTaggedItem('Y2024D1')]
 class D1Service implements DayServiceInterface
 {
     private string $title = "Historian Hysteria";
+    private const COLUMN_DELIMITER = "   ";
+    private const ROW_CLEANUP_REGEX = '/\r+/';
+    private const EMPTY_COLUMN_DATA = ['left' => [], 'right' => []];
 
     public function getTitle(): string
     {
@@ -17,67 +19,80 @@ class D1Service implements DayServiceInterface
 
     public function generatePart1(array|\Generator $rows): string
     {
-        return $this->calculateDiff($rows);
+        return (string)$this->calculateDifference($rows);
     }
 
     public function generatePart2(array|\Generator $rows): string
     {
-        return $this->calculateSum($rows);
+        return (string)$this->calculateSum($rows);
     }
 
-    //
-    // helper functions below
-    //
-
-    private function calculateDiff(array|\Generator $rows): int
+    private function calculateDifference(array|\Generator $rows): int
     {
-        $arrayData = $this->createLeftAndRightArray($rows);
+        $columns = $this->buildColumnData($rows);
 
-        return $this->getDiff($arrayData);
-    }
-
-    private function createLeftAndRightArray(array|\Generator $rows): array
-    {
-        $arrayData = ['left' => [], 'right' => []];
-
-        foreach ($rows as $row) {
-            $row = trim(preg_replace('/\r+/', '', $row));
-            if (empty($row)) {
-                continue;
-            }
-            [$left, $right] = explode("   ", $row);
-            $arrayData['left'][] = $left;
-            $arrayData['right'][] = $right;
-        }
-        return $arrayData;
-    }
-
-    private function getDiff(array $arrayData): int
-    {
-        $totalDiff = 0;
-        sort($arrayData['left']);
-        sort($arrayData['right']);
-        foreach ($arrayData['left'] as $key => $leftValue) {
-            $totalDiff += abs($leftValue - $arrayData['right'][$key]);
-        }
-
-        return $totalDiff;
+        return $this->calculateDiff($columns);
     }
 
     private function calculateSum(array|\Generator $rows): int
     {
-        $arrayData = $this->createLeftAndRightArray($rows);
+        $columns = $this->buildColumnData($rows);
 
-        return $this->getSum($arrayData);
+        return $this->calculateTotalSum($columns);
     }
 
-    private function getSum(array $arrayData): int
+    private function buildColumnData(array|\Generator $rows): array
     {
-        $totalSum = 0;
-        foreach ($arrayData['left'] as $leftValue) {
-            $totalSum += count(array_keys($arrayData['right'], $leftValue)) * $leftValue;
+        $columnData = self::EMPTY_COLUMN_DATA;
+
+        foreach ($rows as $row) {
+            $processedRow = $this->processRow($row);
+            if ($processedRow === null) {
+                continue;
+            }
+            [$left, $right] = $processedRow;
+            $columnData['left'][] = $left;
+            $columnData['right'][] = $right;
         }
 
-        return $totalSum;
+        return $columnData;
+    }
+
+    private function processRow(string $row): ?array
+    {
+        $cleanedRow = trim(preg_replace(self::ROW_CLEANUP_REGEX, '', $row));
+        if (empty($cleanedRow)) {
+            return null;
+        }
+
+        return explode(self::COLUMN_DELIMITER, $cleanedRow);
+    }
+
+    private function calculateDiff(array $columnData): int
+    {
+        $left = $columnData['left'];
+        $right = $columnData['right'];
+        sort($left);
+        sort($right);
+
+        $difference = 0;
+        foreach ($left as $key => $leftValue) {
+            $difference += abs($leftValue - $right[$key]);
+        }
+
+        return $difference;
+    }
+
+    private function calculateTotalSum(array $columnData): int
+    {
+        $left = $columnData['left'];
+        $right = $columnData['right'];
+
+        $sum = 0;
+        foreach ($left as $leftValue) {
+            $sum += count(array_keys($right, $leftValue)) * $leftValue;
+        }
+
+        return $sum;
     }
 }
