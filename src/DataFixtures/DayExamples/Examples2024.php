@@ -325,7 +325,23 @@ EOD;
 
     public function day16Example1(): string
     {
-        return '';
+        return <<<'EOD'
+###############
+#.......#....E#
+#.#.###.#.###.#
+#.....#.#...#.#
+#.###.#####.#.#
+#.#.#.......#.#
+#.#.#####.###.#
+#...........#.#
+###.#.#####.#.#
+#...#.....#.#.#
+#.#.#.###.#.#.#
+#.....#...#.#.#
+#.###.#.#.#.#.#
+#S..#.....#...#
+###############
+EOD;
     }
 
     public function day16Example2(): string
@@ -335,12 +351,24 @@ EOD;
 
     public function day17Example1(): string
     {
-        return '';
+        return <<<'EOD'
+Register A: 729
+Register B: 0
+Register C: 0
+
+Program: 0,1,5,4,3,0
+EOD;
     }
 
     public function day17Example2(): string
     {
-        return '';
+        return <<<'EOD'
+Register A: 2024
+Register B: 0
+Register C: 0
+
+Program: 0,3,5,4,3,0
+EOD;
     }
 
     public function day18Example1(): string
