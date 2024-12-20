@@ -19,29 +19,37 @@ class D1Service implements DayServiceInterface
 
     public function generatePart1(array|\Generator $rows): string
     {
-        return (string)$this->calculateDifference($rows);
+        return $this->calculateDifference($rows);
     }
 
     public function generatePart2(array|\Generator $rows): string
     {
-        return (string)$this->calculateSum($rows);
+        return $this->calculateSum($rows);
     }
 
-    private function calculateDifference(array|\Generator $rows): int
+    private function calculateDifference(array|\Generator $rows): string
     {
         $columns = $this->buildColumnData($rows);
 
-        return $this->calculateDiff($columns);
+        if ($columns === null) {
+            return "Invalid input";
+        }
+
+        return (string)$this->calculateDiff($columns);
     }
 
-    private function calculateSum(array|\Generator $rows): int
+    private function calculateSum(array|\Generator $rows): string
     {
         $columns = $this->buildColumnData($rows);
 
-        return $this->calculateTotalSum($columns);
+        if ($columns === null) {
+            return "Invalid input";
+        }
+
+        return (string)$this->calculateTotalSum($columns);
     }
 
-    private function buildColumnData(array|\Generator $rows): array
+    private function buildColumnData(array|\Generator $rows):? array
     {
         $columnData = self::EMPTY_COLUMN_DATA;
 
@@ -49,6 +57,9 @@ class D1Service implements DayServiceInterface
             $processedRow = $this->processRow($row);
             if ($processedRow === null) {
                 continue;
+            }
+            if (count($processedRow) !== 2) {
+                return null;
             }
             [$left, $right] = $processedRow;
             $columnData['left'][] = $left;
