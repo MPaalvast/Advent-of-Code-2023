@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.3",
         "easycorp/easyadmin-bundle": "^4.18",
+        "symfony/asset-mapper": "7.2.*",
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
         "symfony/flex": "^2",
@@ -22,7 +23,10 @@
         "symfony/stimulus-bundle": "^2.22",
         "symfony/twig-bundle": "7.2.*",
         "symfony/ux-chartjs": "^2.22",
+        "symfony/ux-icons": "^2.22",
+        "symfony/ux-turbo": "^2.22",
         "symfony/yaml": "7.2.*",
+        "symfonycasts/tailwind-bundle": "^0.6.1",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|v3.14.2"
     },
@@ -57,7 +61,8 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"

@@ -1,6 +1,10 @@
-{% extends '@EasyAdmin/layout.html.twig' %}
+{% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block main %}
-    Test
+{#    Test#}
     <div style="height: 300px;">{{ render_chart(chart) }}</div>
+{#    <div {{ stimulus_controller('hello') }}></div>#}
 {% endblock main %}
+
+
+{% block importmap %}{{ importmap('admin') }}{% endblock %}
