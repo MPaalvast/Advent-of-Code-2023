@@ -37,11 +37,11 @@
     {% for dayResult in results %}
         {% if dayResult.solved %}
             <span class="icon text-yellow-500">
-                <i class="fas fa-star"></i>
+                {{ ux_icon('mingcute:star-fill') }}
             </span>
         {% else %}
-            <span class="icon">
-                <i class="far fa-star"></i>
+            <span class="icon text-gray-700">
+                {{ ux_icon('mingcute:star-fill') }}
             </span>
         {%  endif %}
     {% endfor %}

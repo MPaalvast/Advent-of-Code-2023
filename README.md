@@ -1,8 +1,8 @@
 # How to setup
 
 - composer install
-- npm install
-- npm run watch
+- php bin/console tailwind:init
+- php bin/console tailwind:build --watch
 
 ##  Database acties
 - symfony console doctrine:database:create

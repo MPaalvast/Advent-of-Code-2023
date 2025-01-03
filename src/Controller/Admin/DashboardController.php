@@ -8,9 +8,12 @@ use App\Entity\GameDay;
 use App\Entity\GameDayInput;
 use App\Entity\GameDayResult;
 use App\Entity\Year;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
@@ -39,7 +42,6 @@ class DashboardController extends AbstractDashboardController
                 ],
             ],
         ]);
-
         $chart->setOptions([
             'scales' => [
                 'y' => [
