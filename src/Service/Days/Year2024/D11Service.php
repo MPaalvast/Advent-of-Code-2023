@@ -13,7 +13,7 @@ class D11Service implements DayServiceInterface
     private array $newStoneArray = [];
     private int $iterations = 25;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->getStones($rows);
         $this->calculateStonesTotal();
@@ -21,7 +21,7 @@ class D11Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->iterations = 75;
         $this->getStones($rows);
@@ -34,7 +34,7 @@ class D11Service implements DayServiceInterface
     // helper functions below
     //
 
-    private function getStones(array|\Generator $rows): void
+    private function getStones(array $rows): void
     {
         foreach ($rows as $row) {
             $stones = explode(' ', $row);

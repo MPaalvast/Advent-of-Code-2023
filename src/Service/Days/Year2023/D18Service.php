@@ -15,7 +15,7 @@ class D18Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->createGridValues($rows);
         $this->createGrid();
@@ -29,7 +29,7 @@ class D18Service implements DayServiceInterface
         return (string)($inloop + $totalGridValue);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return '0';
     }

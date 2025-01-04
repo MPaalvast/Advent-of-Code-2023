@@ -14,7 +14,7 @@ class D5Service implements DayServiceInterface
     private array $wrongUpdate = [];
     private int $total = 0;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->makeInput($rows);
         $this->getUpdates();
@@ -23,7 +23,7 @@ class D5Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->makeInput($rows);
         $this->getUpdates();
@@ -37,7 +37,7 @@ class D5Service implements DayServiceInterface
     // helper functions below
     //
 
-    private function makeInput(array|\Generator $rows): void
+    private function makeInput(array $rows): void
     {
         $i = 'orders';
         foreach ($rows as $row) {

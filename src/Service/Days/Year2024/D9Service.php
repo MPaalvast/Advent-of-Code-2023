@@ -13,7 +13,7 @@ class D9Service implements DayServiceInterface
     private array $blockArray = [];
     private array $blockAndFileSortedArray = [];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->getBlockAndFileArray($rows);
         $this->moveFileBlocks();
@@ -22,7 +22,7 @@ class D9Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->getBlockAndFileArray($rows);
         $this->moveTotalFileBlocks();
@@ -31,7 +31,7 @@ class D9Service implements DayServiceInterface
         return $this->total;
     }
 
-    private function getBlockAndFileArray(array|\Generator $rows): void
+    private function getBlockAndFileArray(array $rows): void
     {
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

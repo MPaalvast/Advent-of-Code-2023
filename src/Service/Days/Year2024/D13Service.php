@@ -14,7 +14,7 @@ class D13Service implements DayServiceInterface
     private int $maxASteps = 0;
     private array $gameData = [];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->maxASteps = 100;
         $this->buttonValue['A'] = 3;
@@ -26,13 +26,13 @@ class D13Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         // LCM ????
         return $this->total;
     }
 
-    private function readData(array|\Generator $rows): void
+    private function readData(array $rows): void
     {
         $i = 0;
         foreach ($rows as $row) {

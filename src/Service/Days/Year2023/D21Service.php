@@ -15,7 +15,7 @@ class D21Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->handleInput($rows);
         $steps = 64;
@@ -28,7 +28,7 @@ class D21Service implements DayServiceInterface
         return (string)count($this->steps['evenSteps']);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return '0';
     }

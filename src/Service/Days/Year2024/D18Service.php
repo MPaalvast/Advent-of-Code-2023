@@ -17,7 +17,7 @@ class D18Service implements DayServiceInterface
     private string $startPoint = '0-0';
     private string $endPoint = '0-0';
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->loadBadLocations($rows);
         $size = count($this->badLocations) < 30 ? 6 : 70;
@@ -33,7 +33,7 @@ class D18Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->loadBadLocations($rows);
         $size = count($this->badLocations) < 30 ? 6 : 70;
@@ -43,7 +43,7 @@ class D18Service implements DayServiceInterface
         return $this->findBreakingBit();
     }
 
-    private function loadBadLocations(array|\Generator  $rows): void
+    private function loadBadLocations(array  $rows): void
     {
         foreach ($rows as $x => $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

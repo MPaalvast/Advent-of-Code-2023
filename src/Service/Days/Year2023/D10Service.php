@@ -14,14 +14,14 @@ class D10Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->createGrid($rows);
 
         return (string)$this->findEndPosition();
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->createGrid($rows);
         $this->findEndPosition();

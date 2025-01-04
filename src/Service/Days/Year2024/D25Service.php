@@ -14,7 +14,7 @@ class D25Service implements DayServiceInterface
     private ?string $type = null;
     private int $total = 0;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->generateKeysAndLocks($rows);
         $this->checkLoseFitKeyAndLocks();
@@ -22,7 +22,7 @@ class D25Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->total;
     }
@@ -50,7 +50,7 @@ class D25Service implements DayServiceInterface
         return $fit;
     }
 
-    private function generateKeysAndLocks(array|\Generator $rows): void
+    private function generateKeysAndLocks(array $rows): void
     {
         $keyLockData = [];
         foreach ($rows as $row) {

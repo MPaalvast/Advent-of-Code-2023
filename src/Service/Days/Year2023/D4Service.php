@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D4')]
 class D4Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $totalPoints = 0;
         foreach ($rows as $row) {
@@ -36,7 +36,7 @@ class D4Service implements DayServiceInterface
         return (string)$totalPoints;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $trackingArray = [];
 

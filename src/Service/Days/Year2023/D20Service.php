@@ -14,7 +14,7 @@ class D20Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->getInputData($rows);
         for ($i=1;$i<=1000;$i++) {
@@ -25,7 +25,7 @@ class D20Service implements DayServiceInterface
         return (string)($this->pulses['low']*$this->pulses['high']);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         set_time_limit(1600);
         $this->getInputData($rows);
@@ -42,7 +42,7 @@ class D20Service implements DayServiceInterface
         return (string)($i);
     }
 
-    private function getInputData(array|\Generator $rows): void
+    private function getInputData(array $rows): void
     {
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

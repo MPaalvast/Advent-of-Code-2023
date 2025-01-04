@@ -12,14 +12,14 @@ class D7Service implements DayServiceInterface
     private int $total = 0;
     private int $expectedValue = 0;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->getCorrectResults($rows);
 
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->getCorrectResults($rows, true);
 
@@ -30,7 +30,7 @@ class D7Service implements DayServiceInterface
     // helper functions below
     //
 
-    private function getCorrectResults(array|\Generator $rows, bool $canMerge = false): void
+    private function getCorrectResults(array $rows, bool $canMerge = false): void
     {
         foreach ($rows as $x => $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

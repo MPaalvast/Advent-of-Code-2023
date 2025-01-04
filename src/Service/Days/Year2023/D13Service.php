@@ -10,14 +10,14 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D13')]
 class D13Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         [$gridX, $gridY] = $this->getGrids($rows);
 
         return (string)$this->calculateResults($gridX, $gridY);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         [$gridX, $gridY] = $this->getGrids($rows);
 

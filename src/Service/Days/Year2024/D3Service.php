@@ -11,12 +11,12 @@ class D3Service implements DayServiceInterface
     private int $total = 0;
     private string $inputString = '';
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         return $this->calculateMultiply($rows);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->calculateDoAndDontMultiply($rows);
     }
@@ -25,7 +25,7 @@ class D3Service implements DayServiceInterface
     // helper functions below
     //
 
-    private function calculateMultiply(array|\Generator $rows): string
+    private function calculateMultiply(array $rows): string
     {
         $this->makeInputString($rows);
 
@@ -35,7 +35,7 @@ class D3Service implements DayServiceInterface
         return (string)$this->total;
     }
 
-    private function makeInputString(array|\Generator $rows): void
+    private function makeInputString(array $rows): void
     {
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));
@@ -62,7 +62,7 @@ class D3Service implements DayServiceInterface
         }
     }
 
-    private function calculateDoAndDontMultiply(array|\Generator $rows): string
+    private function calculateDoAndDontMultiply(array $rows): string
     {
         $this->makeInputString($rows);
 

@@ -13,7 +13,7 @@ class D24Service implements DayServiceInterface
     private array $data = [];
     private array $result = [];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->initInput($rows);
         $this->calculateResult();
@@ -22,12 +22,12 @@ class D24Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->total;
     }
 
-    private function initInput(array|\Generator $rows): void
+    private function initInput(array $rows): void
     {
         $action = 'data';
         foreach ($rows as $row) {

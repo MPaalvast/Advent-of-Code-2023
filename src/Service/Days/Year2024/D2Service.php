@@ -11,12 +11,12 @@ class D2Service implements DayServiceInterface
     private int $minDiff = 1;
     private int $maxDiff = 3;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         return $this->calculateSafeLevels($rows);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->calculateSafeDampenerLevels($rows);
     }
@@ -25,7 +25,7 @@ class D2Service implements DayServiceInterface
     // helper functions below
     //
 
-    private function calculateSafeLevels(array|\Generator $rows): string
+    private function calculateSafeLevels(array $rows): string
     {
         $safeLevels = 0;
         foreach ($rows as $row) {
@@ -80,7 +80,7 @@ class D2Service implements DayServiceInterface
         return true;
     }
 
-    private function calculateSafeDampenerLevels(array|\Generator $rows): string
+    private function calculateSafeDampenerLevels(array $rows): string
     {
         $safeLevels = 0;
         foreach ($rows as $row) {

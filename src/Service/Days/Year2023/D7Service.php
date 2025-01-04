@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D7')]
 class D7Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $handsPlayed = [
             'Five of a kind' => [],
@@ -84,7 +84,7 @@ class D7Service implements DayServiceInterface
         return (string)$score;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $handsPlayed = [
             'Five of a kind' => [],

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D5')]
 class D5Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $seedLocations = [];
         $convertArray = [];
@@ -37,7 +37,7 @@ class D5Service implements DayServiceInterface
         return (string)min($seedLocations);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $seedLocations = [];
         $convertArray = [];

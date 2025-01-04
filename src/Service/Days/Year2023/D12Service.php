@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D12')]
 class D12Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $result = 0;
         foreach ($rows as $row) {
@@ -33,7 +33,7 @@ class D12Service implements DayServiceInterface
         return (string)$result;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return "Not yet solved :(";
 //        $result = 0;

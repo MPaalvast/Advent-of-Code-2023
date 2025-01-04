@@ -15,7 +15,7 @@ class D23Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->createGrid($rows);
         $this->createNodes();
@@ -23,12 +23,12 @@ class D23Service implements DayServiceInterface
         return '0';
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return '0';
     }
 
-    private function createGrid(array|\Generator $rows): void
+    private function createGrid(array $rows): void
     {
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

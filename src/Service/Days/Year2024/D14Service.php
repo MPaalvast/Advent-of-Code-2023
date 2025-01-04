@@ -17,7 +17,7 @@ class D14Service implements DayServiceInterface
     private array $locations = [];
     private int $seconds =0;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->maxX = 101;
         $this->splitX = 50;
@@ -32,12 +32,12 @@ class D14Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->total;
     }
 
-    private function getRobots(array|\Generator $rows): void
+    private function getRobots(array $rows): void
     {
         foreach ($rows as $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

@@ -15,7 +15,7 @@ class D15Service implements DayServiceInterface
     private array $warehouseData = [];
     private array $movementInstructions = [];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->init($rows);
         $this->walkInstructions();
@@ -24,7 +24,7 @@ class D15Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->wide = true;
         $this->initWide($rows);
@@ -34,7 +34,7 @@ class D15Service implements DayServiceInterface
         return $this->total;
     }
 
-    private function init(array|\Generator $rows): void
+    private function init(array $rows): void
     {
         $type = 'location';
         $movementInstructions = [];
@@ -64,7 +64,7 @@ class D15Service implements DayServiceInterface
         $this->movementInstructions = array_merge(...$movementInstructions);
     }
 
-    private function initWide(array|\Generator $rows): void
+    private function initWide(array $rows): void
     {
         $type = 'location';
         $movementInstructions = [];

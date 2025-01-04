@@ -11,17 +11,17 @@ class D1Service implements DayServiceInterface
     private const ROW_CLEANUP_REGEX = '/\r+/';
     private const EMPTY_COLUMN_DATA = ['left' => [], 'right' => []];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         return $this->calculateDifference($rows);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->calculateSum($rows);
     }
 
-    private function calculateDifference(array|\Generator $rows): string
+    private function calculateDifference(array $rows): string
     {
         $columns = $this->buildColumnData($rows);
 
@@ -32,7 +32,7 @@ class D1Service implements DayServiceInterface
         return (string)$this->calculateDiff($columns);
     }
 
-    private function calculateSum(array|\Generator $rows): string
+    private function calculateSum(array $rows): string
     {
         $columns = $this->buildColumnData($rows);
 
@@ -43,7 +43,7 @@ class D1Service implements DayServiceInterface
         return (string)$this->calculateTotalSum($columns);
     }
 
-    private function buildColumnData(array|\Generator $rows):? array
+    private function buildColumnData(array $rows):? array
     {
         $columnData = self::EMPTY_COLUMN_DATA;
 

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D2')]
 class D2Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $maxTotals = [
             'red' => 12,
@@ -43,7 +43,7 @@ class D2Service implements DayServiceInterface
         return (string)$totalGameNumber;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $totalGameNumber = 0;
         foreach ($rows as $row) {

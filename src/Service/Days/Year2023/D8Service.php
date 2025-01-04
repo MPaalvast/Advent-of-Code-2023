@@ -17,7 +17,7 @@ class D8Service implements DayServiceInterface
         $this->LCM = new LCM();
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $start = 'AAA';
         $end = 'ZZZ';
@@ -27,7 +27,7 @@ class D8Service implements DayServiceInterface
         return (string)$this->findEndPosition($start, $end, $mapDirections, $mapData);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         [$mapData, $mapDirections] = $this->getMapData($rows);
         return (string)$this->findAllEndPositions($mapDirections, $mapData);

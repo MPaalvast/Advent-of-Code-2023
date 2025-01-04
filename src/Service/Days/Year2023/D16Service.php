@@ -15,7 +15,7 @@ class D16Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->getGrid($rows);
         $direction = 'R';
@@ -29,7 +29,7 @@ class D16Service implements DayServiceInterface
         return (string)$this->calculateEnergigezedResult();
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->maxResults = [
             'id' => '',

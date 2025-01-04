@@ -15,7 +15,7 @@ class D4Service implements DayServiceInterface
     private array $startPoints = [];
     private string $searchString = '';
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->searchString = 'XMAS';
         $this->generateGrid($rows, 'X');
@@ -24,7 +24,7 @@ class D4Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->searchString = 'MAS';
         $this->generateGrid($rows, 'A');
@@ -37,7 +37,7 @@ class D4Service implements DayServiceInterface
     // helper functions below
     //
 
-    private function generateGrid(array|\Generator  $rows, string $startValue): void
+    private function generateGrid(array  $rows, string $startValue): void
     {
         foreach ($rows as $x => $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

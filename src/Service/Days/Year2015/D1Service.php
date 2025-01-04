@@ -11,21 +11,21 @@ class D1Service implements DayServiceInterface
     private int $total = 0;
     private array $input = [];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->initInput($rows);
         $this->calculateFloor();
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->initInput($rows);
         $this->findFirstBasementPosition();
         return $this->total;
     }
 
-    private function initInput(array|\Generator $rows): void
+    private function initInput(array $rows): void
     {
         $this->input = str_split($rows[0]);
     }

@@ -14,7 +14,7 @@ class D14Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->createGrid($rows);
         $this->moveRocksUp();
@@ -22,7 +22,7 @@ class D14Service implements DayServiceInterface
         return $this->calculateResult();
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->createGrid($rows);
         $totalCycles = 500;

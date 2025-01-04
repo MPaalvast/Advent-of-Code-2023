@@ -10,12 +10,12 @@ class D14Service implements DayServiceInterface
 {
     private int $total = 0;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->total;
     }

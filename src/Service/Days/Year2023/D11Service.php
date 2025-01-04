@@ -14,13 +14,13 @@ class D11Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->generateGrid($rows);
 
         return (string)$this->generateDistance(1);
     }
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->generateGrid($rows);
 

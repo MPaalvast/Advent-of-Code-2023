@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D3')]
 class D3Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);
         $numbersToCount = $this->listNumbersToCount($arrayInput);
@@ -18,7 +18,7 @@ class D3Service implements DayServiceInterface
         return (string)array_sum($numbersToCount);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $arrayInput = $this->makeArrayInput($rows);
         $numbersToCount = $this->listNumbersToCountByStar($arrayInput);

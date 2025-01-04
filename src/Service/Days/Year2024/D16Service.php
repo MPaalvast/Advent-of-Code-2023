@@ -15,7 +15,7 @@ class D16Service implements DayServiceInterface
     private array $grid = [];
     private array $dijkstraGrid = [];
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->generateGrid($rows);
         $this->generateDijkstraInput();
@@ -28,12 +28,12 @@ class D16Service implements DayServiceInterface
         return $this->total;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return $this->total;
     }
 
-    private function generateGrid(array|\Generator  $rows): void
+    private function generateGrid(array  $rows): void
     {
         foreach ($rows as $x => $row) {
             $row = trim(preg_replace('/\r+/', '', $row));

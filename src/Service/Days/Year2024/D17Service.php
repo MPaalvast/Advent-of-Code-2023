@@ -13,7 +13,7 @@ class D17Service implements DayServiceInterface
     /** curent pointer */
     private int $CP = 0;
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->initComputer($rows);
         $this->runProgram();
@@ -21,7 +21,7 @@ class D17Service implements DayServiceInterface
         return $this->output;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         return 0;
     }

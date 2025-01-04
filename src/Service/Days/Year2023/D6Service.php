@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D6')]
 class D6Service implements DayServiceInterface
 {
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $timeStringData = [];
         $distanceStringData = [];
@@ -34,7 +34,7 @@ class D6Service implements DayServiceInterface
         return (string)$this->getNumberOfWays($timeArray, $distanceArray);
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $timeStringData = [];
         $distanceStringData = [];

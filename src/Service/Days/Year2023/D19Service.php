@@ -14,14 +14,14 @@ class D19Service implements DayServiceInterface
     {
     }
 
-    public function generatePart1(array|\Generator $rows): string
+    public function generatePart1(array $rows): string
     {
         $this->getInputData($rows);
         $this->generateValue();
         return (string)$this->value;
     }
 
-    public function generatePart2(array|\Generator $rows): string
+    public function generatePart2(array $rows): string
     {
         $this->getInputData($rows, true);
         $this->inputList[] = [
