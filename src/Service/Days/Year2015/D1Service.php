@@ -33,7 +33,7 @@ class D1Service implements DayServiceInterface
     private function calculateFloor(): void
     {
         $counts = array_count_values($this->input);
-        $this->total = $counts['('] - $counts[')'];
+        $this->total = $counts['('] ?? 0 - $counts[')'] ?? 0;
     }
 
     private function findFirstBasementPosition(): void
@@ -41,12 +41,21 @@ class D1Service implements DayServiceInterface
         $i = 1;
         $level = 0;
         foreach ($this->input as $direction) {
-            $level += ($direction === '(' ? 1 : -1);
+            if ($direction === '(') {
+                $level++;
+            } else if ($direction === ')') {
+                $level--;
+            }
             if ($level === -1) {
                 $this->total = $i;
                 return;
             }
             $i++;
         }
+    }
+
+    public function isValidInput(array $rows): bool
+    {
+        return str_contains($rows[0], '(') || str_contains($rows[0], ')');
     }
 }

@@ -314,4 +314,10 @@ class D15Service implements DayServiceInterface
 
         dump($dump);
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

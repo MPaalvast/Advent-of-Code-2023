@@ -70,4 +70,10 @@ class D4Service implements DayServiceInterface
 
         return (string)array_sum($trackingArray);
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

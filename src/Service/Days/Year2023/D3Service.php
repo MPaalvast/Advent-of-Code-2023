@@ -182,4 +182,10 @@ class D3Service implements DayServiceInterface
 
         return (int)$number;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

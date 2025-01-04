@@ -90,4 +90,10 @@ class D11Service implements DayServiceInterface
 
         return $distance;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

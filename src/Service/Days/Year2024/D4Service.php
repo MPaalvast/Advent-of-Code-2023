@@ -179,4 +179,10 @@ class D4Service implements DayServiceInterface
             }
         }
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

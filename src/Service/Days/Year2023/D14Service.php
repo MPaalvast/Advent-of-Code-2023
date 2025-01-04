@@ -132,4 +132,10 @@ class D14Service implements DayServiceInterface
 
         $this->grid = $newGrid;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

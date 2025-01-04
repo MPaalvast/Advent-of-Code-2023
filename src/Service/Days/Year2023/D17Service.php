@@ -176,4 +176,10 @@ class D17Service implements DayServiceInterface
         $this->maxHeight = count($this->grid);
         $this->maxWidth = count($this->grid[0]);
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

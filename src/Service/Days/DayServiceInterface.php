@@ -10,4 +10,6 @@ interface DayServiceInterface
     public function generatePart1(array $rows): string;
 
     public function generatePart2(array $rows): string;
+
+    public function isValidInput(array $rows): bool;
 }

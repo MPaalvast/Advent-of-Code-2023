@@ -150,6 +150,12 @@ class D24Service implements DayServiceInterface
         $this->total = bindec($string);
     }
 
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
+
     // while action stack
     // shift the first and check if fields ar available in the data array
     // if not availible pop them to the end of the action stack

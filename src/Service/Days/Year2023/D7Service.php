@@ -222,4 +222,10 @@ class D7Service implements DayServiceInterface
 
         return $cardsArray;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

@@ -202,4 +202,10 @@ class D17Service implements DayServiceInterface
     {
         return $this->computer['register'][$index];
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

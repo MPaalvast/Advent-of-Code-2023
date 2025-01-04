@@ -166,4 +166,10 @@ class D6Service implements DayServiceInterface
     {
         $this->total = count($this->loopingFields);
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

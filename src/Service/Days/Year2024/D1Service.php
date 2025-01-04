@@ -100,4 +100,10 @@ class D1Service implements DayServiceInterface
 
         return $sum;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

@@ -279,4 +279,10 @@ class D16Service implements DayServiceInterface
 
         return $newDirection;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

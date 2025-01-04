@@ -170,4 +170,10 @@ class D10Service implements DayServiceInterface
             $this->dfsAll($n, $path . '->' . $node->name, $visited);
         }
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

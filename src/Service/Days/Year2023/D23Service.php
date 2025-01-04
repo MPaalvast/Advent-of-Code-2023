@@ -109,6 +109,12 @@ class D23Service implements DayServiceInterface
         }
     }
 
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
+
 //    /* Building Graph */
 //$root = new Node('root');
 //foreach (range(1, 6) as $v) {

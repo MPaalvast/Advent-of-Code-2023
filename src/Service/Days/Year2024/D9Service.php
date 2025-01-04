@@ -142,4 +142,10 @@ class D9Service implements DayServiceInterface
             $i += $this->blockArray[$index];
         }
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

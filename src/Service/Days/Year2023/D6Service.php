@@ -79,4 +79,10 @@ class D6Service implements DayServiceInterface
 
         return $result;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

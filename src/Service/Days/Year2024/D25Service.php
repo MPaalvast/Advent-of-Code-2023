@@ -103,4 +103,10 @@ class D25Service implements DayServiceInterface
     {
         return ($keyColumn + $lockColumn) <= $this->maxColumnValue;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

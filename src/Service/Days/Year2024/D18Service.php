@@ -130,4 +130,10 @@ class D18Service implements DayServiceInterface
         [$badX, $badY] = array_map('intval', explode(',', $badLocation));
         $this->grid[$badX][$badY] = '#';
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

@@ -34,7 +34,9 @@ class AbstractDayController extends AbstractController
             $formData = $form->getData();
             $rows = $DayInputOptions->getDayInput($formData, $year, $gameDay);
 
-            if ($formData['day_part'] === 1) {
+            if (!$this->daySelector->isValidInput($index, $rows)) {
+                $result = 'INVALID INPUT!!';
+            } elseif ($formData['day_part'] === 1) {
                 $result = $this->daySelector->generatePart1($index, $rows);
             } else {
                 $result = $this->daySelector->generatePart2($index, $rows);

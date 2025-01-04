@@ -91,4 +91,10 @@ class D15Service implements DayServiceInterface
 
         return $boxes;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

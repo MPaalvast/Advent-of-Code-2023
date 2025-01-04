@@ -260,4 +260,10 @@ class D10Service implements DayServiceInterface
 
         return $nexPosition;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

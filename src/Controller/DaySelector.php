@@ -22,4 +22,9 @@ class DaySelector
     {
         return $this->container->get($index)->generatePart2($rows);
     }
+
+    public function isValidInput(string $index, array $rows): string
+    {
+        return $this->container->get($index)->isValidInput($rows);
+    }
 }

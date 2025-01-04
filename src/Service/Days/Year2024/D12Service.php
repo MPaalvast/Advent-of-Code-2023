@@ -246,6 +246,12 @@ class D12Service implements DayServiceInterface
         return true;
     }
 
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
+
 // 860761 => to low
 // 867910 => to low
 // 877626 => not correct

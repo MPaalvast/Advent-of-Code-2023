@@ -138,4 +138,10 @@ class D5Service implements DayServiceInterface
 
         return $seedLocations;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

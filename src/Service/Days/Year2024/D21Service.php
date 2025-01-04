@@ -19,4 +19,10 @@ class D21Service implements DayServiceInterface
     {
         return $this->total;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

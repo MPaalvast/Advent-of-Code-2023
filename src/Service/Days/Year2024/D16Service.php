@@ -97,5 +97,11 @@ class D16Service implements DayServiceInterface
         }
         $this->total = $costs;
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }
 // 136592 => to high

@@ -94,4 +94,10 @@ class D14Service implements DayServiceInterface
     {
         $this->total = count($this->locations[1]) * count($this->locations[2]) * count($this->locations[3]) * count($this->locations[4]);
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

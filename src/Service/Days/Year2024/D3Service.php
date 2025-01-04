@@ -97,4 +97,10 @@ class D3Service implements DayServiceInterface
             $this->handleMultiplyData($multiplyData);
         }
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

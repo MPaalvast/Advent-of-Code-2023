@@ -106,4 +106,10 @@ class D13Service implements DayServiceInterface
     {
         $this->total = array_sum($this->results);
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }

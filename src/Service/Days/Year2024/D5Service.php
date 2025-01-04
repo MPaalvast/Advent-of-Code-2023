@@ -131,4 +131,10 @@ class D5Service implements DayServiceInterface
             $this->wrongUpdate[$key] = implode(',', $correctOrder);
         }
     }
+
+    public function isValidInput(array $rows): bool
+    {
+        // TODO: Implement isValidInput() method.
+        return true;
+    }
 }
