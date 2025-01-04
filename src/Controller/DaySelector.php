@@ -13,11 +13,6 @@ class DaySelector
         protected ContainerInterface $container,
     ){}
 
-    public function getTitle(string $index): string
-    {
-        return $this->container->get($index)->getTitle();
-    }
-
     public function generatePart1(string $index, array|\Generator $rows): string
     {
         return $this->container->get($index)->generatePart1($rows);

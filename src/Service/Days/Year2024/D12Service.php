@@ -8,7 +8,6 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D12')]
 class D12Service implements DayServiceInterface
 {
-    private string $title = "Garden Groups";
     private int $total = 0;
     private array $grid = [];
     private array $regions = [];
@@ -19,13 +18,7 @@ class D12Service implements DayServiceInterface
     private array $currentRegion = [];
     private int $currentRegionBorders = 0;
     private array $knownRegionFields = [];
-
     private array $testDump = [];
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     // make grid array
     // start on top left '0-0'

@@ -9,17 +9,11 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D16')]
 class D16Service implements DayServiceInterface
 {
-    private string $title = "Reindeer Maze";
     private int $total = 0;
     private string $startPoint = '';
     private string $endPoint = '';
     private array $grid = [];
     private array $dijkstraGrid = [];
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

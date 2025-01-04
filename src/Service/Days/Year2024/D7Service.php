@@ -9,16 +9,8 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AllowDynamicProperties] #[AsTaggedItem('Y2024D7')]
 class D7Service implements DayServiceInterface
 {
-    private string $title = "Bridge Repair";
-
     private int $total = 0;
-
     private int $expectedValue = 0;
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

@@ -10,13 +10,6 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D11')]
 class D11Service implements DayServiceInterface
 {
-    private string $title = "Cosmic Expansion";
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
     public function __construct(public array $normalizedGrid = [], public array $grid = [], public array $planetLocations = [], public array $emptyData = [])
     {
     }

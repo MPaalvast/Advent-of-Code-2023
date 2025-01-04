@@ -10,13 +10,6 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D14')]
 class D14Service implements DayServiceInterface
 {
-    private string $title = "Parabolic Reflector Dish";
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
     public function __construct(public array $grid = [], public int $maxRows = 0, public int $maxCol = 0)
     {
     }

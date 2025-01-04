@@ -10,18 +10,12 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D18')]
 class D18Service implements DayServiceInterface
 {
-    private string $title = "RAM Run";
     private int $total = 0;
     private array $badLocations = [];
     private array $grid = [];
     private array $dijkstraGrid = [];
     private string $startPoint = '0-0';
     private string $endPoint = '0-0';
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

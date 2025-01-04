@@ -8,20 +8,10 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D8')]
 class D8Service implements DayServiceInterface
 {
-    private string $title = "Resonant Collinearity";
-
     private array $grid = [];
-
     private array $foundNodes = [];
-
     private array $frequencies = [];
-
     private int $total = 0;
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

@@ -8,21 +8,12 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D4')]
 class D4Service implements DayServiceInterface
 {
-    private string $title = "Ceres Search";
-
     private array $grid = [];
-
     private int $maxXIndex = 0;
     private int $maxYIndex = 0;
     private int $total = 0;
-
     private array $startPoints = [];
     private string $searchString = '';
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

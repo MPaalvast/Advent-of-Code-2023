@@ -8,18 +8,11 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D6')]
 class D6Service implements DayServiceInterface
 {
-    private string $title = "Guard Gallivant";
-
     private array $grid = [];
-
     private array $currentPoint = [];
-
     private array $visitedFieldsData = [];
-
     private string $currentDirection = '';
-
     private array $loopingFields = [];
-
     private array $nextDirection = [
         'up' => 'right',
         'right' => 'down',
@@ -27,11 +20,6 @@ class D6Service implements DayServiceInterface
         'left' => 'up',
     ];
     private int $total = 0;
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

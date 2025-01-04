@@ -8,13 +8,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2021D12')]
 class D12Service implements DayServiceInterface
 {
-    private string $title = "???";
     private int $total = 0;
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

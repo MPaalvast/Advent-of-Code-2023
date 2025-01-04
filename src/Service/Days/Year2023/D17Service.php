@@ -11,13 +11,6 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D17')]
 class D17Service implements DayServiceInterface
 {
-    private string $title = "Clumsy Crucible";
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
     public function __construct(public array $grid = [], public array $dijkstraGrid = [], public int $maxHeight = 0, public int $maxWidth = 0)
     {
     }

@@ -46,7 +46,6 @@ class AbstractDayController extends AbstractController
         return $this->render('day.html.twig', [
             'game_day' => $gameDay,
             'year' => $year,
-            'day_title' => $this->daySelector->getTitle($index),
             'result' => $result,
             'form' => $form,
         ], new Response(null, $form->isSubmitted() && !$form->isValid() ? 422 : 202));

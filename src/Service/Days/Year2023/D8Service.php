@@ -11,13 +11,6 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2023D8')]
 class D8Service implements DayServiceInterface
 {
-    private string $title = "Haunted Wasteland";
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
     public LCM $LCM;
     public function __construct()
     {

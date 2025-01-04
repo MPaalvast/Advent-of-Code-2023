@@ -8,15 +8,8 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D2')]
 class D2Service implements DayServiceInterface
 {
-    private string $title = "Red-Nosed Reports";
-
     private int $minDiff = 1;
     private int $maxDiff = 3;
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {

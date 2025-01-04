@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2024D10')]
 class D10Service implements DayServiceInterface
 {
-    private string $title = "Hoof It";
     private int $total = 0;
     private int $dfsAllTotal = 0;
     private array $grid = [];
@@ -17,11 +16,6 @@ class D10Service implements DayServiceInterface
     private array $startPoints = [];
     private array $endPoints = [];
     private string $dfsEndPointName = '';
-
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
 
     public function generatePart1(array|\Generator $rows): string
     {
