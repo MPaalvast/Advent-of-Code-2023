@@ -37,7 +37,7 @@ class Config2015Fixtures extends Fixture implements DependentFixtureInterface
 
     private function gameDayIterator(): \Iterator
     {
-        yield ['day' => $this->getReference('day_1', Day::class), 'title' => "Not Quite Lisp", 'active' => false, 'examples' => $this->examples->getDay1Examples(), 'results' => $this->gameDayPartResultIterator(1)];
+        yield ['day' => $this->getReference('day_1', Day::class), 'title' => "Not Quite Lisp", 'active' => true, 'examples' => $this->examples->getDay1Examples(), 'results' => $this->gameDayPartResultIterator(1)];
         yield ['day' => $this->getReference('day_2', Day::class), 'title' => "I Was Told There Would Be No Math", 'active' => false, 'examples' => $this->examples->getDay2Examples(), 'results' => $this->gameDayPartResultIterator(2)];
         yield ['day' => $this->getReference('day_3', Day::class), 'title' => "Perfectly Spherical Houses in a Vacuum", 'active' => false, 'examples' => $this->examples->getDay3Examples(), 'results' => $this->gameDayPartResultIterator(3)];
         yield ['day' => $this->getReference('day_4', Day::class), 'title' => "The Ideal Stocking Stuffer", 'active' => false, 'examples' => $this->examples->getDay4Examples(), 'results' => $this->gameDayPartResultIterator(4)];
@@ -68,6 +68,9 @@ class Config2015Fixtures extends Fixture implements DependentFixtureInterface
     {
         switch ($day) {
             case 1:
+                yield ['part' => $this->getReference('dayPart_1', DayPart::class), 'solved' => true];
+                yield ['part' => $this->getReference('dayPart_2', DayPart::class), 'solved' => true];
+                break;
             case 2:
             case 3:
             case 4:
