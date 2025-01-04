@@ -55,11 +55,11 @@ class Config2024Fixtures extends Fixture implements DependentFixtureInterface
         yield ['day' => $this->getReference('day_16', Day::class), 'title' => "Reindeer Maze", 'active' => true, 'examples' => $this->examples->getDay16Examples(), 'results' => $this->gameDayPartResultIterator(16)];
         yield ['day' => $this->getReference('day_17', Day::class), 'title' => "Chronospatial Computer", 'active' => true, 'examples' => $this->examples->getDay17Examples(), 'results' => $this->gameDayPartResultIterator(17)];
         yield ['day' => $this->getReference('day_18', Day::class), 'title' => "RAM Run", 'active' => true, 'examples' => $this->examples->getDay18Examples(), 'results' => $this->gameDayPartResultIterator(18)];
-        yield ['day' => $this->getReference('day_19', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay19Examples(), 'results' => $this->gameDayPartResultIterator(19)];
-        yield ['day' => $this->getReference('day_20', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay20Examples(), 'results' => $this->gameDayPartResultIterator(20)];
-        yield ['day' => $this->getReference('day_21', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay21Examples(), 'results' => $this->gameDayPartResultIterator(21)];
-        yield ['day' => $this->getReference('day_22', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay22Examples(), 'results' => $this->gameDayPartResultIterator(22)];
-        yield ['day' => $this->getReference('day_23', Day::class), 'title' => "???", 'active' => false, 'examples' => $this->examples->getDay23Examples(), 'results' => $this->gameDayPartResultIterator(23)];
+        yield ['day' => $this->getReference('day_19', Day::class), 'title' => "Linen Layout", 'active' => false, 'examples' => $this->examples->getDay19Examples(), 'results' => $this->gameDayPartResultIterator(19)];
+        yield ['day' => $this->getReference('day_20', Day::class), 'title' => "Race Condition", 'active' => false, 'examples' => $this->examples->getDay20Examples(), 'results' => $this->gameDayPartResultIterator(20)];
+        yield ['day' => $this->getReference('day_21', Day::class), 'title' => "Keypad Conundrum", 'active' => false, 'examples' => $this->examples->getDay21Examples(), 'results' => $this->gameDayPartResultIterator(21)];
+        yield ['day' => $this->getReference('day_22', Day::class), 'title' => "Monkey Market", 'active' => false, 'examples' => $this->examples->getDay22Examples(), 'results' => $this->gameDayPartResultIterator(22)];
+        yield ['day' => $this->getReference('day_23', Day::class), 'title' => "LAN Party", 'active' => false, 'examples' => $this->examples->getDay23Examples(), 'results' => $this->gameDayPartResultIterator(23)];
         yield ['day' => $this->getReference('day_24', Day::class), 'title' => "Crossed Wires ", 'active' => true, 'examples' => $this->examples->getDay24Examples(), 'results' => $this->gameDayPartResultIterator(24)];
         yield ['day' => $this->getReference('day_25', Day::class), 'title' => "Code Chronicle", 'active' => true, 'examples' => $this->examples->getDay25Examples(), 'results' => $this->gameDayPartResultIterator(25)];
     }

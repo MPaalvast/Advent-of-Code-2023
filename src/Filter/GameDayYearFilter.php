@@ -2,17 +2,18 @@
 
 namespace App\Filter;
 
+use App\Entity\GameDay;
 use App\Entity\Year;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Contracts\Filter\FilterInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\FilterDataDto;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\FilterTrait;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Filter\Type\EntityFilterType;
 
-class GameDayYearFilter
+class GameDayYearFilter implements FilterInterface
 {
     use FilterTrait;
 
@@ -25,12 +26,6 @@ class GameDayYearFilter
             ->setFormType(EntityFilterType::class)
             ->setFormTypeOption('value_type_options', [
                 'class' => Year::class,
-//                'multiple' => true,
-                'query_builder' => function (EntityRepository $repository) {
-                    return $repository
-                        ->createQueryBuilder('GameDay')
-                        ->orderBy('year.title', 'ASC');
-                }
             ]);
     }
 
@@ -40,11 +35,11 @@ class GameDayYearFilter
         $property = $filterDataDto->getProperty();
         $comparison = $filterDataDto->getComparison();
         $parameterName = $filterDataDto->getParameterName();
-        $countries = $filterDataDto->getValue();
-
+        $entityYear = $filterDataDto->getValue();
         $queryBuilder
-            ->innerJoin(Year::class, $alias, Expr\Join::WITH, 'gameday.year = year')
+            ->innerJoin(GameDay::class, 'gameDay', Expr\Join::WITH, 'entity.gameDay = gameDay.id')
+            ->innerJoin(Year::class, $alias, Expr\Join::WITH, 'gameDay.year = year')
             ->andWhere(sprintf('%s.%s %s :%s', $alias, $property, $comparison, $parameterName))
-            ->setParameter($parameterName, $countries);
+            ->setParameter($parameterName, $entityYear);
     }
 }

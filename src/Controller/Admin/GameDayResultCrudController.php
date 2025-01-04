@@ -23,8 +23,10 @@ class GameDayResultCrudController extends AbstractCrudController
     {
         return $filters
             ->add(BooleanFilter::new('solved'))
-//            ->add(GameDayYearFilter::new('year'))
-            ;
+            ->add(GameDayYearFilter::new('id')
+                ->setFormTypeOption('mapped', false)
+                ->setLabel('Year')
+            );
     }
 
     public function configureFields(string $pageName): iterable

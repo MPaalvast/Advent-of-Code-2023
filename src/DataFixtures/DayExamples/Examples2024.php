@@ -409,12 +409,24 @@ EOD;
 
     public function day19Example1(): string
     {
-        return '';
+        return <<<'EOD'
+r, wr, b, g, bwu, rb, gb, br
+
+brwrr
+bggr
+gbbr
+rrbgbr
+ubwu
+bwurrg
+brgr
+bbrgwb
+EOD;
+
     }
 
     public function day19Example2(): string
     {
-        return '';
+        return $this->day19Example1();
     }
 
     public function day20Example1(): string
