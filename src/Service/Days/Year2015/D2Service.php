@@ -39,20 +39,6 @@ class D2Service implements DayServiceInterface
         }
     }
 
-    /**
-     * input rows must contain {nr}x{nr}x{nr}
-     */
-    public function isValidInput(array $rows): bool
-    {
-        foreach ($rows as $row) {
-            preg_match('/^(\d+x\d+x\d+)$/', $row, $matches);
-            if (empty($matches)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private function getTotalWrappingPaper(): void
     {
         foreach ($this->packages as $package) {
@@ -65,6 +51,8 @@ class D2Service implements DayServiceInterface
      * formula: length * width
      * formula: width * height
      * formula: height * length
+     *
+     * @param array<int> $package
      *
      * @return array<int>
      */
@@ -79,6 +67,8 @@ class D2Service implements DayServiceInterface
 
     /**
      * formula: ((lengthWidthSurface + widthHeightSurface + heightLengthSurface) * 2) + smallestSideSurface
+     *
+     * @param array<int> $sides
      */
     private function calculateTotalWrappingPaper(array $sides): void
     {
@@ -97,6 +87,8 @@ class D2Service implements DayServiceInterface
     /**
      * Get the 2 smallest sides as side1 and side2
      * formula: side1 + side1 + side2 + side2
+     *
+     * @param array<int> $package
      */
     private function calculateRibbonPaper(array $package): int
     {
@@ -109,9 +101,27 @@ class D2Service implements DayServiceInterface
 
     /**
      * formula: length * width * height
+     *
+     * @param array<int> $package
      */
     private function calculateRibbonBowPaper(array $package): int
     {
         return $package['length'] * $package['width'] * $package['height'];
+    }
+
+    /**
+     * input rows must contain {nr}x{nr}x{nr}
+     *
+     * @param array<string> $rows
+     */
+    public function isValidInput(array $rows): bool
+    {
+        foreach ($rows as $row) {
+            preg_match('/^(\d+x\d+x\d+)$/', $row, $matches);
+            if (empty($matches)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
