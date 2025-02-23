@@ -42,7 +42,7 @@ class Examples2015
 
     public function day4Example2(): string
     {
-        return '';
+        return $this->day4Example1();
     }
 
     public function day5Example1(): string
@@ -52,7 +52,7 @@ class Examples2015
 
     public function day5Example2(): string
     {
-        return '';
+        return $this->day5Example1();
     }
 
     public function day6Example1(): string
