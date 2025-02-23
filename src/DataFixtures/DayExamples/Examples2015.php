@@ -66,7 +66,7 @@ EOD;
 
     public function day6Example2(): string
     {
-        return '';
+        return $this->day6Example1();
     }
 
     public function day7Example1(): string
