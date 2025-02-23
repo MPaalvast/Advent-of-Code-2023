@@ -3,19 +3,19 @@
 {% block title %}Day overview{% endblock %}
 
 {% block body %}
-    <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
-        <main class="w-full flex-grow p-6">
-            <h1 class="text-3xl text-black pb-6 text-center">Days {{ year }}</h1>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <div class="w-full h-screen overflow-x-hidden flex flex-col">
+        <main class="w-full flex-grow overview">
+            <h1 class="text-center">Days {{ year }}</h1>
+            <div class="grid">
                 {% for gameDay in yearGameDays %}
                     {% if gameDay.active %}
-                        <a href="{{ path('app_day', {'day': gameDay.day.title , 'year': year.title}) }}" class="text-center py-4 px-4 rounded-md border border-slate-800 transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 hover:text-white duration-300">
+                        <a href="{{ path('app_day', {'day': gameDay.day.title , 'year': year.title}) }}" class="day_item transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
                             <h3>Day {{ gameDay.day.title }}</h3>
                             <div>{{ gameDay.title }}</div>
                             <div>{{ _self.getStars(gameDay.gameDayResults) }}</div>
                         </a>
                     {% else %}
-                        <span class="text-center py-4 px-4 rounded-md border border-slate-800 bg-gray-300">
+                        <span class="day_item  bg-gray-300">
                             <h3>Day {{ gameDay.day.title }}</h3>
                             <span>{{ gameDay.title }}</span>
                             <br/>
@@ -27,7 +27,7 @@
             </div>
         </main>
 
-        <footer class="w-full bg-white text-right p-4">
+        <footer class="w-full text-right">
             <a target="_blank" href="https://adventofcode.com/" class="underline">Advent of code</a>.
         </footer>
     </div>
@@ -36,11 +36,11 @@
 {% macro getStars(results) %}
     {% for dayResult in results %}
         {% if dayResult.solved %}
-            <span class="icon text-yellow-500">
+            <span class="icon color_pass">
                 {{ ux_icon('mingcute:star-fill') }}
             </span>
         {% else %}
-            <span class="icon text-gray-700">
+            <span class="icon">
                 {{ ux_icon('mingcute:star-fill') }}
             </span>
         {%  endif %}

@@ -14,8 +14,23 @@
 .nav-item:hover, .nav-item.active { background: #1947ee; }
 .account-link:hover { background: #0284c7; }
 
+.btn-back {
+    right: 12px;
+    margin-top: 12px;
+
+}
+.btn {
+    background-color: #0284c7;
+    color: white;
+    padding: 6px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
 body {
-    background-color: lightgray;
+    margin: 0;
 }
 
 select {
@@ -48,4 +63,84 @@ select {
 .icon, .back-icon {
     display: inline-block;
     width: 24px;
+}
+
+.icon {
+    color: #374151;
+}
+.icon.color_pass {
+    color: #eab308;
+}
+
+aside {
+    width: 200px;
+}
+
+aside {
+    .logo {
+        padding: 12px;
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        :hover {
+            color: lightgrey;
+        }
+    }
+    nav a{
+        color: white;
+        justify-content: center;
+        padding: 4px 6px;
+        text-decoration: none;
+        font-size: large;
+    }
+}
+
+main, footer {
+    background: aliceblue;
+}
+header {
+    background-color: #0284c7;
+    color: white;
+    div {
+        margin: 5px 10px 5px 0;
+        a {
+            text-decoration: none;
+            color: white;
+        }
+    }
+}
+main div.grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 0 10px;
+
+    .day_item {
+        padding: 4px;
+        border-radius: 8px;
+        border: 1px solid black;
+        text-align: center;
+        background: white;
+        text-decoration: none;
+        color: black;
+    }
+
+    a.day_item:hover {
+        background-color: #6366f1;
+        color: white;
+    }
+    span.day_item {
+        background-color: #d1d5db;
+    }
+}
+
+main.overview h1 {
+    padding-bottom: 30px;
+}
+
+main fieldset{
+    background-color: white;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px;
 }

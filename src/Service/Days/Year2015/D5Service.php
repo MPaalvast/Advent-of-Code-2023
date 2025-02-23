@@ -19,6 +19,9 @@ class D5Service implements DayServiceInterface
     {
         return $this->total;
     }
+    // [aeiou] get vowels
+    // ([a-z])(?=.*\1) get double letters
+    // (ab)|(bc)|(cd)|(de)|(ef)|(fg)|(gh)|(hi)|(ij)|(jk)|(kl)|(lm)|(mn)|(no)|(op)|(pq)|(qr)|(rs)|(st)|(tu)|(uv)|(vw)|(wx)|(xy)|(yz) get 2 following letters
 
     public function isValidInput(array $rows): bool
     {

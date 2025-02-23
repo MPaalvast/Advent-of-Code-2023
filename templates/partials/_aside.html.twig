@@ -1,13 +1,10 @@
-{% import "partials/_aside_item.html.twig" as menuItems %}
-
-<aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl overflow-y-auto">
-    <div class="p-6">
-        <a href="{{ path('app_home') }}" class="text-white text-3xl font-semibold uppercase hover:text-gray-300"><\></a>
+<aside class="relative bg-sidebar h-screen">
+    <div class="logo">
+        <a href="{{ path('app_home') }}"><\></a>
     </div>
-    <nav class="text-white text-base font-semibold pt-3 overflow-y-auto">
+    <nav>
         {% for activeYear in list_active_years() %}
-            <a href="{{ path('app_year_days', { 'year': activeYear.title }) }}" class="flex items-center text-white py-4 pl-6 nav-item {% if year is defined and year.title == activeYear.title %} active {% endif %}">{{ activeYear.title}}</a>
+            <a href="{{ path('app_year_days', { 'year': activeYear.title }) }}" class="flex nav-item {% if year is defined and year.title == activeYear.title %} active {% endif %}">{{ activeYear.title}}</a>
         {% endfor %}
-{#        {% include 'partials/_aside_item_list.html.twig' %}#}
     </nav>
 </aside>
