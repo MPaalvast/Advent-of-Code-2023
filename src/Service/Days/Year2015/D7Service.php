@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 #[AsTaggedItem('Y2015D7')]
 class D7Service implements DayServiceInterface
 {
-    private int $total = 0;
+    private int|string $total = 0;
     private array $actions = [];
     private array $result = [];
 
@@ -16,6 +16,9 @@ class D7Service implements DayServiceInterface
     {
         $this->init($rows);
         $this->renderActions();
+        if ($this->total !== 0) {
+            return $this->total;
+        }
         $this->setTotal();
         return $this->total;
     }
@@ -24,11 +27,17 @@ class D7Service implements DayServiceInterface
     {
         $this->init($rows);
         $this->renderActions();
+        if ($this->total !== 0) {
+            return $this->total;
+        }
         $bResult = $this->result['a'];
         $this->reset();
         $this->init($rows);
         $this->result['b'] = $bResult;
         $this->renderActions();
+        if ($this->total !== 0) {
+            return $this->total;
+        }
         $this->setTotal();
         return $this->total;
     }
@@ -78,10 +87,20 @@ class D7Service implements DayServiceInterface
 
     private function renderActions(): void
     {
+        $firstAction = null;
         while (!empty($this->actions)) {
             $currentAction = array_shift($this->actions);
+
+            if ($firstAction !== null && $firstAction === $currentAction) {
+                $this->total = "Loop found!";
+                return;
+            }
+            if (null === $firstAction) {
+                $firstAction = $currentAction;
+            }
             if ($this->checkAction($currentAction)) {
                 $this->handleAction($currentAction);
+                $firstAction = null;
                 continue;
             }
             $this->actions[] = $currentAction;
@@ -133,7 +152,12 @@ class D7Service implements DayServiceInterface
 
     public function isValidInput(array $rows): bool
     {
-        // TODO: Implement isValidInput() method.
+        foreach ($rows as $row) {
+            preg_match('/^(([a-z0-9]+)|([a-z0-9]+ (AND|OR|LSHIFT|RSHIFT) [a-z1-9]+)|NOT [a-z1-9]+) -> [a-z1-9]+$/', $row, $matches);
+            if (empty($matches)) {
+                return false;
+            }
+        }
         return true;
     }
 }

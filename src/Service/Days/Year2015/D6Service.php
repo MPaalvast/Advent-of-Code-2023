@@ -164,7 +164,12 @@ class D6Service implements DayServiceInterface
 
     public function isValidInput(array $rows): bool
     {
-        // TODO: Implement isValidInput() method.
+        foreach ($rows as $row) {
+            preg_match('/^(turn (on|off)|toggle) \d{1,3},\d{1,3} through \d{1,3},\d{1,3}$/', $row, $matches);
+            if (empty($matches)) {
+                return false;
+            }
+        }
         return true;
     }
 }

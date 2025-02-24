@@ -43,7 +43,7 @@ class Config2015Fixtures extends Fixture implements DependentFixtureInterface
         yield ['day' => $this->getReference('day_4', Day::class), 'title' => "The Ideal Stocking Stuffer", 'active' => true, 'examples' => $this->examples->getDay4Examples(), 'results' => $this->gameDayPartResultIterator(4)];
         yield ['day' => $this->getReference('day_5', Day::class), 'title' => "Doesn't He Have Intern-Elves For This?", 'active' => true, 'examples' => $this->examples->getDay5Examples(), 'results' => $this->gameDayPartResultIterator(5)];
         yield ['day' => $this->getReference('day_6', Day::class), 'title' => "Probably a Fire Hazard", 'active' => true, 'examples' => $this->examples->getDay6Examples(), 'results' => $this->gameDayPartResultIterator(6)];
-        yield ['day' => $this->getReference('day_7', Day::class), 'title' => "Some Assembly Required", 'active' => false, 'examples' => $this->examples->getDay7Examples(), 'results' => $this->gameDayPartResultIterator(7)];
+        yield ['day' => $this->getReference('day_7', Day::class), 'title' => "Some Assembly Required", 'active' => true, 'examples' => $this->examples->getDay7Examples(), 'results' => $this->gameDayPartResultIterator(7)];
         yield ['day' => $this->getReference('day_8', Day::class), 'title' => "Matchsticks", 'active' => false, 'examples' => $this->examples->getDay8Examples(), 'results' => $this->gameDayPartResultIterator(8)];
         yield ['day' => $this->getReference('day_9', Day::class), 'title' => "All in a Single Night", 'active' => false, 'examples' => $this->examples->getDay9Examples(), 'results' => $this->gameDayPartResultIterator(9)];
         yield ['day' => $this->getReference('day_10', Day::class), 'title' => "Elves Look, Elves Say", 'active' => false, 'examples' => $this->examples->getDay10Examples(), 'results' => $this->gameDayPartResultIterator(10)];
@@ -73,10 +73,10 @@ class Config2015Fixtures extends Fixture implements DependentFixtureInterface
             case 4:
             case 5:
             case 6:
+            case 7:
                 yield ['part' => $this->getReference('dayPart_1', DayPart::class), 'solved' => true];
                 yield ['part' => $this->getReference('dayPart_2', DayPart::class), 'solved' => true];
                 break;
-            case 7:
             case 8:
             case 9:
             case 10:
