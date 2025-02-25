@@ -100,7 +100,7 @@ EOD;
 
     public function day8Example2(): string
     {
-        return '';
+        return $this->day8Example1();
     }
 
     public function day9Example1(): string
@@ -114,9 +114,7 @@ EOD;
 
     public function day9Example2(): string
     {
-        return <<<'EOD'
-
-EOD;
+        return $this->day9Example1();
     }
 
     public function day10Example1(): string
