@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\GameDayRepository;
 use App\Repository\YearRepository;
+use App\Repository\DayRepository;
 use App\Service\Tools\DayInputOptions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ class DayController extends AbstractDayController
         DaySelector $daySelector,
         private readonly GameDayRepository $gameDayRepository,
         private readonly YearRepository $yearRepository,
+        private readonly DayRepository $dayRepository,
     )
     {
         parent::__construct($daySelector);
@@ -48,9 +50,13 @@ class DayController extends AbstractDayController
         if (null === $yearEntity) {
             throw $this->createNotFoundException(sprintf('Year "%s" not found.', $year));
         }
-        $gameDayEntity = $this->gameDayRepository->findOneBy(['year' => $yearEntity, 'day' => $day]);
+        $dayEntity = $this->dayRepository->findOneBy(['title' => $day]);
+        if (null === $dayEntity) {
+            throw $this->createNotFoundException(sprintf('Day "%s" not found.', $day));
+        }
+        $gameDayEntity = $this->gameDayRepository->findOneBy(['year' => $yearEntity, 'day' => $dayEntity]);
         if (null === $gameDayEntity) {
-            throw $this->createNotFoundException(sprintf('GameDay "%s" not found.', $gameDayEntity));
+            throw $this->createNotFoundException(sprintf('GameDay "%s-%s" not found.', $year, $day));
         }
         try {
             return $this->renderDayPage($request, $DayInputOptions, $yearEntity, $gameDayEntity);
