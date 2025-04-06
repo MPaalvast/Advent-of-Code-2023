@@ -1,48 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Day overview{% endblock %}
+{% block title %}Selected Year: {{ year }}{% endblock %}
 
 {% block body %}
-    <div class="w-full h-screen overflow-x-hidden flex flex-col">
-        <main class="w-full flex-grow overview">
-            <h1 class="text-center">Days {{ year }}</h1>
-            <div class="grid">
-                {% for gameDay in yearGameDays %}
-                    {% if gameDay.active %}
-                        <a href="{{ path('app_day', {'day': gameDay.day.title , 'year': year.title}) }}" class="day_item transition ease-in-out hover:-translate-y-1 hover:scale-110 duration-300">
-                            <h3>Day {{ gameDay.day.title }}</h3>
-                            <div>{{ gameDay.title }}</div>
-                            <div>{{ _self.getStars(gameDay.gameDayResults) }}</div>
-                        </a>
-                    {% else %}
-                        <span class="day_item  bg-gray-300">
-                            <h3>Day {{ gameDay.day.title }}</h3>
-                            <span>{{ gameDay.title }}</span>
-                            <br/>
-                            <span>{{ _self.getStars(gameDay.gameDayResults) }}</span>
-                        </span>
-                    {% endif %}
-                {% endfor %}
-
-            </div>
-        </main>
-
-        <footer class="w-full text-right">
-            <a target="_blank" href="https://adventofcode.com/" class="underline">Advent of code</a>.
-        </footer>
+    <h2 id="selected-year">Selected Year: {{ year }}</h2>
+    <div class="day-container" id="day-container">
+        {% for gameDay in yearGameDays %}
+            {% if gameDay.active %}
+                <a href="{{ path('app_day', {'day': gameDay.day.title , 'year': year.title}) }}" class="day-block">
+                    <h3>Day {{ gameDay.day.title }}</h3>
+                    <div>{{ gameDay.title }}</div>
+                    <div class="icons">
+                        {{ _self.getStars(gameDay.gameDayResults) }}
+                    </div>
+                </a>
+            {% else %}
+                <div class="day-block">
+                    <h3>Dag {{ gameDay.day.title }}</h3>
+                    <div>{{ gameDay.title }}</div>
+                    <div class="icons">
+                        {{ _self.getStars(gameDay.gameDayResults, true) }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
 {% endblock %}
 
-{% macro getStars(results) %}
+{% macro getStars(results, inactiveDay) %}
     {% for dayResult in results %}
-        {% if dayResult.solved %}
-            <span class="icon color_pass">
-                {{ ux_icon('mingcute:star-fill') }}
-            </span>
+        {% if inactiveDay %}
+            <span class="color-yellow">{{ ux_icon('mingcute:minus-circle-line') }}</span>
+        {% elseif dayResult.solved %}
+            <span class="color-green">{{ ux_icon('mingcute:check-circle-line') }}</span>
         {% else %}
-            <span class="icon">
-                {{ ux_icon('mingcute:star-fill') }}
-            </span>
+            <span class="color-red">{{ ux_icon('mingcute:close-circle-line') }}</span>
         {%  endif %}
     {% endfor %}
 {% endmacro %}

@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" class="h-screen">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Your Symfony App{% endblock %}</title>
-    {% block stylesheets %}
-        <!-- Add additional stylesheets here -->
-    {% endblock %}
-    {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
-        <!-- Add additional scripts here -->
-
-        <!-- AlpineJS -->
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        <!-- Font Awesome -->
-{#        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>#}
-
-    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Jaartallen Menu{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Add additional stylesheets here -->
+        {% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <!-- AlpineJS -->
+            <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+            <!-- Font Awesome -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+        {% endblock %}
 </head>
-<body class="font-family-karla flex">
+<body>
 
-{% include 'partials/_aside.html.twig' %}
+{% include 'partials/_header.html.twig' %}
 
-<div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+<div class="container">
     {% include 'partials/_menu.html.twig' %}
-
-    {% block body %}{% endblock %}
-
+    <div id="content">
+        {% block body %}{% endblock %}
+    </div>
 </div>
-
 
 </body>
 </html>

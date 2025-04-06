@@ -32,7 +32,7 @@ class AbstractDayController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();
-            $rows = $DayInputOptions->getDayInput($formData, $year, $gameDay);
+            $rows = $DayInputOptions->getDayInput($formData);
 
             if (!$this->daySelector->isValidInput($index, $rows)) {
                 $result = 'INVALID INPUT!!';
