@@ -14,7 +14,6 @@ class DfsDto
     private DFSAlgorithm $dfsAlgorithm;
     private FindGridPositions $findGridPositions;
     private array $grid;
-
     private int $totalPaths = 0;
 
     public function __construct(
