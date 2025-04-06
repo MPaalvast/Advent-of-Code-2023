@@ -1,12 +1,5 @@
-<!-- Desktop Header -->
-<header class="w-full">
-    <div class="relative flex justify-end">
-        Advent of code |&nbsp;
-        <a href="{{ path('admin') }}">
-            <span class="menu-item-label position-relative">
-                Admin
-            </span>
-        </a>
-    </div>
-
-</header>
+<div id="menu">
+    {% for activeYear in list_active_years() %}
+        <a href="{{ path('app_year_days', { 'year': activeYear.title }) }}" class="flex nav-item {% if year is defined and year.title == activeYear.title %} active {% endif %}">{{ activeYear.title}}</a>
+    {% endfor %}
+</div>

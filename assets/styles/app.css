@@ -1,146 +1,173 @@
-@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.font-family-karla {
-    font-family: karla, serif; }
-.bg-sidebar { background: #0284c7; }
-.cta-btn { color: #0284c7; }
-.upgrade-btn { background: #1947ee; }
-.upgrade-btn:hover { background: #0038fd; }
-.active-nav-link { background: #1947ee; }
-.nav-item:hover, .nav-item.active { background: #1947ee; }
-.account-link:hover { background: #0284c7; }
-
-.btn-back {
-    right: 12px;
-    margin-top: 12px;
-
-}
-.btn {
-    background-color: #0284c7;
-    color: white;
-    padding: 6px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
 body {
     margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('../background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+#top-menu {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+#top-menu .logo {
+    margin-left: 20px;
+}
+#top-menu .title {
+    margin-right: 20px;
+}
+.container {
+    display: flex;
+    flex-grow: 1;
+}
+#menu {
+    width: 200px;
+    min-width: 200px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+    padding: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+#menu a {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+#menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+#menu a.active {
+    background: rgba(255, 255, 255, 0.4);
+}
+#content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+.day-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.day-block {
+    text-decoration: none;
+    color: black;
+    width: 150px;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+a.day-block:hover {
+    transform: scale(1.05);
+}
+.icons {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 5px;
 }
 
-select {
-    /*background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e);*/
-    background-position: right 0.5rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em 1.5em;
-    padding-right: 2.5rem;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-}
-
-[type='text'], input:where(:not([type])), [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #fff;
-    border-color: #6b7280;
-    border-width: 1px;
-    border-radius: 0px;
-    padding-top: 0.5rem;
-    padding-right: 0.75rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    --tw-shadow: 0 0 #0000;
-}
-
-.icon, .back-icon {
+.icons span {
     display: inline-block;
     width: 24px;
 }
 
-.icon {
-    color: #374151;
+.color-red{
+    color: red;
 }
-.icon.color_pass {
-    color: #eab308;
+.color-green{
+    color: green;
 }
-
-aside {
-    width: 200px;
+.color-yellow{
+    color: rgb(255, 221, 0);
 }
-
-aside {
-    .logo {
-        padding: 12px;
-        a {
-            color: white;
-            text-decoration: none;
-        }
-        :hover {
-            color: lightgrey;
-        }
-    }
-    nav a{
-        color: white;
-        justify-content: center;
-        padding: 4px 6px;
-        text-decoration: none;
-        font-size: large;
-    }
-}
-
-main, footer {
-    background: aliceblue;
-}
-header {
-    background-color: #0284c7;
+.title a{
+    text-decoration: none;
     color: white;
-    div {
-        margin: 5px 10px 5px 0;
-        a {
-            text-decoration: none;
-            color: white;
-        }
-    }
-}
-main div.grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
-    padding: 0 10px;
-
-    .day_item {
-        padding: 4px;
-        border-radius: 8px;
-        border: 1px solid black;
-        text-align: center;
-        background: white;
-        text-decoration: none;
-        color: black;
-    }
-
-    a.day_item:hover {
-        background-color: #6366f1;
-        color: white;
-    }
-    span.day_item {
-        background-color: #d1d5db;
-    }
 }
 
-main.overview h1 {
-    padding-bottom: 30px;
+
+.no-display {
+    display: none;
 }
 
-main fieldset{
-    background-color: white;
+.day-header {
+    margin-bottom: 20px;
+}
+.part-selector {
+    margin-bottom: 15px;
+}
+
+select {
+    padding: 10px;
     border-radius: 5px;
-    padding: 16px;
-    margin: 16px;
+    border: none;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.6);
+    color: rgb(87, 86, 86);
+}
+textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 150px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    resize: vertical;
+    font-size: 16px;
+}
+.submit-button {
+    padding: 10px 20px;
+    background: rgba(0, 123, 255, 0.7);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+.submit-button:hover {
+    background: rgba(0, 123, 255, 1);
+}
+.result-block {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    text-align: left;
+    margin-top: 10px;
+    color: rgb(87, 86, 86);
+}
+
+.d-flex {
+    display: flex;
+}
+
+fieldset {
+    width : 100%;
+    max-width: 600px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.m-bot-10 {
+    margin-bottom: 10px;
 }

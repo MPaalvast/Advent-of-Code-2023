@@ -3,24 +3,15 @@
 {% block title %}Day {{ game_day.day.title }}{% endblock %}
 
 {% block body %}
-    <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
-        <main class="w-full flex-grow p-6">
-            <a href="{{ path('app_year_days', {'year': year }) }}" class="btn btn-back absolute">{{ ux_icon('ep:back', {class: 'back-icon'}) }} Back</a>
-            <h1 class="text-4xl text-black pb-6 text-center">{{ year }}</h1>
-            <h2 class="text-3xl text-black pb-6 text-center">Day {{ game_day.day.title }}</h2>
-            <h3 class="text-2xl text-black pb-6 text-center">--- {{ game_day.title}} ---</h3>
-            <fieldset class="border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 rounded mt-8">
-                {{ form(form) }}
-            </fieldset>
+    <h2 class="day-header">Day {{ game_day.day.title }}</h2>
+    <h3 class="day-header">--- {{ game_day.title}} ---</h3>
 
-            <fieldset class="border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 dark:text-white rounded mt-4">
-                <h3 class="mb-4 text-3xl">Result:</h3>
-                <div id="result">{{ result }}</div>
-            </fieldset>
-        </main>
+    <fieldset>
+        {{ form(form) }}
+    </fieldset>
 
-        <footer class="w-full text-right p-4">
-            <a target="_blank" href="https://adventofcode.com/" class="underline">Advent of code</a>.
-        </footer>
-    </div>
+    <fieldset class="result-block">
+        <h3 class="mb-4 text-3xl">Result:</h3>
+        <div id="result">{{ result }}</div>
+    </fieldset>
 {% endblock %}
