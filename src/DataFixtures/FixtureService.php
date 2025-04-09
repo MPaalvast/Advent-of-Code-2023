@@ -22,15 +22,20 @@ readonly class FixtureService
 
             $i = 1;
             foreach ($gameDayData['examples'] as $exampleData) {
-                if ($exampleData !== '' && isset($exampleData[$i])) {
-                    $gameDayInput = new GameDayInput();
-                    $gameDayInput->setGameDay($gameDay);
-                    $gameDayInput->setDayPart($dayParts[$i]);
-                    $gameDayInput->setInput($exampleData);
-                    $manager->persist($gameDayInput);
+//                dump($exampleData);
+                if (!empty($exampleData)) {
+                    foreach ($exampleData as $example) {
+                        $gameDayInput = new GameDayInput();
+                        $gameDayInput->setGameDay($gameDay);
+                        $gameDayInput->setDayPart($dayParts[$i]);
+                        $gameDayInput->setInput($example['input']);
+                        $gameDayInput->setResult($example['result']);
+                        $manager->persist($gameDayInput);
+                    }
                 }
                 $i++;
             }
+//            dd('test');
 
             foreach ($gameDayData['results'] as $resultData) {
                 $gameDayResult = new GameDayResult();

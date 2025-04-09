@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class GameDayInputCrudController extends AbstractCrudController
 {
@@ -39,6 +40,7 @@ class GameDayInputCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             AssociationField::new('dayPart'),
             TextareaField::new('input'),
+            TextField::new('result'),
         ];
     }
 }
