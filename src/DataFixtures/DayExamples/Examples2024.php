@@ -5,57 +5,68 @@ namespace App\DataFixtures\DayExamples;
 
 class Examples2024
 {
-    public function day1Example1(): string
+    public function day1ExamplesPart1(): array
     {
-        return <<<'EOT'
+        return [
+            ['input' => <<<'EOT'
 3   4
 4   3
 2   5
 1   3
 3   9
 3   3
-EOT;
+EOT, 'result' => 11],
+        ];
     }
 
-    public function day1Example2(): string
+    public function day1ExamplesPart2(): array
     {
-        return $this->day1Example1();
+        $data = $this->day1ExamplesPart1();
+        $data[0]['result'] = 31;
+
+        return $data;
     }
 
-    public function day2Example1(): string
+    public function day2ExamplesPart1(): array
     {
-        return <<<'EOT'
+        return [
+            ['input' => <<<'EOT'
 7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1
 1 3 2 4 5
 8 6 4 4 1
 1 3 6 7 9
-EOT;
+EOT, 'result' => 2],
+        ];
     }
 
-    public function day2Example2(): string
+    public function day2ExamplesPart2(): array
     {
-        return $this->day2Example1();
+        $data = $this->day2ExamplesPart1();
+        $data[0]['result'] = 4;
+
+        return $data;
     }
 
-    public function day3Example1(): string
+    public function day3ExamplesPart1(): array
     {
-        return <<<'EOT'
-xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))
-EOT;
+        return [
+            ['input' => 'xmul(2,4)%&mul[3,7]!@^do_not_mul(5,5)+mul(32,64]then(mul(11,8)mul(8,5))', 'result' => 161],
+        ];
     }
 
-    public function day3Example2(): string
+    public function day3ExamplesPart2(): array
     {
-        return <<<'EOT'
-xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))
-EOT;
+        return [
+            ['input' => "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))", 'result' => 48],
+        ];
     }
 
-    public function day4Example1(): string
+    public function day4ExamplesPart1(): array
     {
-        return <<<'EOT'
+        return [
+            ['input' => <<<'EOT'
 MMMSXXMASM
 MSAMXMSMSA
 AMXSXMAAMM
@@ -66,17 +77,22 @@ SMSMSASXSS
 SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX
-EOT;
+EOT, 'result' => 18],
+        ];
     }
 
-    public function day4Example2(): string
+    public function day4ExamplesPart2(): array
     {
-        return $this->day4Example1();
+        $data = $this->day4ExamplesPart1();
+        $data[0]['result'] = 9;
+
+        return $data;
     }
 
-    public function day5Example1(): string
+    public function day5ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 47|53
 97|13
 97|61
@@ -105,17 +121,22 @@ EOT;
 75,97,47,61,53
 61,13,29
 97,13,75,29,47
-EOD;
+EOT, 'result' => 143],
+        ];
     }
 
-    public function day5Example2(): string
+    public function day5ExamplesPart2(): array
     {
-        return $this->day5Example1();
+        $data = $this->day4ExamplesPart1();
+        $data[0]['result'] = 123;
+
+        return $data;
     }
 
-    public function day6Example1(): string
+    public function day6ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 ....#.....
 .........#
 ..........
@@ -126,17 +147,22 @@ EOD;
 ........#.
 #.........
 ......#...
-EOD;
+EOT, 'result' => 41],
+        ];
     }
 
-    public function day6Example2(): string
+    public function day6ExamplesPart2(): array
     {
-        return $this->day6Example1();
+        $data = $this->day6ExamplesPart1();
+        $data[0]['result'] = 6;
+
+        return $data;
     }
 
-    public function day7Example1(): string
+    public function day7ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 190: 10 19
 3267: 81 40 27
 83: 17 5
@@ -146,17 +172,22 @@ EOD;
 192: 17 8 14
 21037: 9 7 18 13
 292: 11 6 16 20
-EOD;
+EOT, 'result' => 3749],
+        ];
     }
 
-    public function day7Example2(): string
+    public function day7ExamplesPart2(): array
     {
-        return $this->day7Example1();
+        $data = $this->day7ExamplesPart1();
+        $data[0]['result'] = 11387;
+
+        return $data;
     }
 
-    public function day8Example1(): string
+    public function day8ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 ............
 ........0...
 .....0......
@@ -169,27 +200,55 @@ EOD;
 .........A..
 ............
 ............
-EOD;
+EOT, 'result' => 14],
+        ];
     }
 
-    public function day8Example2(): string
+    public function day8ExamplesPart2(): array
     {
-        return $this->day8Example1();
+        $data = $this->day8ExamplesPart1();
+        $data[0]['result'] = 34;
+
+        return $data;
     }
 
-    public function day9Example1(): string
+    public function day9ExamplesPart1(): array
     {
-        return '2333133121414131402';
+        return [
+            ['input' => '2333133121414131402', 'result' => 1928],
+        ];
     }
 
-    public function day9Example2(): string
+    public function day9ExamplesPart2(): array
     {
-        return $this->day9Example1();
+        $data = $this->day9ExamplesPart1();
+        $data[0]['result'] = 2858;
+
+        return $data;
     }
 
-    public function day10Example1(): string
+    public function day10ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
+...0...
+...1...
+...2...
+6543456
+7.....7
+8.....8
+9.....9
+EOT, 'result' => 2],
+            ['input' => <<<'EOT'
+..90..9
+...1.98
+...2..7
+6543456
+765.987
+876....
+987....
+EOT, 'result' => 4],
+            ['input' => <<<'EOT'
 89010123
 78121874
 87430965
@@ -198,29 +257,68 @@ EOD;
 32019012
 01329801
 10456732
-EOD;
-
+EOT, 'result' => 36],
+        ];
     }
 
-    public function day10Example2(): string
+    public function day10ExamplesPart2(): array
     {
-        return $this->day10Example1();
-
+        return [
+            ['input' => <<<'EOT'
+.....0.
+..4321.
+..5..2.
+..6543.
+..7..4.
+..8765.
+..9....
+EOT, 'result' => 3],
+            ['input' => <<<'EOT'
+..90..9
+...1.98
+...2..7
+6543456
+765.987
+876....
+987....
+EOT, 'result' => 13],
+            ['input' => <<<'EOT'
+012345
+123456
+234567
+345678
+4.6789
+56789.
+EOT, 'result' => 227],
+            ['input' => <<<'EOT'
+89010123
+78121874
+87430965
+96549874
+45678903
+32019012
+01329801
+10456732
+EOT, 'result' => 81],
+        ];
     }
 
-    public function day11Example1(): string
+    public function day11ExamplesPart1(): array
     {
-        return '125 17';
+        return [
+            ['input' => '125 17', 'result' => 55312],
+        ];
     }
 
-    public function day11Example2(): string
+    public function day11ExamplesPart2(): array
     {
-        return $this->day11Example1();
+        return $this->day11ExamplesPart1();
     }
 
-    public function day12Example1(): string
+    public function day12ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 RRRRIICCFF
 RRRRIICCCF
 VVRRRCCFFF
@@ -231,17 +329,55 @@ VVIIICJJEE
 MIIIIIJJEE
 MIIISIJEEE
 MMMISSJEEE
-EOD;
+EOT, 'result' => 1930],
+            ['input' => <<<'EOT'
+OOOOO
+OXOXO
+OOOOO
+OXOXO
+OOOOO
+EOT, 'result' => 772],
+        ];
     }
 
-    public function day12Example2(): string
+    public function day12ExamplesPart2(): array
     {
-        return $this->day12Example1();
+        return [
+            ['input' => <<<'EOT'
+AAAA
+BBCD
+BBCC
+EEEC
+EOT, 'result' => 80],
+            ['input' => <<<'EOT'
+OOOOO
+OXOXO
+OOOOO
+OXOXO
+OOOOO
+EOT, 'result' => 436],
+            ['input' => <<<'EOT'
+EEEEE
+EXXXX
+EEEEE
+EXXXX
+EEEEE
+EOT, 'result' => 236],
+            ['input' => <<<'EOT'
+AAAAAA
+AAABBA
+AAABBA
+ABBAAA
+ABBAAA
+AAAAAA
+EOT, 'result' => 368],
+        ];
     }
 
-    public function day13Example1(): string
+    public function day13ExamplesPart1(): array
     {
-        return <<<EOD
+        return [
+            ['input' => <<<'EOT'
 Button A: X+94, Y+34
 Button B: X+22, Y+67
 Prize: X=8400, Y=5400
@@ -257,18 +393,19 @@ Prize: X=7870, Y=6450
 Button A: X+69, Y+23
 Button B: X+27, Y+71
 Prize: X=18641, Y=10279
-EOD;
-
+EOT, 'result' => 480],
+        ];
     }
 
-    public function day13Example2(): string
+    public function day13ExamplesPart2(): array
     {
-        return $this->day13Example1();
+        return [];
     }
 
-    public function day14Example1(): string
+    public function day14ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 p=0,4 v=3,-3
 p=6,3 v=-1,-3
 p=10,3 v=-1,2
@@ -281,18 +418,19 @@ p=9,3 v=2,3
 p=7,3 v=-1,2
 p=2,4 v=2,-3
 p=9,5 v=-3,-3
-EOD;
-
+EOT, 'result' => 12],
+        ];
     }
 
-    public function day14Example2(): string
+    public function day14ExamplesPart2(): array
     {
-        return '';
+        return [];
     }
 
-    public function day15Example1(): string
+    public function day15ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 ##########
 #..O..O.O#
 #......O.#
@@ -314,18 +452,22 @@ vvv<<^>^v^^><<>>><>^<<><^vv^^<>vvv<>><^^v>^>vv<>v<<<<v<^v>^<^^>>>^<v<v
 <><^^>^^^<><vvvvv^v<v<<>^v<v>v<<^><<><<><<<^^<<<^<<>><<><^^^>^^<>^>v<>
 ^^>vv<^v^v<vv>^<><v<^v>^^^>>>^^vvv^>vvv<>>>^<^>>>>>^<<^v>^vvv<>^<><<v>
 v^^>>><<^^<>>^v^<v^vv<>v^<<>^<^v^v><^<<<><<^<v><v<>vv>>v><v^<vv<>v^<<^
-EOD;
-
+EOT, 'result' => 2028],
+        ];
     }
 
-    public function day15Example2(): string
+    public function day15ExamplesPart2(): array
     {
-        return $this->day15Example1();
+        $data = $this->day15ExamplesPart1();
+        $data[0]['result'] = 9021;
+
+        return $data;
     }
 
-    public function day16Example1(): string
+    public function day16ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 ###############
 #.......#....E#
 #.#.###.#.###.#
@@ -341,39 +483,45 @@ EOD;
 #.###.#.#.#.#.#
 #S..#.....#...#
 ###############
-EOD;
+EOT, 'result' => 11048],
+        ];
     }
 
-    public function day16Example2(): string
+    public function day16ExamplesPart2(): array
     {
-        return '';
+        return [];
     }
 
-    public function day17Example1(): string
+    public function day17ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 Register A: 729
 Register B: 0
 Register C: 0
 
 Program: 0,1,5,4,3,0
-EOD;
+EOT, 'result' => '4,6,3,5,6,3,5,2,1,0'],
+        ];
     }
 
-    public function day17Example2(): string
+    public function day17ExamplesPart2(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 Register A: 2024
 Register B: 0
 Register C: 0
 
 Program: 0,3,5,4,3,0
-EOD;
+EOT, 'result' => 117440],
+        ];
     }
 
-    public function day18Example1(): string
+    public function day18ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 5,4
 4,2
 4,5
@@ -399,17 +547,22 @@ EOD;
 0,5
 1,6
 2,0
-EOD;
+EOT, 'result' => 22],
+        ];
     }
 
-    public function day18Example2(): string
+    public function day18ExamplesPart2(): array
     {
-        return $this->day18Example1();
+        $data = $this->day18ExamplesPart1();
+        $data[0]['result'] = '6,1';
+
+        return $data;
     }
 
-    public function day19Example1(): string
+    public function day19ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 r, wr, b, g, bwu, rb, gb, br
 
 brwrr
@@ -420,58 +573,71 @@ ubwu
 bwurrg
 brgr
 bbrgwb
-EOD;
-
+EOT, 'result' => 22],
+        ];
     }
 
-    public function day19Example2(): string
+    public function day19ExamplesPart2(): array
     {
-        return $this->day19Example1();
+        return [];
     }
 
-    public function day20Example1(): string
+    public function day20ExamplesPart1(): array
     {
-        return '';
+        return [];
     }
 
-    public function day20Example2(): string
+    public function day20ExamplesPart2(): array
     {
-        return '';
+        return [];
     }
 
-    public function day21Example1(): string
+    public function day21ExamplesPart1(): array
     {
-        return '';
+        return [];
     }
 
-    public function day21Example2(): string
+    public function day21ExamplesPart2(): array
     {
-        return '';
+        return [];
     }
 
-    public function day22Example1(): string
+    public function day22ExamplesPart1(): array
     {
-        return '';
+        return [];
     }
 
-    public function day22Example2(): string
+    public function day22ExamplesPart2(): array
     {
-        return '';
+        return [];
     }
 
-    public function day23Example1(): string
+    public function day23ExamplesPart1(): array
     {
-        return '';
+        return [];
     }
 
-    public function day23Example2(): string
+    public function day23ExamplesPart2(): array
     {
-        return '';
+        return [];
     }
 
-    public function day24Example1(): string
+    public function day24ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
+x00: 1
+x01: 1
+x02: 1
+y00: 0
+y01: 1
+y02: 0
+
+x00 AND y00 -> z00
+x01 XOR y01 -> z01
+x02 OR y02 -> z02
+EOT, 'result' => 4],
+            ['input' => <<<'EOT'
 x00: 1
 x01: 0
 x02: 1
@@ -519,18 +685,19 @@ y03 OR x01 -> nrd
 hwm AND bqk -> z03
 tgd XOR rvg -> z12
 tnw OR pbm -> gnj
-EOD;
-
+EOT, 'result' => 2024],
+        ];
     }
 
-    public function day24Example2(): string
+    public function day24ExamplesPart2(): array
     {
-        return $this->day24Example1();
+        return [];
     }
 
-    public function day25Example1(): string
+    public function day25ExamplesPart1(): array
     {
-        return <<<'EOD'
+        return [
+            ['input' => <<<'EOT'
 #####
 .####
 .####
@@ -570,11 +737,12 @@ EOD;
 #.#..
 #.#.#
 #####
-EOD;
+EOT, 'result' => 3],
+        ];
     }
 
-    public function day25Example2(): string
+    public function day25ExamplesPart2(): array
     {
-        return $this->day25Example1();
+        return [];
     }
 }

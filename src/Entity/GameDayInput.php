@@ -25,6 +25,9 @@ class GameDayInput
     #[ORM\JoinColumn(nullable: false)]
     private ?GameDay $gameDay = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $result = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +72,18 @@ class GameDayInput
     public function setGameDay(GameDay $gameDay): static
     {
         $this->gameDay = $gameDay;
+
+        return $this;
+    }
+
+    public function getResult(): ?string
+    {
+        return $this->result;
+    }
+
+    public function setResult(string $result): static
+    {
+        $this->result = $result;
 
         return $this;
     }
