@@ -116,6 +116,21 @@ a.day-block:hover {
     margin-bottom: 15px;
 }
 
+.day-main {
+    width: 100%;
+    max-width: 900px;
+    gap: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.day-main-left {
+    width: 60%;
+}
+.day-main-right {
+    width: 40%;
+}
+
 select {
     padding: 10px;
     border-radius: 5px;
@@ -148,22 +163,29 @@ textarea {
     background: rgba(0, 123, 255, 1);
 }
 .result-block {
-    width: 100%;
     max-width: 600px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
     text-align: left;
     margin-top: 10px;
+}
+.example-block {
+    max-width: 400px;
+}
+
+.result-block, .example-block {
+    background: rgba(255, 255, 255, 0.8);
     color: rgb(87, 86, 86);
+    border-radius: 5px;
 }
 
 .d-flex {
     display: flex;
 }
+.flex-end {
+    justify-content: flex-end;
+}
 
 fieldset {
-    width : 100%;
-    max-width: 600px;
+    /*max-width: 600px;*/
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.6);
 }

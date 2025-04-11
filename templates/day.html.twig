@@ -6,12 +6,21 @@
     <h2 class="day-header">Day {{ game_day.day.title }}</h2>
     <h3 class="day-header">--- {{ game_day.title}} ---</h3>
 
-    <fieldset>
-        {{ form(form) }}
-    </fieldset>
+    <div class="day-main">
+        <div class="day-main-left">
+            <fieldset>
+                {{ form(form) }}
+            </fieldset>
 
-    <fieldset class="result-block">
-        <h3 class="mb-4 text-3xl">Result:</h3>
-        <div id="result">{{ result }}</div>
-    </fieldset>
+            <fieldset class="result-block">
+                <h3 class="mb-4 text-3xl">Result:</h3>
+                <div id="result">{{ result }}</div>
+            </fieldset>
+        </div>
+        <div class="day-main-right">
+            <fieldset class="example-block">
+                <h3 class="mb-4 text-3xl">Examples:</h3>
+            </fieldset>
+        </div>
+    </div>
 {% endblock %}
