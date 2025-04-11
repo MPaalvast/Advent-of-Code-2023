@@ -35,6 +35,7 @@ class DayType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Get result',
                 'attr' => ['class' => 'submit-button'],
+                'row_attr' => ['class' => 'd-flex flex-end']
             ])
         ;
     }
