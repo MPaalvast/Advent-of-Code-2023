@@ -1,0 +1,29 @@
+{% if selectable %}
+    <a{{ attributes }} href="{{ path('app_day', {'day': gameDay.day.title , 'year': gameDay.year.title}) }}" class="day-block">
+{% else %}
+    <div{{ attributes }} class="day-block">
+{% endif %}
+    <h3>Day {{ gameDay.day.title }}</h3>
+    <div>{{ gameDay.title }}</div>
+    <div class="icons">
+        {{ _self.getStars(gameDay.gameDayResults, selectable) }}
+    </div>
+{% if selectable %}
+    </a>
+{% else %}
+    </div>
+{% endif %}
+
+{% macro getStars(results, selectable) %}
+    {% for dayResult in results %}
+        {% if selectable %}
+            {% if dayResult.solved %}
+                <span class="color-green">{{ ux_icon('mingcute:check-circle-line') }}</span>
+            {% else %}
+                <span class="color-red">{{ ux_icon('mingcute:close-circle-line') }}</span>
+            {%  endif %}
+        {% else %}
+            <span class="color-yellow">{{ ux_icon('mingcute:minus-circle-line') }}</span>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
