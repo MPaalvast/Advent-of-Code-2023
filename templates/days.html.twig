@@ -7,34 +7,16 @@
     <div class="day-container" id="day-container">
         {% for gameDay in yearGameDays %}
             {% if gameDay.active %}
-                <a href="{{ path('app_day', {'day': gameDay.day.title , 'year': year.title}) }}" class="day-block">
-                    <h3>Day {{ gameDay.day.title }}</h3>
-                    <div>{{ gameDay.title }}</div>
-                    <div class="icons">
-                        {{ _self.getStars(gameDay.gameDayResults) }}
-                    </div>
-                </a>
+                <twig:DayBlock
+                    :gameDay="gameDay"
+                    :selectable="true"
+                />
             {% else %}
-                <div class="day-block">
-                    <h3>Dag {{ gameDay.day.title }}</h3>
-                    <div>{{ gameDay.title }}</div>
-                    <div class="icons">
-                        {{ _self.getStars(gameDay.gameDayResults, true) }}
-                    </div>
-                </div>
+                <twig:DayBlock
+                    :gameDay="gameDay"
+                    :selectable="false"
+                />
             {% endif %}
         {% endfor %}
     </div>
 {% endblock %}
-
-{% macro getStars(results, inactiveDay) %}
-    {% for dayResult in results %}
-        {% if inactiveDay %}
-            <span class="color-yellow">{{ ux_icon('mingcute:minus-circle-line') }}</span>
-        {% elseif dayResult.solved %}
-            <span class="color-green">{{ ux_icon('mingcute:check-circle-line') }}</span>
-        {% else %}
-            <span class="color-red">{{ ux_icon('mingcute:close-circle-line') }}</span>
-        {%  endif %}
-    {% endfor %}
-{% endmacro %}
