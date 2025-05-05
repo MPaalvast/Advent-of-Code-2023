@@ -78,7 +78,12 @@ class D9Service implements DayServiceInterface
 
     public function isValidInput(array $rows): bool
     {
-        // TODO: Implement isValidInput() method.
+        foreach ($rows as $row) {
+            preg_match('/^([A-Za-z]+) to ([A-Za-z]+) = (\d+)$/', $row, $matches);
+            if (empty($matches)) {
+                return false;
+            }
+        }
         return true;
     }
 }
