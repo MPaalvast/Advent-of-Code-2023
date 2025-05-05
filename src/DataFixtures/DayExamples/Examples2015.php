@@ -588,13 +588,17 @@ EOD
     public function day11ExamplesPart1(): array
     {
         return [
-            ['input' => 'hepxcrrq', 'result' => '?'],
+            ['input' => 'abcdefgh', 'result' => 'abcdffaa'],
+            ['input' => 'ghijklmn', 'result' => 'ghjaabcc'],
         ];
     }
 
     public function day11ExamplesPart2(): array
     {
-        return[];
+        return [
+            ['input' => 'abcdefgh', 'result' => 'abcdffbb'],
+            ['input' => 'ghijklmn', 'result' => 'ghjbbcdd'],
+        ];
     }
 
     public function day12ExamplesPart1(): array
