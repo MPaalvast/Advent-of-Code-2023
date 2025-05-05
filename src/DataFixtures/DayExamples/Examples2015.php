@@ -553,23 +553,36 @@ EOD
 
     public function day9ExamplesPart2(): array
     {
-        return [];
+        return [
+            ['input' => <<<'EOD'
+London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141
+EOD
+                , 'result' => 982],
+        ];
     }
 
     public function day10ExamplesPart1(): array
     {
         return [
-            ['input' => '1', 'result' => 11],
-            ['input' => '11', 'result' => 21],
-            ['input' => '21', 'result' => 1211],
-            ['input' => '1211', 'result' => 111221],
-            ['input' => '111221', 'result' => 312211],
+            ['input' => '1', 'result' => 82350],
+            ['input' => '11', 'result' => 107312],
+            ['input' => '21', 'result' => 139984],
+            ['input' => '1211', 'result' => 182376],
+            ['input' => '111221', 'result' => 237746],
         ];
     }
 
     public function day10ExamplesPart2(): array
     {
-        return [];
+        return [
+            ['input' => '1', 'result' => 1166642],
+            ['input' => '11', 'result' => 1520986],
+            ['input' => '21', 'result' => 1982710],
+            ['input' => '1211', 'result' => 2584304],
+            ['input' => '111221', 'result' => 3369156],
+        ];
     }
 
     public function day11ExamplesPart1(): array
