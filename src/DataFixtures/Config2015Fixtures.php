@@ -80,10 +80,10 @@ class Config2015Fixtures extends Fixture implements DependentFixtureInterface
             case 11:
             case 12:
             case 13:
+            case 14:
                 yield ['part' => $this->getReference('dayPart_1', DayPart::class), 'solved' => true];
                 yield ['part' => $this->getReference('dayPart_2', DayPart::class), 'solved' => true];
                 break;
-            case 14:
             case 15:
             case 16:
             case 17:
