@@ -617,7 +617,12 @@ EOD
 
     public function day12ExamplesPart2(): array
     {
-        return [];
+        return [
+            ['input' => '[1,2,3]', 'result' => 6],
+            ['input' => '1,{"c":"red","b":2},3]', 'result' => 4],
+            ['input' => '{"d":"red","e":[1,2,3,4],"f":5}', 'result' => 0],
+            ['input' => '[1,"red",5]', 'result' => 6],
+        ];
     }
 
     public function day13ExamplesPart1(): array
