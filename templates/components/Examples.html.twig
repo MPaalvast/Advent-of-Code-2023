@@ -1,0 +1,17 @@
+<fieldset {{ attributes }} class="example-block">
+    <h3 class="mb-4 text-3xl">Examples:</h3>
+    {% for dayPartKey,dayPartData in this.examples %}
+        <h4>Part {{ dayPartKey }}</h4>
+        {% for key,part in dayPartData %}
+            <div>
+                <span
+                    style="display:inline-block;width:50%;"
+                    data-controller="examples"
+                    data-examples-id-value="{{ part.id }}"
+                    {{ stimulus_action('examples', 'loadInput', 'click') }}
+                >Example: {{ key+1 }}</span><span>Result: {{ part.getResult }}</span>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</fieldset>
+

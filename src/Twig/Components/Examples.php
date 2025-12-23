@@ -2,24 +2,34 @@
 
 namespace App\Twig\Components;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\GameDay;
+use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
+use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-use Symfony\UX\TwigComponent\Attribute\PreMount;
 
-#[AsTwigComponent('examples')]
-class Examples
+#[AsTwigComponent]
+final class Examples
 {
-    public int $partNr = 1;
+//    use DefaultActionTrait;
 
-    #[PreMount]
-    public function preMount(array $data): array
+//    #[LiveProp(writable: true)]
+//    public int $partNr = 1;
+
+//    #[LiveProp]
+    public ?GameDay $gameDay = null;
+
+    public function getExamples(): array
     {
-        // validate data
-        $resolver = new OptionsResolver();
-        $resolver->setIgnoreUndefined(true);
+        $output = [];
+        foreach ($this->gameDay->getGameDayInputs() as $gameDayInput) {
+            $partTitle = $gameDayInput->getDayPart()?->getTitle();
+            if (!isset($output[$partTitle])) {
+                $output[$partTitle] = [];
+            }
+            $output[$partTitle][] = $gameDayInput;
+        }
 
-        $resolver->setDefaults(['partNr' => 1]);
-
-        return $resolver->resolve($data) + $data;
+        return $output;
     }
 }

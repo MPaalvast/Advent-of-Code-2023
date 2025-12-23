@@ -6,6 +6,7 @@
     <h2 class="day-header">Day {{ game_day.day.title }}</h2>
     <h3 class="day-header">--- {{ game_day.title}} ---</h3>
 
+{#    <div class="day-main" {{ stimulus_controller('examples') }}>#}
     <div class="day-main">
         <div class="day-main-left">
             <fieldset>
@@ -18,7 +19,13 @@
             </fieldset>
         </div>
         <div class="day-main-right">
-            <twig:Examples partNr="1"/>
+            <twig:Examples :gameDay="game_day">
+{#                {% for example in game_day.gameDayInputs %}#}
+{#                    <div>#}
+{#                        <span style="display:inline-block;width:50%;"><a href="#">Example: {{ loop.index }}</a></span><span>Result: {{ example.result }}</span>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+            </twig:Examples>
         </div>
     </div>
 {% endblock %}

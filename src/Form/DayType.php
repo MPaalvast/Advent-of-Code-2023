@@ -30,6 +30,7 @@ class DayType extends AbstractType
                     'class' => '',
                     'rows' => 10,
                     'placeholder' => 'Put your input here...',
+                    'data-examples-target' => 'formInput',
                 ],
             ])
             ->add('save', SubmitType::class, [

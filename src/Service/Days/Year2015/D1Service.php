@@ -36,7 +36,7 @@ class D1Service implements DayServiceInterface
     private function calculateFloor(): void
     {
         $counts = array_count_values($this->input);
-        $this->total = $counts['('] ?? 0 - $counts[')'] ?? 0;
+        $this->total = ($counts['('] ?? 0) - ($counts[')'] ?? 0);
     }
 
     /**
