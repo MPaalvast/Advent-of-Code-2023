@@ -150,6 +150,21 @@ class D2Service implements DayServiceInterface
         if (empty($matches)) {
             return false;
         }
+        if (!preg_match('/^\d+-\d+(,\d+-\d+)*$/', $rows[0])) {
+            return false;
+        }
+
+        preg_match_all('/(\d+)-(\d+)/', $rows[0], $matches, PREG_SET_ORDER);
+
+        foreach ($matches as $match) {
+            $start = (int) $match[1];
+            $end   = (int) $match[2];
+
+            if ($start >= $end) {
+                return false;
+            }
+        }
+
         return true;
     }
 }
